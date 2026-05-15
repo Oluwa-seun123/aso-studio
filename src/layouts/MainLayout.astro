@@ -1,0 +1,272 @@
+---
+import "../styles/global.css";
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "ASO Creative Studio — AI-Powered Creative Agency",
+  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Based in Nigeria. Working worldwide.",
+  image = "/og-image.jpg",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://asocreativestudio.com");
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <!-- Core Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#c9a227" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <title>{title}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+    <!-- Global Styles -->
+    <style is:global>
+      /* ── Reset & Base ── */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-family: "Inter", sans-serif;
+        background-color: #050505;
+        color: #fafafa;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      body {
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-color: #050505;
+      }
+
+      /* ── Text Selection ── */
+      ::selection {
+        background-color: rgba(201, 162, 39, 0.3);
+        color: #f59e0b;
+      }
+
+      ::-moz-selection {
+        background-color: rgba(201, 162, 39, 0.3);
+        color: #f59e0b;
+      }
+
+      /* ── Custom Scrollbar ── */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #050505;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #27272a;
+        border-radius: 3px;
+        transition: background 0.2s ease;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #c9a227;
+      }
+
+      /* Firefox scrollbar */
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #27272a #050505;
+      }
+
+      /* ── Utility Classes ── */
+
+      /* Gold gradient text */
+      .gradient-text {
+        background: linear-gradient(135deg, #c9a227 0%, #f59e0b 50%, #c9a227 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 0% center; }
+        100% { background-position: 200% center; }
+      }
+
+      /* Gold glow on elements */
+      .gold-glow {
+        box-shadow: 0 0 24px rgba(201, 162, 39, 0.4), 0 0 48px rgba(201, 162, 39, 0.15);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .gold-glow:hover {
+        box-shadow: 0 0 32px rgba(245, 158, 11, 0.6), 0 0 64px rgba(245, 158, 11, 0.2);
+      }
+
+      /* GSAP hidden state (set before animation plays) */
+      .gsap-hidden {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+
+      /* Stagger container children */
+      .stagger-children > * {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      /* ── Focus Styles ── */
+      :focus-visible {
+        outline: 2px solid #c9a227;
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      /* ── Smooth anchor offset (for fixed nav) ── */
+      [id] {
+        scroll-margin-top: 80px;
+      }
+
+      /* ── Section base ── */
+      section {
+        position: relative;
+      }
+    </style>
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- ── Tawk.to Live Chat ── -->
+    <!-- REPLACE WITH YOUR TAWK_ID below -->
+    <!--
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+      (function(){
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/YOUR_TAWK_ID/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+      })();
+    </script>
+    -->
+
+    <!-- ── GSAP Init ── -->
+    <script>
+      window.addEventListener("load", () => {
+        if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* ── 1. Nav background on scroll ── */
+        const nav = document.querySelector("#main-nav");
+        if (nav) {
+          ScrollTrigger.create({
+            start: "top -80px",
+            onEnter: () => nav.classList.add("nav-scrolled"),
+            onLeaveBack: () => nav.classList.remove("nav-scrolled"),
+          });
+        }
+
+        /* ── 2. Section reveals (.gsap-hidden) ── */
+        gsap.utils.toArray(".gsap-hidden").forEach((el) => {
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          });
+        });
+
+        /* ── 3. Stagger containers ── */
+        gsap.utils.toArray(".stagger-children").forEach((container) => {
+          const children = container.querySelectorAll(":scope > *");
+          gsap.to(children, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.12,
+            scrollTrigger: {
+              trigger: container,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+        });
+
+        /* ── 4. Stats counter animation ── */
+        document.querySelectorAll("[data-count]").forEach((el) => {
+          const target = parseInt(el.getAttribute("data-count") ?? "0", 10);
+          const obj = { val: 0 };
+          gsap.to(obj, {
+            val: target,
+            duration: 2,
+            ease: "power2.out",
+            onUpdate: () => {
+              el.textContent = Math.floor(obj.val) + (el.getAttribute("data-suffix") ?? "");
+            },
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+        });
+
+        /* ── 5. Lucide icons init ── */
+        if (typeof lucide !== "undefined") {
+          lucide.createIcons();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+---
+const testimonials = [
+  {
+    initials: "VA",
+    name: "Victoria Abiodun",
+    role: "Founder",
+    company: "VeeLuxe",
+    color: "#c9a227",
+    rating: 5,
+    quote:
+      "The whole process felt easy and well thought out. They really understood our vision and brought it to life through clean, modern graphics that feel true to our brand.",
+  },
+  {
+    initials: "JR",
+    name: "James Rodriguez",
+    role: "Founder",
+    company: "BrandSpark",
+    color: "#6366f1",
+    rating: 5,
+    quote:
+      "From concept to final delivery, every piece was pixel-perfect. The graphic design work elevated our entire brand identity to a new level.",
+  },
+  {
+    initials: "AJ",
+    name: "Amara Johnson",
+    role: "CEO",
+    company: "VibeMedia",
+    color: "#14b8a6",
+    rating: 5,
+    quote:
+      "Professional, creative, and incredibly fast. The AI video content created for our campaign was beyond our expectations. A true creative partner.",
+  },
+];
+---
+
+<section
+  id="testimonials"
+  class="relative py-[120px] overflow-hidden"
+  style="background: #050505;"
+  aria-labelledby="testimonials-heading"
+>
+  <!-- Background noise texture -->
+  <div
+    class="absolute inset-0 opacity-[0.018]"
+    style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 24px 24px;"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Large faint quote mark (decorative) -->
+  <div
+    class="absolute top-16 right-10 font-heading font-bold text-[220px] leading-none pointer-events-none select-none hidden lg:block"
+    style="color: rgba(201,162,39,0.04); line-height: 1;"
+    aria-hidden="true"
+  >
+    "
+  </div>
+
+  <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-10">
+
+    <!-- Section header -->
+    <div class="mb-16 gsap-hidden">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-label text-[11px] tracking-[0.35em] uppercase text-gold">
+          05 / Testimonials
+        </span>
+        <div
+          class="flex-1 h-px max-w-[60px]"
+          style="background: linear-gradient(90deg, #c9a227, transparent);"
+          aria-hidden="true"
+        ></div>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <h2
+          id="testimonials-heading"
+          class="font-heading font-bold text-text-primary"
+          style="font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1;"
+        >
+          What Clients Say
+        </h2>
+        <!-- Aggregate rating -->
+        <div class="flex items-center gap-3">
+          <div class="flex gap-1" aria-label="5 out of 5 stars">
+            {[...Array(5)].map(() => (
+              <i data-lucide="star" class="w-4 h-4" style="color: #c9a227; fill: #c9a227;"></i>
+            ))}
+          </div>
+          <span class="font-label text-xs text-text-muted tracking-wide">
+            5.0 · All verified clients
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial cards -->
+    <div
+      class="stagger-children grid grid-cols-1 md:grid-cols-3 gap-5"
+      role="list"
+    >
+      {testimonials.map((t) => (
+        <article
+          class="testimonial-card relative rounded-2xl p-8 border flex flex-col transition-all duration-400"
+          style="background: #0a0a0a; border-color: #27272a;"
+          role="listitem"
+          aria-label={`Testimonial from ${t.name}, ${t.role} at ${t.company}`}
+        >
+
+          <!-- Large quote icon -->
+          <div class="mb-6" aria-hidden="true">
+            <i
+              data-lucide="quote"
+              class="w-10 h-10"
+              style="color: rgba(201,162,39,0.35); fill: rgba(201,162,39,0.08);"
+            ></i>
+          </div>
+
+          <!-- Star rating -->
+          <div class="flex gap-1 mb-5" aria-label={`${t.rating} stars`}>
+            {[...Array(t.rating)].map(() => (
+              <i
+                data-lucide="star"
+                class="w-3.5 h-3.5"
+                style="color: #c9a227; fill: #c9a227;"
+              ></i>
+            ))}
+          </div>
+
+          <!-- Quote text -->
+          <blockquote
+            class="font-body text-[15px] leading-[1.75] text-text-secondary flex-1 mb-8 italic"
+          >
+            "{t.quote}"
+          </blockquote>
+
+          <!-- Divider -->
+          <div
+            class="w-full h-px mb-6"
+            style="background: #27272a;"
+            aria-hidden="true"
+          ></div>
+
+          <!-- Author row -->
+          <div class="flex items-center gap-3">
+            <!-- Avatar initials -->
+            <div
+              class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-heading font-bold text-sm text-white"
+              style={`background: ${t.color}22; border: 1.5px solid ${t.color}55; color: ${t.color};`}
+              aria-hidden="true"
+            >
+              {t.initials}
+            </div>
+
+            <!-- Name + role -->
+            <div class="min-w-0">
+              <p class="font-heading font-semibold text-[14px] text-text-primary leading-tight truncate">
+                {t.name}
+              </p>
+              <p class="font-label text-[11px] tracking-wide text-text-muted truncate">
+                {t.role} · {t.company}
+              </p>
+            </div>
+
+            <!-- Verified badge -->
+            <div class="ml-auto flex-shrink-0" aria-label="Verified client">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center"
+                style="background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25);"
+              >
+                <i data-lucide="check" class="w-3 h-3" style="color: #22c55e;"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colored bottom accent -->
+          <div
+            class="absolute bottom-0 left-8 right-8 h-px"
+            style={`background: linear-gradient(90deg, ${t.color}40, transparent);`}
+            aria-hidden="true"
+          ></div>
+
+        </article>
+      ))}
+    </div>
+
+    <!-- Social proof footer line -->
+    <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 gsap-hidden">
+      <div class="flex items-center gap-2 text-text-muted">
+        <i data-lucide="shield-check" class="w-4 h-4 text-gold"></i>
+        <span class="font-label text-xs tracking-wide">All reviews from real clients</span>
+      </div>
+      <span class="hidden sm:block w-1 h-1 rounded-full bg-text-muted" aria-hidden="true"></span>
+      <div class="flex items-center gap-2 text-text-muted">
+        <i data-lucide="globe" class="w-4 h-4 text-gold"></i>
+        <span class="font-label text-xs tracking-wide">Clients across 5 countries</span>
+      </div>
+      <span class="hidden sm:block w-1 h-1 rounded-full bg-text-muted" aria-hidden="true"></span>
+      <div class="flex items-center gap-2 text-text-muted">
+        <i data-lucide="repeat" class="w-4 h-4 text-gold"></i>
+        <span class="font-label text-xs tracking-wide">90% client retention rate</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Card hover lift + border glow */
+  .testimonial-card:hover {
+    border-color: rgba(201, 162, 39, 0.3) !important;
+    transform: translateY(-6px);
+    box-shadow:
+      0 0 28px rgba(201, 162, 39, 0.1),
+      0 16px 48px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Quote icon lifts slightly on hover */
+  .testimonial-card:hover [data-lucide="quote"] {
+    color: rgba(201, 162, 39, 0.55) !important;
+    transition: color 0.3s ease;
+  }
+</style>

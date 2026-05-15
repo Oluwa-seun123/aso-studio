@@ -1,0 +1,272 @@
+---
+const steps = [
+  {
+    number: "01",
+    icon: "search",
+    title: "Discovery",
+    subtitle: "Understand & align",
+    description:
+      "We start with a focused conversation to understand your brand, goals, target audience, and what success looks like. No guesswork — just clarity.",
+    bullets: ["Brand brief", "Goal mapping", "Timeline & scope"],
+  },
+  {
+    number: "02",
+    icon: "sparkles",
+    title: "Creation",
+    subtitle: "Build & refine",
+    description:
+      "With a clear brief locked in, I get to work — crafting, iterating, and refining until every detail meets the standard your brand deserves.",
+    bullets: ["Concept development", "Revisions included", "Progress updates"],
+  },
+  {
+    number: "03",
+    icon: "rocket",
+    title: "Delivery",
+    subtitle: "Launch & support",
+    description:
+      "Final assets delivered in the formats you need, ready to launch. I stay available for post-delivery support so nothing gets left behind.",
+    bullets: ["All file formats", "Launch-ready assets", "Post-delivery support"],
+  },
+];
+---
+
+<section
+  id="process"
+  class="relative py-[120px] overflow-hidden"
+  style="background: #0f0f0f;"
+  aria-labelledby="process-heading"
+>
+  <!-- Decorative left edge line -->
+  <div
+    class="absolute left-0 top-[20%] bottom-[20%] w-px opacity-20"
+    style="background: linear-gradient(180deg, transparent, #c9a227, transparent);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
+
+    <!-- Section header -->
+    <div class="mb-20 gsap-hidden">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-label text-[11px] tracking-[0.35em] uppercase text-gold">
+          03 / How It Works
+        </span>
+        <div
+          class="flex-1 h-px max-w-[60px]"
+          style="background: linear-gradient(90deg, #c9a227, transparent);"
+          aria-hidden="true"
+        ></div>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <h2
+          id="process-heading"
+          class="font-heading font-bold text-text-primary"
+          style="font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1;"
+        >
+          My Process
+        </h2>
+        <p class="font-body text-sm text-text-muted max-w-xs leading-relaxed lg:text-right">
+          Simple. Transparent. Repeatable.<br />
+          From first message to final file.
+        </p>
+      </div>
+    </div>
+
+    <!-- Desktop: steps + SVG line -->
+    <div class="hidden lg:block">
+      <!-- SVG connecting line -->
+      <div class="relative mb-0">
+        <svg
+          id="process-line-svg"
+          class="absolute top-[52px] left-0 right-0 w-full overflow-visible"
+          height="4"
+          aria-hidden="true"
+          style="z-index: 1;"
+        >
+          <!-- Track (static) -->
+          <line
+            x1="16.66%"
+            y1="2"
+            x2="83.33%"
+            y2="2"
+            stroke="#27272a"
+            stroke-width="1"
+            stroke-dasharray="4 4"
+          />
+          <!-- Animated gold line -->
+          <line
+            id="process-line-draw"
+            x1="16.66%"
+            y1="2"
+            x2="16.66%"
+            y2="2"
+            stroke="#c9a227"
+            stroke-width="1.5"
+            style="filter: drop-shadow(0 0 4px rgba(201,162,39,0.8));"
+          />
+        </svg>
+
+        <!-- Steps row -->
+        <div class="stagger-children grid grid-cols-3 gap-8 relative" style="z-index: 2;">
+          {steps.map((step, i) => (
+            <div class="process-step flex flex-col items-center text-center">
+
+              <!-- Icon circle -->
+              <div class="relative mb-8">
+                <!-- Outer ring pulse -->
+                <div
+                  class="absolute inset-0 rounded-full opacity-0 process-ring"
+                  style="background: rgba(201,162,39,0.1); transform: scale(1.4);"
+                  aria-hidden="true"
+                ></div>
+
+                <div
+                  class="process-icon-circle relative w-[104px] h-[104px] rounded-full flex items-center justify-center border-2 transition-all duration-400"
+                  style="background: #1a1a1a; border-color: #27272a;"
+                >
+                  <!-- Number -->
+                  <span
+                    class="absolute -top-3 -right-1 font-label text-[10px] tracking-[0.15em] text-gold px-2 py-0.5 rounded-full"
+                    style="background: rgba(201,162,39,0.12); border: 1px solid rgba(201,162,39,0.25);"
+                  >
+                    {step.number}
+                  </span>
+
+                  <i
+                    data-lucide={step.icon}
+                    class="w-8 h-8"
+                    style="color: #c9a227;"
+                  ></i>
+                </div>
+              </div>
+
+              <!-- Text content -->
+              <h3 class="font-heading font-bold text-xl text-text-primary mb-1">
+                {step.title}
+              </h3>
+              <p class="font-label text-[11px] tracking-[0.2em] uppercase text-gold mb-4">
+                {step.subtitle}
+              </p>
+              <p class="font-body text-sm text-text-secondary leading-relaxed mb-6 max-w-[260px]">
+                {step.description}
+              </p>
+
+              <!-- Bullet points -->
+              <ul class="flex flex-col gap-2" role="list">
+                {step.bullets.map((b) => (
+                  <li class="flex items-center justify-center gap-2 font-body text-xs text-text-muted">
+                    <span
+                      class="w-1 h-1 rounded-full flex-shrink-0"
+                      style="background: #c9a227;"
+                      aria-hidden="true"
+                    ></span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile: vertical stack -->
+    <div class="lg:hidden stagger-children flex flex-col gap-0">
+      {steps.map((step, i) => (
+        <div class="relative flex gap-6 pb-12 last:pb-0">
+
+          <!-- Vertical line -->
+          {i < steps.length - 1 && (
+            <div
+              class="absolute left-[27px] top-[56px] bottom-0 w-px"
+              style="background: linear-gradient(180deg, #c9a227, #27272a);"
+              aria-hidden="true"
+            ></div>
+          )}
+
+          <!-- Icon -->
+          <div class="flex-shrink-0">
+            <div
+              class="w-14 h-14 rounded-full flex items-center justify-center border-2 relative"
+              style="background: #1a1a1a; border-color: #27272a;"
+            >
+              <span
+                class="absolute -top-2 -right-1 font-label text-[9px] text-gold px-1.5 py-0.5 rounded-full"
+                style="background: rgba(201,162,39,0.12); border: 1px solid rgba(201,162,39,0.25);"
+              >
+                {step.number}
+              </span>
+              <i data-lucide={step.icon} class="w-5 h-5" style="color: #c9a227;"></i>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="pt-1">
+            <h3 class="font-heading font-bold text-lg text-text-primary mb-0.5">
+              {step.title}
+            </h3>
+            <p class="font-label text-[10px] tracking-[0.2em] uppercase text-gold mb-3">
+              {step.subtitle}
+            </p>
+            <p class="font-body text-sm text-text-secondary leading-relaxed mb-4">
+              {step.description}
+            </p>
+            <ul class="flex flex-col gap-1.5" role="list">
+              {step.bullets.map((b) => (
+                <li class="flex items-center gap-2 font-body text-xs text-text-muted">
+                  <span
+                    class="w-1 h-1 rounded-full flex-shrink-0"
+                    style="background: #c9a227;"
+                    aria-hidden="true"
+                  ></span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Icon circle hover glow */
+  .process-step:hover .process-icon-circle {
+    border-color: rgba(201, 162, 39, 0.6) !important;
+    box-shadow: 0 0 24px rgba(201, 162, 39, 0.25);
+  }
+  .process-step:hover .process-ring {
+    opacity: 1;
+    animation: ringPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1.3); opacity: 0.15; }
+    50% { transform: scale(1.5); opacity: 0; }
+  }
+</style>
+
+<script>
+  window.addEventListener("load", () => {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+
+    /* Draw the SVG line left→right on scroll */
+    const drawLine = document.getElementById("process-line-draw");
+    if (!drawLine) return;
+
+    gsap.to(drawLine, {
+      attr: { x2: "83.33%" },
+      duration: 1.8,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: "#process",
+        start: "top 65%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  });
+</script>

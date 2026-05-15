@@ -1,0 +1,125 @@
+---
+const stats = [
+  {
+    value: 50,
+    suffix: "+",
+    label: "Projects Delivered",
+    icon: "layout-grid",
+    description: "Across AI video, graphics & web",
+  },
+  {
+    value: 30,
+    suffix: "+",
+    label: "Happy Clients",
+    icon: "users",
+    description: "Brands, founders & agencies",
+  },
+  {
+    value: 5,
+    suffix: "",
+    label: "Countries Reached",
+    icon: "globe",
+    description: "100% remote collaboration",
+  },
+  {
+    value: 3,
+    suffix: "+",
+    label: "Years of Craft",
+    icon: "sparkles",
+    description: "In creative & digital work",
+  },
+];
+---
+
+<section
+  id="stats"
+  class="relative py-16 border-y"
+  style="background: #0f0f0f; border-color: #27272a;"
+  aria-label="Studio statistics"
+>
+  <!-- Subtle top glow line -->
+  <div
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px"
+    style="background: linear-gradient(90deg, transparent, #c9a227, transparent);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
+
+    <!-- Section eyebrow -->
+    <div class="flex justify-center mb-10">
+      <span
+        class="font-label text-[11px] tracking-[0.3em] uppercase text-text-muted"
+        aria-hidden="true"
+      >
+        By the numbers
+      </span>
+    </div>
+
+    <!-- Stats grid -->
+    <div
+      class="stagger-children grid grid-cols-2 lg:grid-cols-4 gap-px"
+      style="background: #27272a;"
+      role="list"
+    >
+      {stats.map((stat, i) => (
+        <div
+          class="flex flex-col items-center text-center px-8 py-10 transition-colors duration-300 group"
+          style="background: #0f0f0f;"
+          role="listitem"
+        >
+          <!-- Icon -->
+          <div
+            class="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
+            style="background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.2);"
+            aria-hidden="true"
+          >
+            <i
+              data-lucide={stat.icon}
+              class="w-5 h-5 text-gold"
+              style="color: #c9a227;"
+            ></i>
+          </div>
+
+          <!-- Counter -->
+          <div class="mb-1.5">
+            <span
+              data-count={stat.value}
+              data-suffix={stat.suffix}
+              class="font-heading font-bold text-text-primary tabular-nums"
+              style="font-size: clamp(2.25rem, 4vw, 3.5rem); line-height: 1;"
+              aria-label={`${stat.value}${stat.suffix} ${stat.label}`}
+            >
+              0{stat.suffix}
+            </span>
+          </div>
+
+          <!-- Label -->
+          <p class="font-heading font-semibold text-[15px] text-text-primary mb-1.5">
+            {stat.label}
+          </p>
+
+          <!-- Description -->
+          <p class="font-body text-xs text-text-muted leading-relaxed max-w-[140px]">
+            {stat.description}
+          </p>
+
+          <!-- Bottom gold accent line (shows on hover) -->
+          <div
+            class="mt-6 h-px w-0 group-hover:w-12 transition-all duration-500 ease-out"
+            style="background: linear-gradient(90deg, #c9a227, #f59e0b);"
+            aria-hidden="true"
+          ></div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+  <!-- Subtle bottom glow line -->
+  <div
+    class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-px"
+    style="background: linear-gradient(90deg, transparent, #c9a227, transparent);"
+    aria-hidden="true"
+  ></div>
+</section>

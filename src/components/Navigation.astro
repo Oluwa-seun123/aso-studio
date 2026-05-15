@@ -1,0 +1,205 @@
+---
+// Navigation.astro
+---
+
+<nav
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+  <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
+    <div style="display:flex; align-items:center; justify-content:space-between; height:72px;">
+
+      <!-- Logo -->
+      <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <div style="width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; letter-spacing:0.15em; color:#050505;">
+          ASO
+        </div>
+        <div style="display:flex; flex-direction:column; line-height:1;">
+          <span style="font-weight:600; font-size:15px; color:#fafafa; letter-spacing:0.02em;">Creative Studio</span>
+          <span style="font-size:10px; color:#52525b; letter-spacing:0.2em; text-transform:uppercase; margin-top:2px;">AI · Design · Web</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul id="nav-links" style="display:flex; align-items:center; gap:32px; list-style:none; margin:0; padding:0;">
+        <li><a href="#work"     class="navlink">Work</a></li>
+        <li><a href="#services" class="navlink">Services</a></li>
+        <li><a href="#process"  class="navlink">Process</a></li>
+        <li><a href="#about"    class="navlink">About</a></li>
+        <li><a href="#contact"  class="navlink">Contact</a></li>
+      </ul>
+
+      <!-- CTA Button -->
+      <a href="#contact" id="nav-cta">Start a Project</a>
+
+      <!-- Mobile Hamburger -->
+      <button id="mobile-menu-btn" aria-label="Open menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line ham-short"></span>
+      </button>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Overlay -->
+<div id="mobile-menu">
+  <button id="mobile-close">✕</button>
+  <ul>
+    <li><a href="#work"     class="mobile-link">Work</a></li>
+    <li><a href="#services" class="mobile-link">Services</a></li>
+    <li><a href="#process"  class="mobile-link">Process</a></li>
+    <li><a href="#about"    class="mobile-link">About</a></li>
+    <li><a href="#contact"  class="mobile-link">Contact</a></li>
+  </ul>
+  <a href="#contact" id="mobile-cta" class="mobile-link">Start a Project</a>
+</div>
+
+<style>
+  /* ── Nav CTA ── */
+  #nav-cta {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #c9a227, #f59e0b);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #050505;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(201,162,39,0.3);
+    transition: all 0.3s ease;
+  }
+  #nav-cta:hover {
+    box-shadow: 0 0 32px rgba(245,158,11,0.5);
+    transform: translateY(-1px);
+  }
+
+  /* ── Nav Links ── */
+  .navlink {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #a1a1aa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .navlink:hover { color: #fafafa; }
+  .navlink::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background: #c9a227;
+    transition: width 0.3s ease;
+  }
+  .navlink:hover::after { width: 100%; }
+
+  /* ── Hamburger ── */
+  #mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .ham-line {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: #fafafa;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .ham-short { width: 16px; background: #c9a227; }
+
+  /* ── Mobile Overlay ── */
+  #mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,5,5,0.97);
+    backdrop-filter: blur(20px);
+  }
+  #mobile-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #a1a1aa;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  #mobile-menu ul {
+    list-style: none;
+    margin: 0 0 40px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .mobile-link {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    color: #fafafa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mobile-link:hover { color: #c9a227; }
+  #mobile-cta {
+    font-size: 1.125rem;
+    padding: 16px 40px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #c9a227, #f59e0b);
+    color: #050505;
+  }
+
+  /* ── Scrolled state ── */
+  :global(#main-nav.nav-scrolled) {
+    background: rgba(5,5,5,0.88);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(39,39,42,0.6);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1023px) {
+    #nav-links  { display: none !important; }
+    #nav-cta    { display: none !important; }
+    #mobile-menu-btn { display: flex !important; }
+  }
+</style>
+
+<script>
+  const btn    = document.getElementById("mobile-menu-btn");
+  const close  = document.getElementById("mobile-close");
+  const menu   = document.getElementById("mobile-menu");
+  const mlinks = document.querySelectorAll(".mobile-link");
+
+  function openMenu()  {
+    if (menu) { menu.style.display = "flex"; document.body.style.overflow = "hidden"; }
+  }
+  function closeMenu() {
+    if (menu) { menu.style.display = "none"; document.body.style.overflow = ""; }
+  }
+
+  btn?.addEventListener("click", openMenu);
+  close?.addEventListener("click", closeMenu);
+  mlinks.forEach(l => l.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+</script>

@@ -38,7 +38,10 @@ import Navigation from './Navigation.astro';
         </label>
       </div>
 
-      <form id="contactForm" class="space-y-6" action="https://formspree.io/f/meedjqgv" method="POST">
+      <div data-fs-success></div>
+      <div data-fs-error></div>
+
+      <form id="my-form" class="space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label for="name" class="block text-sm font-medium text-secondary mb-2">Name</label>
@@ -47,9 +50,11 @@ import Navigation from './Navigation.astro';
               type="text" 
               name="name" 
               required 
+              data-fs-field
               class="w-full px-4 py-3 rounded-xl border border-border bg-surface text-primary placeholder-secondary focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
               placeholder="Your full name"
             />
+            <span data-fs-error="name" class="text-red-400 text-sm mt-1 block"></span>
           </div>
           <div>
             <label for="email" class="block text-sm font-medium text-secondary mb-2">Email</label>
@@ -58,9 +63,11 @@ import Navigation from './Navigation.astro';
               type="email" 
               name="email" 
               required 
+              data-fs-field
               class="w-full px-4 py-3 rounded-xl border border-border bg-surface text-primary placeholder-secondary focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
               placeholder="your.email@example.com"
             />
+            <span data-fs-error="email" class="text-red-400 text-sm mt-1 block"></span>
           </div>
         </div>
 
@@ -71,26 +78,25 @@ import Navigation from './Navigation.astro';
             name="message" 
             rows="5" 
             required 
+            data-fs-field
             class="w-full px-4 py-3 rounded-xl border border-border bg-surface text-primary placeholder-secondary focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
             placeholder="Tell me about your project..."
           ></textarea>
+          <span data-fs-error="message" class="text-red-400 text-sm mt-1 block"></span>
         </div>
 
         <input type="hidden" name="service" id="serviceValue" value="web">
 
         <button 
-          id="submitBtn"
-          type="submit" 
+          type="submit"
+          data-fs-submit-btn
           class="w-full py-4 bg-gold hover:bg-gold-glow text-background font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
         >
-          <span id="submitText">Send Message</span>
+          <span>Send Message</span>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
           </svg>
         </button>
-
-        <!-- Success/Error Message -->
-        <div id="formMessage" class="hidden p-4 rounded-xl text-center font-medium"></div>
       </form>
 
     </div>
@@ -107,56 +113,41 @@ import Navigation from './Navigation.astro';
       serviceValue.value = e.target.value;
     });
   });
-
-  // Handle form submission
-  const contactForm = document.getElementById('contactForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const submitText = document.getElementById('submitText');
-  const formMessage = document.getElementById('formMessage');
-
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Disable button and show loading state
-    submitBtn.disabled = true;
-    submitText.textContent = 'Sending...';
-
-    try {
-      const formData = new FormData(contactForm);
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        // Success
-        formMessage.textContent = '✅ Message sent successfully! I\'ll get back to you soon.';
-        formMessage.className = 'p-4 rounded-xl text-center font-medium bg-green-500/20 text-green-400 border border-green-500/30';
-        formMessage.classList.remove('hidden');
-        contactForm.reset();
-        serviceValue.value = 'web';
-        serviceRadios[0].checked = true;
-        submitText.textContent = 'Message Sent!';
-        
-        // Reset after 5 seconds
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitText.textContent = 'Send Message';
-          formMessage.classList.add('hidden');
-        }, 5000);
-      } else {
-        throw new Error('Form submission failed');
-      }
-    } catch (error) {
-      // Error
-      formMessage.textContent = '❌ Something went wrong. Please try again.';
-      formMessage.className = 'p-4 rounded-xl text-center font-medium bg-red-500/20 text-red-400 border border-red-500/30';
-      formMessage.classList.remove('hidden');
-      submitBtn.disabled = false;
-      submitText.textContent = 'Send Message';
-    }
-  });
 </script>
+
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#my-form', formId: 'meedjqgv' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+<style>
+  :global([data-fs-error]) {
+    display: block;
+    margin-top: 0.5rem;
+    color: rgb(248, 113, 113);
+    font-size: 0.875rem;
+  }
+
+  :global([data-fs-success]) {
+    display: none;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    font-weight: 500;
+    background-color: rgba(34, 197, 94, 0.2);
+    color: rgb(134, 239, 172);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    margin-bottom: 1.5rem;
+  }
+
+  :global([data-fs-success][data-success]) {
+    display: block;
+  }
+
+  :global(input[aria-invalid="true"]),
+  :global(textarea[aria-invalid="true"]) {
+    border-color: rgb(248, 113, 113) !important;
+    background-color: rgba(248, 113, 113, 0.05);
+  }
+</style>

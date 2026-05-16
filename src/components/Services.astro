@@ -35,163 +35,54 @@ const services = [
 ];
 ---
 
-<section id="services" class="relative py-section overflow-hidden bg-background">
-  <!-- Background grid -->
-  <div class="absolute inset-0 opacity-[0.025]" style="background-image:radial-gradient(circle,#a1a1aa 1px,transparent 1px); background-size:40px 40px;"></div>
-
-  <!-- Top line -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-px" style="background:linear-gradient(90deg,transparent,rgba(201,162,39,0.4),transparent);"></div>
-
-  <div class="relative z-10 max-w-site mx-auto px-10">
-
-    <!-- Header -->
+<section id="services" class="relative py-20 overflow-hidden bg-background">
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-10">
+    
     <div class="mb-16">
       <div class="flex items-center gap-3 mb-5">
-        <span class="font-label text-[11px] tracking-[0.35em] uppercase text-gold">02 / What I Do</span>
-        <div class="w-[60px] h-px" style="background:linear-gradient(90deg,#c9a227,transparent);"></div>
+        <span class="font-label text-xs tracking-widest uppercase text-gold">02 / What I Do</span>
+        <div class="w-16 h-px bg-gold"></div>
       </div>
-      <h2 class="font-heading font-bold text-display-md text-primary mb-4">My Services</h2>
-      <p class="font-body text-secondary max-w-[480px] leading-relaxed">
+      <h2 class="font-heading font-bold text-3xl md:text-5xl text-primary mb-4">My Services</h2>
+      <p class="font-body text-secondary max-w-md leading-relaxed">
         A focused set of services built for modern brands that want results — not just deliverables.
       </p>
     </div>
 
-    <!-- Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="services-grid">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {services.map((service) => (
-        <article class="group relative bg-surface border border-border rounded-2xl p-8 overflow-hidden cursor-pointer transition-all duration-400 ease-smooth hover:border-gold/50 hover:-translate-y-2 hover:shadow-gold">
-          <!-- Top row -->
+        <article class="group relative bg-surface border border-border rounded-2xl p-8 overflow-hidden cursor-pointer transition-all duration-300 hover:border-gold hover:-translate-y-2 hover:shadow-gold">
+          
           <div class="flex items-start justify-between mb-7">
-            <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-gold/15 group-hover:border-gold/45">
+            <div class="w-12 h-12 rounded-xl bg-gold bg-opacity-10 border border-gold border-opacity-20 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-15 group-hover:border-opacity-45">
               <span class="text-xl">{service.icon}</span>
             </div>
             <div class="flex items-center gap-3">
-              <span class="font-label text-[11px] tracking-[0.2em] text-muted">{service.number}</span>
-              <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center text-gold text-sm opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+              <span class="font-label text-xs tracking-widest text-muted">{service.number}</span>
+              <div class="w-8 h-8 rounded-full bg-gold bg-opacity-10 border border-gold border-opacity-25 flex items-center justify-center text-gold text-sm opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
                 ↗
               </div>
             </div>
           </div>
 
-          <!-- Title -->
-          <h3 class="font-heading font-bold text-lg text-primary mb-1.5 transition-colors duration-200 group-hover:text-gold">{service.title}</h3>
-          <p class="font-label text-[11px] tracking-[0.18em] uppercase text-muted mb-4">{service.tagline}</p>
-
-          <!-- Description -->
+          <h3 class="font-heading font-bold text-lg text-primary mb-1 transition-colors duration-200 group-hover:text-gold">{service.title}</h3>
+          <p class="font-label text-xs tracking-widest uppercase text-muted mb-4">{service.tagline}</p>
           <p class="font-body text-sm text-secondary leading-relaxed mb-7">{service.description}</p>
 
-          <!-- Tags -->
           <div class="flex flex-wrap gap-2">
             {service.offerings.map((item) => (
-              <span class="font-label text-[11px] tracking-wider px-3 py-1.5 rounded-pill bg-white/5 border border-border text-secondary transition-all duration-200 group-hover:border-gold/20 group-hover:text-primary">{item}</span>
+              <span class="font-label text-xs tracking-wider px-3 py-1.5 rounded-full bg-white bg-opacity-5 border border-border text-secondary transition-all duration-200 group-hover:border-gold group-hover:border-opacity-20 group-hover:text-primary">{item}</span>
             ))}
           </div>
         </article>
       ))}
     </div>
 
-    <!-- Bottom CTA -->
     <div class="mt-14 flex justify-center">
-      <a href="#contact" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-pill bg-gold-gradient font-heading font-semibold text-[15px] text-background no-underline shadow-gold transition-all duration-300 hover:shadow-gold-lg hover:-translate-y-0.5">
+      <a href="#contact" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold font-heading font-semibold text-sm text-background no-underline shadow-gold transition-all duration-300 hover:shadow-gold-lg hover:-translate-y-0.5">
         Start a Project →
       </a>
     </div>
 
   </div>
 </section>
-    overflow: hidden;
-    transition: all 0.4s ease;
-    cursor: pointer;
-  }
-  .service-card:hover {
-    border-color: rgba(201,162,39,0.5);
-    transform: translateY(-8px);
-    box-shadow: 0 0 32px rgba(201,162,39,0.15), 0 20px 60px rgba(0,0,0,0.5);
-  }
-
-  .service-icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: rgba(201,162,39,0.08);
-    border: 1px solid rgba(201,162,39,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-  .service-card:hover .service-icon-box {
-    background: rgba(201,162,39,0.15);
-    border-color: rgba(201,162,39,0.45);
-  }
-
-  .service-arrow {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(201,162,39,0.1);
-    border: 1px solid rgba(201,162,39,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #c9a227;
-    font-size: 14px;
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.3s ease;
-  }
-  .service-card:hover .service-arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .service-title {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    color: #fafafa;
-    margin: 0 0 6px;
-    transition: color 0.2s ease;
-  }
-  .service-card:hover .service-title { color: #c9a227; }
-
-  .service-tag {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    padding: 6px 12px;
-    border-radius: 9999px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid #27272a;
-    color: #a1a1aa;
-    transition: all 0.2s ease;
-  }
-  .service-card:hover .service-tag {
-    border-color: rgba(201,162,39,0.2);
-    color: #d4d4d8;
-  }
-
-  #services-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 32px;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, #c9a227, #f59e0b);
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: #050505;
-    text-decoration: none;
-    box-shadow: 0 0 24px rgba(201,162,39,0.35);
-    transition: all 0.3s ease;
-  }
-  #services-cta:hover {
-    box-shadow: 0 0 40px rgba(245,158,11,0.5);
-    transform: translateY(-2px);
-  }
-
-  @media (max-width: 768px) {
-    #services-grid { grid-template-columns: 1fr !important; }
-  }
-</style>

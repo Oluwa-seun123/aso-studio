@@ -1,205 +1,164 @@
 ---
-// Navigation.astro
+// Navigation.astro - Fixed mobile menu with inline SVGs
 ---
 
-<nav
-  id="main-nav"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
->
-  <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
-    <div style="display:flex; align-items:center; justify-content:space-between; height:72px;">
+<<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-[1280px] mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-full bg-aso-gold flex items-center justify-center text-aso-black font-bold font-['Space_Grotesk']">
+        ASO
+      </div>
+      <span class="text-aso-text font-['Space_Grotesk'] font-bold text-lg hidden sm:block">
+        Creative Studio
+      </span>
+    </a>
 
-      <!-- Logo -->
-      <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <div style="width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; letter-spacing:0.15em; color:#050505;">
-          ASO
-        </div>
-        <div style="display:flex; flex-direction:column; line-height:1;">
-          <span style="font-weight:600; font-size:15px; color:#fafafa; letter-spacing:0.02em;">Creative Studio</span>
-          <span style="font-size:10px; color:#52525b; letter-spacing:0.2em; text-transform:uppercase; margin-top:2px;">AI · Design · Web</span>
-        </div>
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#work" class="relative text-aso-secondary hover:text-aso-text transition-colors text-sm font-medium group">
+        Work
+        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-aso-gold transition-all duration-300 group-hover:w-full"></span>
       </a>
-
-      <!-- Desktop Links -->
-      <ul id="nav-links" style="display:flex; align-items:center; gap:32px; list-style:none; margin:0; padding:0;">
-        <li><a href="#work"     class="navlink">Work</a></li>
-        <li><a href="#services" class="navlink">Services</a></li>
-        <li><a href="#process"  class="navlink">Process</a></li>
-        <li><a href="#about"    class="navlink">About</a></li>
-        <li><a href="#contact"  class="navlink">Contact</a></li>
-      </ul>
-
-      <!-- CTA Button -->
-      <a href="#contact" id="nav-cta">Start a Project</a>
-
-      <!-- Mobile Hamburger -->
-      <button id="mobile-menu-btn" aria-label="Open menu">
-        <span class="ham-line"></span>
-        <span class="ham-line"></span>
-        <span class="ham-line ham-short"></span>
-      </button>
-
+      <a href="#services" class="relative text-aso-secondary hover:text-aso-text transition-colors text-sm font-medium group">
+        Services
+        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-aso-gold transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#process" class="relative text-aso-secondary hover:text-aso-text transition-colors text-sm font-medium group">
+        Process
+        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-aso-gold transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#about" class="relative text-aso-secondary hover:text-aso-text transition-colors text-sm font-medium group">
+        About
+        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-aso-gold transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#contact" class="relative text-aso-secondary hover:text-aso-text transition-colors text-sm font-medium group">
+        Contact
+        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-aso-gold transition-all duration-300 group-hover:w-full"></span>
+      </a>
     </div>
+
+    <!-- Desktop CTA -->
+    <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-aso-gold text-aso-black font-medium text-sm hover:bg-[#f59e0b] transition-colors">
+      Start a Project
+    </a>
+
+    <!-- Mobile Hamburger Button -->
+    <button 
+      id="menu-toggle" 
+      class="md:hidden relative z-50 w-10 h-10 flex items-center justify-center text-aso-text hover:text-aso-gold transition-colors"
+      aria-label="Toggle menu"
+      type="button"
+    >
+      <!-- Hamburger Icon -->
+      <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <!-- Close Icon -->
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Full-Screen Overlay -->
+  <div 
+    id="mobile-menu" 
+    class="fixed inset-0 bg-[#050505]/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
+  >
+    <a href="#work" class="mobile-link text-3xl font-['Space_Grotesk'] font-bold text-aso-text hover:text-aso-gold transition-colors translate-y-4 opacity-0">Work</a>
+    <a href="#services" class="mobile-link text-3xl font-['Space_Grotesk'] font-bold text-aso-text hover:text-aso-gold transition-colors translate-y-4 opacity-0">Services</a>
+    <a href="#process" class="mobile-link text-3xl font-['Space_Grotesk'] font-bold text-aso-text hover:text-aso-gold transition-colors translate-y-4 opacity-0">Process</a>
+    <a href="#about" class="mobile-link text-3xl font-['Space_Grotesk'] font-bold text-aso-text hover:text-aso-gold transition-colors translate-y-4 opacity-0">About</a>
+    <a href="#contact" class="mobile-link text-3xl font-['Space_Grotesk'] font-bold text-aso-text hover:text-aso-gold transition-colors translate-y-4 opacity-0">Contact</a>
+    
+    <a href="#contact" class="mobile-link mt-4 px-8 py-3 rounded-full bg-aso-gold text-aso-black font-medium translate-y-4 opacity-0">
+      Start a Project
+    </a>
   </div>
 </nav>
 
-<!-- Mobile Overlay -->
-<div id="mobile-menu">
-  <button id="mobile-close">✕</button>
-  <ul>
-    <li><a href="#work"     class="mobile-link">Work</a></li>
-    <li><a href="#services" class="mobile-link">Services</a></li>
-    <li><a href="#process"  class="mobile-link">Process</a></li>
-    <li><a href="#about"    class="mobile-link">About</a></li>
-    <li><a href="#contact"  class="mobile-link">Contact</a></li>
-  </ul>
-  <a href="#contact" id="mobile-cta" class="mobile-link">Start a Project</a>
-</div>
-
-<style>
-  /* ── Nav CTA ── */
-  #nav-cta {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, #c9a227, #f59e0b);
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: #050505;
-    text-decoration: none;
-    box-shadow: 0 0 20px rgba(201,162,39,0.3);
-    transition: all 0.3s ease;
-  }
-  #nav-cta:hover {
-    box-shadow: 0 0 32px rgba(245,158,11,0.5);
-    transform: translateY(-1px);
-  }
-
-  /* ── Nav Links ── */
-  .navlink {
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #a1a1aa;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    position: relative;
-    padding-bottom: 4px;
-  }
-  .navlink:hover { color: #fafafa; }
-  .navlink::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    width: 0;
-    background: #c9a227;
-    transition: width 0.3s ease;
-  }
-  .navlink:hover::after { width: 100%; }
-
-  /* ── Hamburger ── */
-  #mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-  }
-  .ham-line {
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: #fafafa;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-  .ham-short { width: 16px; background: #c9a227; }
-
-  /* ── Mobile Overlay ── */
-  #mobile-menu {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 40;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(5,5,5,0.97);
-    backdrop-filter: blur(20px);
-  }
-  #mobile-close {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: none;
-    border: none;
-    color: #a1a1aa;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  #mobile-menu ul {
-    list-style: none;
-    margin: 0 0 40px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
-  .mobile-link {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
-    font-size: 2.25rem;
-    color: #fafafa;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .mobile-link:hover { color: #c9a227; }
-  #mobile-cta {
-    font-size: 1.125rem;
-    padding: 16px 40px;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, #c9a227, #f59e0b);
-    color: #050505;
-  }
-
-  /* ── Scrolled state ── */
-  :global(#main-nav.nav-scrolled) {
-    background: rgba(5,5,5,0.88);
-    backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(39,39,42,0.6);
-    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 1023px) {
-    #nav-links  { display: none !important; }
-    #nav-cta    { display: none !important; }
-    #mobile-menu-btn { display: flex !important; }
-  }
-</style>
-
 <script>
-  const btn    = document.getElementById("mobile-menu-btn");
-  const close  = document.getElementById("mobile-close");
-  const menu   = document.getElementById("mobile-menu");
-  const mlinks = document.querySelectorAll(".mobile-link");
+  (function() {
+    const nav = document.getElementById('main-nav');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    let isOpen = false;
 
-  function openMenu()  {
-    if (menu) { menu.style.display = "flex"; document.body.style.overflow = "hidden"; }
-  }
-  function closeMenu() {
-    if (menu) { menu.style.display = "none"; document.body.style.overflow = ""; }
-  }
+    function updateNav() {
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-[#050505]/80', 'backdrop-blur-lg', 'border-b', 'border-[#27272a]');
+      } else {
+        nav.classList.remove('bg-[#050505]/80', 'backdrop-blur-lg', 'border-b', 'border-[#27272a]');
+      }
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
 
-  btn?.addEventListener("click", openMenu);
-  close?.addEventListener("click", closeMenu);
-  mlinks.forEach(l => l.addEventListener("click", closeMenu));
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+    function toggleMenu() {
+      isOpen = !isOpen;
+      
+      if (isOpen) {
+        mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+        iconMenu.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        mobileLinks.forEach((link, i) => {
+          setTimeout(() => {
+            link.classList.remove('translate-y-4', 'opacity-0');
+            link.classList.add('translate-y-0', 'opacity-100');
+          }, 100 + (i * 75));
+        });
+      } else {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+        iconMenu.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        document.body.style.overflow = '';
+        mobileLinks.forEach(link => {
+          link.classList.add('translate-y-4', 'opacity-0');
+          link.classList.remove('translate-y-0', 'opacity-100');
+        });
+      }
+    }
+
+    menuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (isOpen) toggleMenu();
+      });
+    });
+
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target === mobileMenu && isOpen) {
+        toggleMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && isOpen) {
+        toggleMenu();
+      }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
 </script>

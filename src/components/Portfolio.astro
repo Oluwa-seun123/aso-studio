@@ -1,205 +1,208 @@
 ---
-// Navigation.astro
+import { getCollection } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+
+const allProjects = await getCollection("projects");
+
+const sortedProjects = allProjects.sort((a, b) => {
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
+
+const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
 ---
 
-<nav
-  id="main-nav"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+<section
+  id="work"
+  class="relative py-[120px] overflow-hidden bg-surface"
+  aria-labelledby="portfolio-heading"
 >
-  <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
-    <div style="display:flex; align-items:center; justify-content:space-between; height:72px;">
+  <!-- Background grid -->
+  <div
+    class="absolute inset-0 opacity-[0.02]"
+    style="background-image: radial-gradient(circle, #a1a1aa 1px, transparent 1px); background-size: 36px 36px;"
+    aria-hidden="true"
+  ></div>
 
-      <!-- Logo -->
-      <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <div style="width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; letter-spacing:0.15em; color:#050505;">
-          ASO
-        </div>
-        <div style="display:flex; flex-direction:column; line-height:1;">
-          <span style="font-weight:600; font-size:15px; color:#fafafa; letter-spacing:0.02em;">Creative Studio</span>
-          <span style="font-size:10px; color:#52525b; letter-spacing:0.2em; text-transform:uppercase; margin-top:2px;">AI · Design · Web</span>
-        </div>
-      </a>
+  <!-- Top ambient line -->
+  <div
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-px"
+    style="background: linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent);"
+    aria-hidden="true"
+  ></div>
 
-      <!-- Desktop Links -->
-      <ul id="nav-links" style="display:flex; align-items:center; gap:32px; list-style:none; margin:0; padding:0;">
-        <li><a href="#work"     class="navlink">Work</a></li>
-        <li><a href="#services" class="navlink">Services</a></li>
-        <li><a href="#process"  class="navlink">Process</a></li>
-        <li><a href="#about"    class="navlink">About</a></li>
-        <li><a href="#contact"  class="navlink">Contact</a></li>
-      </ul>
+  <div class="relative z-10 max-w-site mx-auto px-6 lg:px-10">
 
-      <!-- CTA Button -->
-      <a href="#contact" id="nav-cta">Start a Project</a>
+    <!-- Section Header -->
+    <div class="mb-12 gsap-hidden">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-label text-xs tracking-[0.35em] uppercase text-gold">
+          04 / Portfolio
+        </span>
+        <div
+          class="flex-1 h-px max-w-[60px]"
+          style="background: linear-gradient(90deg, #c9a227, transparent);"
+          aria-hidden="true"
+        ></div>
+      </div>
 
-      <!-- Mobile Hamburger -->
-      <button id="mobile-menu-btn" aria-label="Open menu">
-        <span class="ham-line"></span>
-        <span class="ham-line"></span>
-        <span class="ham-line ham-short"></span>
-      </button>
-
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <h2
+          id="portfolio-heading"
+          class="font-heading font-bold text-primary text-display-md"
+        >
+          My Works
+        </h2>
+        <p class="font-body text-sm text-muted max-w-xs leading-relaxed lg:text-right">
+          A selection of projects across every service.
+          <br />Each one built with intention.
+        </p>
+      </div>
     </div>
+
+    <!-- Filter Buttons -->
+    <div
+      class="flex flex-wrap gap-3 mb-12 gsap-hidden"
+      role="tablist"
+      aria-label="Filter projects by category"
+      id="filter-bar"
+    >
+      {filters.map((filter, i) => (
+        <button
+          class="filter-btn font-label text-xs tracking-[0.18em] uppercase px-5 py-2.5 rounded-full border transition-all duration-250"
+          data-filter={filter}
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          style={
+            i === 0
+              ? "background: #c9a227; border-color: #c9a227; color: #050505;"
+              : "background: transparent; border-color: #27272a; color: #a1a1aa;"
+          }
+        >
+          {filter}
+        </button>
+      ))}
+    </div>
+
+    <!-- Projects Grid -->
+    <div
+      id="projects-grid"
+      class="grid grid-cols-1 md:grid-cols-2 gap-6"
+      role="tabpanel"
+      aria-label="Project list"
+    >
+      {sortedProjects.map((project) => (
+        <div
+          class="project-item"
+          data-category={project.data.category}
+        >
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            category={project.data.category}
+            image={project.data.image}
+            link={project.data.link}
+            client={project.data.client}
+            slug={project.slug}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Empty state -->
+    <div
+      id="empty-state"
+      class="hidden flex-col items-center justify-center py-20 text-center"
+    >
+      <div
+        class="w-14 h-14 rounded-full flex items-center justify-center mb-4 bg-gold/10 border border-gold/20"
+      >
+        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+      <p class="font-heading text-lg text-secondary">No projects in this category yet.</p>
+      <p class="font-body text-sm text-muted mt-2">Check back soon.</p>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-14 flex justify-center gsap-hidden">
+      <a
+        href="#contact"
+        class="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-heading font-semibold text-[15px] border border-border text-secondary bg-transparent transition-all duration-300 hover:border-gold hover:text-gold"
+      >
+        Have a project in mind?
+        <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+
   </div>
-</nav>
-
-<!-- Mobile Overlay -->
-<div id="mobile-menu">
-  <button id="mobile-close">✕</button>
-  <ul>
-    <li><a href="#work"     class="mobile-link">Work</a></li>
-    <li><a href="#services" class="mobile-link">Services</a></li>
-    <li><a href="#process"  class="mobile-link">Process</a></li>
-    <li><a href="#about"    class="mobile-link">About</a></li>
-    <li><a href="#contact"  class="mobile-link">Contact</a></li>
-  </ul>
-  <a href="#contact" id="mobile-cta" class="mobile-link">Start a Project</a>
-</div>
-
-<style>
-  /* ── Nav CTA ── */
-  #nav-cta {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, #c9a227, #f59e0b);
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: #050505;
-    text-decoration: none;
-    box-shadow: 0 0 20px rgba(201,162,39,0.3);
-    transition: all 0.3s ease;
-  }
-  #nav-cta:hover {
-    box-shadow: 0 0 32px rgba(245,158,11,0.5);
-    transform: translateY(-1px);
-  }
-
-  /* ── Nav Links ── */
-  .navlink {
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #a1a1aa;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    position: relative;
-    padding-bottom: 4px;
-  }
-  .navlink:hover { color: #fafafa; }
-  .navlink::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    width: 0;
-    background: #c9a227;
-    transition: width 0.3s ease;
-  }
-  .navlink:hover::after { width: 100%; }
-
-  /* ── Hamburger ── */
-  #mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-  }
-  .ham-line {
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: #fafafa;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-  .ham-short { width: 16px; background: #c9a227; }
-
-  /* ── Mobile Overlay ── */
-  #mobile-menu {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 40;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(5,5,5,0.97);
-    backdrop-filter: blur(20px);
-  }
-  #mobile-close {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: none;
-    border: none;
-    color: #a1a1aa;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  #mobile-menu ul {
-    list-style: none;
-    margin: 0 0 40px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
-  .mobile-link {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
-    font-size: 2.25rem;
-    color: #fafafa;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .mobile-link:hover { color: #c9a227; }
-  #mobile-cta {
-    font-size: 1.125rem;
-    padding: 16px 40px;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, #c9a227, #f59e0b);
-    color: #050505;
-  }
-
-  /* ── Scrolled state ── */
-  :global(#main-nav.nav-scrolled) {
-    background: rgba(5,5,5,0.88);
-    backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(39,39,42,0.6);
-    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 1023px) {
-    #nav-links  { display: none !important; }
-    #nav-cta    { display: none !important; }
-    #mobile-menu-btn { display: flex !important; }
-  }
-</style>
+</section>
 
 <script>
-  const btn    = document.getElementById("mobile-menu-btn");
-  const close  = document.getElementById("mobile-close");
-  const menu   = document.getElementById("mobile-menu");
-  const mlinks = document.querySelectorAll(".mobile-link");
+  window.addEventListener("load", () => {
 
-  function openMenu()  {
-    if (menu) { menu.style.display = "flex"; document.body.style.overflow = "hidden"; }
-  }
-  function closeMenu() {
-    if (menu) { menu.style.display = "none"; document.body.style.overflow = ""; }
-  }
+    /* GSAP scale-in for cards */
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+      const items = document.querySelectorAll(".project-item");
+      gsap.fromTo(
+        items,
+        { opacity: 0, scale: 0.94, y: 20 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.55,
+          ease: "power3.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: "#projects-grid",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
 
-  btn?.addEventListener("click", openMenu);
-  close?.addEventListener("click", closeMenu);
-  mlinks.forEach(l => l.addEventListener("click", closeMenu));
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+    /* Category Filtering */
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const projectItems = document.querySelectorAll(".project-item");
+    const emptyState = document.getElementById("empty-state");
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const selected = btn.getAttribute("data-filter") ?? "All";
+
+        /* Update button styles */
+        filterBtns.forEach((b) => {
+          const isActive = b === btn;
+          b.style.background     = isActive ? "#c9a227"    : "transparent";
+          b.style.borderColor    = isActive ? "#c9a227"    : "#27272a";
+          b.style.color          = isActive ? "#050505"    : "#a1a1aa";
+          b.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        /* Show/hide project items */
+        let visibleCount = 0;
+        projectItems.forEach((item) => {
+          const cat = item.getAttribute("data-category") ?? "";
+          const show = selected === "All" || cat === selected;
+
+          if (show) {
+            item.style.display = "block";
+            item.style.animation = "filterFadeIn 0.35s ease forwards";
+            visibleCount++;
+          } else {
+            item.style.display = "none";
+          }
+        });
+
+        /* Toggle empty state */
+        if (emptyState) {
+          emptyState.style.display = visibleCount === 0 ? "flex" : "none";
+        }
+      });
+    });
+  });
 </script>

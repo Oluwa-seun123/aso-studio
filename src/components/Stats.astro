@@ -4,28 +4,24 @@ const stats = [
     value: 50,
     suffix: "+",
     label: "Projects Delivered",
-    icon: "layout-grid",
     description: "Across AI video, graphics & web",
   },
   {
     value: 30,
     suffix: "+",
     label: "Happy Clients",
-    icon: "users",
     description: "Brands, founders & agencies",
   },
   {
     value: 5,
     suffix: "",
     label: "Countries Reached",
-    icon: "globe",
     description: "100% remote collaboration",
   },
   {
     value: 3,
     suffix: "+",
     label: "Years of Craft",
-    icon: "sparkles",
     description: "In creative & digital work",
   },
 ];
@@ -33,93 +29,124 @@ const stats = [
 
 <section
   id="stats"
-  class="relative py-16 border-y"
-  style="background: #0f0f0f; border-color: #27272a;"
+  style="position:relative; padding:64px 0; border-top:1px solid #27272a; border-bottom:1px solid #27272a; background:#0f0f0f;"
   aria-label="Studio statistics"
 >
-  <!-- Subtle top glow line -->
+  <!-- Top glow line -->
   <div
-    class="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px"
-    style="background: linear-gradient(90deg, transparent, #c9a227, transparent);"
+    style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:400px; height:1px; background:linear-gradient(90deg,transparent,#c9a227,transparent);"
     aria-hidden="true"
   ></div>
 
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
+  <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
 
-    <!-- Section eyebrow -->
-    <div class="flex justify-center mb-10">
-      <span
-        class="font-label text-[11px] tracking-[0.3em] uppercase text-text-muted"
-        aria-hidden="true"
-      >
+    <!-- Eyebrow -->
+    <div style="display:flex; justify-content:center; margin-bottom:40px;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#52525b;">
         By the numbers
       </span>
     </div>
 
     <!-- Stats grid -->
-    <div
-      class="stagger-children grid grid-cols-2 lg:grid-cols-4 gap-px"
-      style="background: #27272a;"
-      role="list"
-    >
-      {stats.map((stat, i) => (
-        <div
-          class="flex flex-col items-center text-center px-8 py-10 transition-colors duration-300 group"
-          style="background: #0f0f0f;"
-          role="listitem"
-        >
-          <!-- Icon -->
-          <div
-            class="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
-            style="background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.2);"
-            aria-hidden="true"
-          >
-            <i
-              data-lucide={stat.icon}
-              class="w-5 h-5 text-gold"
-              style="color: #c9a227;"
-            ></i>
-          </div>
+    <div class="stats-grid" role="list">
+      {stats.map((stat) => (
+        <div class="stat-item" role="listitem">
+          <!-- Icon box -->
+          <div class="stat-icon-box" aria-hidden="true">★</div>
 
           <!-- Counter -->
-          <div class="mb-1.5">
-            <span
-              data-count={stat.value}
-              data-suffix={stat.suffix}
-              class="font-heading font-bold text-text-primary tabular-nums"
-              style="font-size: clamp(2.25rem, 4vw, 3.5rem); line-height: 1;"
-              aria-label={`${stat.value}${stat.suffix} ${stat.label}`}
-            >
-              0{stat.suffix}
-            </span>
-          </div>
+          <span
+            data-count={stat.value}
+            data-suffix={stat.suffix}
+            class="stat-number"
+            aria-label={`${stat.value}${stat.suffix} ${stat.label}`}
+          >
+            0{stat.suffix}
+          </span>
 
           <!-- Label -->
-          <p class="font-heading font-semibold text-[15px] text-text-primary mb-1.5">
-            {stat.label}
-          </p>
+          <p class="stat-label">{stat.label}</p>
 
           <!-- Description -->
-          <p class="font-body text-xs text-text-muted leading-relaxed max-w-[140px]">
-            {stat.description}
-          </p>
-
-          <!-- Bottom gold accent line (shows on hover) -->
-          <div
-            class="mt-6 h-px w-0 group-hover:w-12 transition-all duration-500 ease-out"
-            style="background: linear-gradient(90deg, #c9a227, #f59e0b);"
-            aria-hidden="true"
-          ></div>
+          <p class="stat-desc">{stat.description}</p>
         </div>
       ))}
     </div>
 
   </div>
 
-  <!-- Subtle bottom glow line -->
+  <!-- Bottom glow line -->
   <div
-    class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-px"
-    style="background: linear-gradient(90deg, transparent, #c9a227, transparent);"
+    style="position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:400px; height:1px; background:linear-gradient(90deg,transparent,#c9a227,transparent);"
     aria-hidden="true"
   ></div>
 </section>
+
+<style>
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #27272a;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    background: #0f0f0f;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    transition: background 0.3s ease;
+  }
+  .stat-item:hover { background: #111111; }
+
+  .stat-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(201,162,39,0.1);
+    border: 1px solid rgba(201,162,39,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a227;
+    font-size: 16px;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+  }
+  .stat-item:hover .stat-icon-box { transform: scale(1.1); }
+
+  .stat-number {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    line-height: 1;
+    color: #fafafa;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-label {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fafafa;
+    margin: 0;
+  }
+
+  .stat-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    color: #52525b;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 140px;
+  }
+
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

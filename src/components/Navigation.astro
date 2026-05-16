@@ -1,112 +1,253 @@
 ---
 const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
-  { name: 'Portfolio', href: '/portfolio' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Work",     href: "#work"     },
+  { name: "Services", href: "#services" },
+  { name: "Process",  href: "#process"  },
+  { name: "About",    href: "#about"    },
+  { name: "Contact",  href: "#contact"  },
 ];
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      
+<nav
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  style="background: transparent;"
+>
+  <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
+    <div style="display:flex; align-items:center; justify-content:space-between; height:72px;">
+
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-sm">ASO</span>
+      <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <div style="width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; letter-spacing:0.15em; color:#050505; flex-shrink:0;">
+          ASO
         </div>
-        <div class="hidden sm:block">
-          <span class="text-lg font-bold text-gray-900 dark:text-white block leading-tight">Creative Studio</span>
-          <span class="text-xs text-gray-500 dark:text-gray-400 tracking-widest">AI · DESIGN · WEB</span>
+        <div style="display:flex; flex-direction:column; line-height:1;">
+          <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; color:#fafafa; letter-spacing:0.02em;">Creative Studio</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#52525b; letter-spacing:0.2em; text-transform:uppercase; margin-top:2px;">AI · Design · Web</span>
         </div>
       </a>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-8">
+      <!-- Desktop Links -->
+      <ul id="nav-links" style="display:flex; align-items:center; gap:32px; list-style:none; margin:0; padding:0;">
         {navLinks.map((link) => (
-          <a 
-            href={link.href} 
-            class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
-          >
-            {link.name}
-          </a>
+          <li>
+            <a href={link.href} class="navlink">{link.name}</a>
+          </li>
         ))}
-        
-        <!-- Theme Toggle -->
-        <button 
-          id="theme-toggle" 
-          class="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Toggle theme"
-        >
-          <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        </button>
+      </ul>
 
-        <a 
-          href="/contact" 
-          class="px-4 py-2 text-sm font-medium text-white bg-amber-500 rounded-lg hover:bg-amber-600 transition-colors"
+      <!-- Desktop right: theme toggle + CTA -->
+      <div style="display:flex; align-items:center; gap:12px;">
+        <button
+          id="theme-toggle"
+          style="width:36px; height:36px; border-radius:8px; border:1px solid #27272a; background:transparent; color:#a1a1aa; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s ease; font-size:16px;"
+          aria-label="Toggle theme"
+          title="Toggle theme"
         >
-          Get Started
-        </a>
+          🌙
+        </button>
+        <a href="#contact" id="nav-cta">Start a Project</a>
       </div>
 
-      <!-- Mobile: Theme + Menu -->
-      <div class="flex items-center gap-2 md:hidden">
-        <button 
-          id="theme-toggle-mobile" 
-          class="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Toggle theme"
-        >
-          <svg id="sun-icon-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          <svg id="moon-icon-mobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        </button>
+      <!-- Mobile Hamburger -->
+      <button id="mobile-menu-btn" aria-label="Open menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line ham-short"></span>
+      </button>
 
-        <button 
-          id="mobile-menu-btn" 
-          class="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Toggle menu"
-        >
-          <svg id="menu-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg id="menu-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile Menu Panel -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-    <div class="px-4 py-4 space-y-2">
-      {navLinks.map((link) => (
-        <a 
-          href={link.href} 
-          class="block px-3 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-        >
-          {link.name}
-        </a>
-      ))}
-      <a 
-        href="/contact" 
-        class="block px-3 py-3 text-base font-medium text-white bg-amber-500 rounded-lg hover:bg-amber-600 transition-colors text-center mt-4"
-      >
-        Get Started
-      </a>
     </div>
   </div>
 </nav>
+
+<!-- Mobile Overlay -->
+<div id="mobile-menu">
+  <button id="mobile-close">✕</button>
+  <ul>
+    {navLinks.map((link) => (
+      <li><a href={link.href} class="mobile-link">{link.name}</a></li>
+    ))}
+  </ul>
+  <a href="#contact" id="mobile-cta">Start a Project</a>
+</div>
+
+<style>
+  /* Scrolled state */
+  :global(#main-nav.nav-scrolled) {
+    background: rgba(5,5,5,0.92) !important;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(39,39,42,0.6);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+
+  /* Nav links */
+  .navlink {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #a1a1aa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .navlink:hover { color: #fafafa; }
+  .navlink::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 1px; width: 0;
+    background: #c9a227;
+    transition: width 0.3s ease;
+  }
+  .navlink:hover::after { width: 100%; }
+
+  /* Desktop CTA */
+  #nav-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #c9a227, #f59e0b);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #050505;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(201,162,39,0.3);
+    transition: all 0.3s ease;
+  }
+  #nav-cta:hover {
+    box-shadow: 0 0 32px rgba(245,158,11,0.5);
+    transform: translateY(-1px);
+  }
+
+  /* Hamburger */
+  #mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .ham-line {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: #fafafa;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .ham-short { width: 16px; background: #c9a227; }
+
+  /* Mobile overlay */
+  #mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,5,5,0.97);
+    backdrop-filter: blur(20px);
+  }
+  #mobile-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    background: none;
+    border: none;
+    color: #a1a1aa;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  #mobile-menu ul {
+    list-style: none;
+    margin: 0 0 40px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .mobile-link {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    color: #fafafa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mobile-link:hover { color: #c9a227; }
+  #mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 40px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #c9a227, #f59e0b);
+    color: #050505;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 1023px) {
+    #nav-links   { display: none !important; }
+    #nav-cta     { display: none !important; }
+    #theme-toggle { display: none !important; }
+    #mobile-menu-btn { display: flex !important; }
+  }
+</style>
+
+<script>
+  // Mobile menu
+  const btn   = document.getElementById("mobile-menu-btn");
+  const close = document.getElementById("mobile-close");
+  const menu  = document.getElementById("mobile-menu");
+  const mlinks = document.querySelectorAll(".mobile-link, #mobile-cta");
+
+  function openMenu()  { if (menu) { menu.style.display = "flex";  document.body.style.overflow = "hidden"; } }
+  function closeMenu() { if (menu) { menu.style.display = "none";  document.body.style.overflow = "";       } }
+
+  btn?.addEventListener("click", openMenu);
+  close?.addEventListener("click", closeMenu);
+  mlinks.forEach(l => l.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+
+  // Scroll-based nav background
+  const nav = document.getElementById("main-nav");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 80) nav?.classList.add("nav-scrolled");
+    else nav?.classList.remove("nav-scrolled");
+  }, { passive: true });
+
+  // Theme toggle
+  const themeBtn = document.getElementById("theme-toggle");
+
+  function getTheme() {
+    return localStorage.getItem("theme") ??
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }
+
+  function applyTheme(theme: string) {
+    if (theme === "dark") document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
+    if (themeBtn) themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
+
+  applyTheme(getTheme());
+
+  themeBtn?.addEventListener("click", () => {
+    const next = getTheme() === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    applyTheme(next);
+  });
+</script></nav>
 
 <div class="h-16"></div>
 

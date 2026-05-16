@@ -10,19 +10,18 @@ const navLinks = [
 
 <nav
   id="main-nav"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-  style="background: transparent;"
+  style="position:fixed; top:0; left:0; right:0; z-index:50; transition:all 0.3s ease;"
 >
   <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
     <div style="display:flex; align-items:center; justify-content:space-between; height:72px;">
 
       <!-- Logo -->
       <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <div style="width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; letter-spacing:0.15em; color:#050505; flex-shrink:0;">
+        <div style="width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; letter-spacing:0.15em; color:#050505;">
           ASO
         </div>
         <div style="display:flex; flex-direction:column; line-height:1;">
-          <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; color:#fafafa; letter-spacing:0.02em;">Creative Studio</span>
+          <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; color:#fafafa;">Creative Studio</span>
           <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#52525b; letter-spacing:0.2em; text-transform:uppercase; margin-top:2px;">AI · Design · Web</span>
         </div>
       </a>
@@ -36,21 +35,14 @@ const navLinks = [
         ))}
       </ul>
 
-      <!-- Desktop right: theme toggle + CTA -->
-      <div style="display:flex; align-items:center; gap:12px;">
-        <button
-          id="theme-toggle"
-          style="width:36px; height:36px; border-radius:8px; border:1px solid #27272a; background:transparent; color:#a1a1aa; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s ease; font-size:16px;"
-          aria-label="Toggle theme"
-          title="Toggle theme"
-        >
-          🌙
-        </button>
+      <!-- Desktop right -->
+      <div style="display:flex; align-items:center; gap:12px;" id="nav-right">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
         <a href="#contact" id="nav-cta">Start a Project</a>
       </div>
 
-      <!-- Mobile Hamburger -->
-      <button id="mobile-menu-btn" aria-label="Open menu">
+      <!-- Hamburger -->
+      <button id="mobile-menu-btn" class="hamburger-btn" aria-label="Open menu">
         <span class="ham-line"></span>
         <span class="ham-line"></span>
         <span class="ham-line ham-short"></span>
@@ -61,14 +53,14 @@ const navLinks = [
 </nav>
 
 <!-- Mobile Overlay -->
-<div id="mobile-menu">
-  <button id="mobile-close">✕</button>
-  <ul>
+<div id="mobile-menu" class="mobile-overlay">
+  <button id="mobile-close" class="mobile-close-btn">✕</button>
+  <ul class="mobile-nav-list">
     {navLinks.map((link) => (
       <li><a href={link.href} class="mobile-link">{link.name}</a></li>
     ))}
   </ul>
-  <a href="#contact" id="mobile-cta">Start a Project</a>
+  <a href="#contact" class="mobile-cta-link">Start a Project</a>
 </div>
 
 <style>
@@ -76,7 +68,6 @@ const navLinks = [
   :global(#main-nav.nav-scrolled) {
     background: rgba(5,5,5,0.92) !important;
     backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid rgba(39,39,42,0.6);
     box-shadow: 0 4px 32px rgba(0,0,0,0.5);
   }
@@ -103,10 +94,171 @@ const navLinks = [
   }
   .navlink:hover::after { width: 100%; }
 
-  /* Desktop CTA */
+  /* Theme button */
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #27272a;
+    background: transparent;
+    color: #a1a1aa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s ease;
+  }
+  .theme-btn:hover {
+    border-color: rgba(201,162,39,0.4);
+    background: rgba(201,162,39,0.06);
+  }
+
+  /* CTA */
   #nav-cta {
     display: inline-flex;
     align-items: center;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #c9a227, #f59e0b);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #050505;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(201,162,39,0.3);
+    transition: all 0.3s ease;
+  }
+  #nav-cta:hover {
+    box-shadow: 0 0 32px rgba(245,158,11,0.5);
+    transform: translateY(-1px);
+  }
+
+  /* Hamburger */
+  .hamburger-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .ham-line {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: #fafafa;
+    border-radius: 2px;
+  }
+  .ham-short { width: 16px; background: #c9a227; }
+
+  /* Mobile overlay */
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,5,5,0.97);
+    backdrop-filter: blur(20px);
+  }
+  .mobile-close-btn {
+    position: absolute;
+    top: 24px; right: 24px;
+    background: none;
+    border: none;
+    color: #a1a1aa;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0 0 40px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .mobile-link {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    color: #fafafa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mobile-link:hover { color: #c9a227; }
+  .mobile-cta-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 40px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #c9a227, #f59e0b);
+    color: #050505;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 1023px) {
+    #nav-links { display: none !important; }
+    #nav-right  { display: none !important; }
+    .hamburger-btn { display: flex !important; }
+  }
+</style>
+
+<script is:inline>
+  // Mobile menu
+  var btn   = document.getElementById('mobile-menu-btn');
+  var close = document.getElementById('mobile-close');
+  var menu  = document.getElementById('mobile-menu');
+  var mlinks = document.querySelectorAll('.mobile-link, .mobile-cta-link');
+
+  function openMenu()  { if (menu) { menu.style.display = 'flex';  document.body.style.overflow = 'hidden'; } }
+  function closeMenu() { if (menu) { menu.style.display = 'none';  document.body.style.overflow = '';       } }
+
+  if (btn)   btn.addEventListener('click', openMenu);
+  if (close) close.addEventListener('click', closeMenu);
+  mlinks.forEach(function(l) { l.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+
+  // Scroll-based nav background
+  var nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 80) nav && nav.classList.add('nav-scrolled');
+    else nav && nav.classList.remove('nav-scrolled');
+  }, { passive: true });
+
+  // Theme toggle
+  var themeBtn = document.getElementById('theme-toggle');
+
+  function getTheme() {
+    return localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+
+  function applyTheme(theme) {
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    if (themeBtn) themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+
+  applyTheme(getTheme());
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function() {
+      var next = getTheme() === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+  }
+</script>    align-items: center;
     padding: 10px 20px;
     border-radius: 9999px;
     background: linear-gradient(135deg, #c9a227, #f59e0b);

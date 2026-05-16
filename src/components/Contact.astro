@@ -1,60 +1,60 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
+import Navigation from './Navigation.astro';
 ---
 
-<<Layout title="Contact - ASO Creative Studio">
+<Layout title="Contact - ASO Creative Studio">
   <Navigation />
   
-  <main class="bg-white dark:bg-gray-950 text-gray-900 dark:text-white min-h-screen">
+  <main class="min-h-screen">
     <div class="max-w-3xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       
       <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold mb-4">Let's Work Together</h1>
-        <p class="text-gray-600 dark:text-gray-400 text-lg">Tell me about your project and I'll get back to you within 24 hours.</p>
+        <h1 class="text-4xl font-bold mb-4 text-white">Let's Work Together</h1>
+        <p class="text-gray-400 text-lg">Tell me about your project and I'll get back to you within 24 hours.</p>
       </div>
 
       <!-- Service Selection -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         <label class="cursor-pointer">
           <input type="radio" name="service" value="web" class="peer sr-only" checked>
-          <div class="p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 peer-checked:border-amber-500 peer-checked:bg-amber-50 dark:peer-checked:bg-amber-900/20 transition-all text-center">
+          <div class="p-4 rounded-xl border-2 border-gray-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 transition-all text-center">
             <div class="text-2xl mb-2">🌐</div>
-            <div class="font-semibold text-gray-900 dark:text-white">Web Development</div>
+            <div class="font-semibold text-white">Web Development</div>
           </div>
         </label>
         <label class="cursor-pointer">
           <input type="radio" name="service" value="ai" class="peer sr-only">
-          <div class="p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 peer-checked:border-amber-500 peer-checked:bg-amber-50 dark:peer-checked:bg-amber-900/20 transition-all text-center">
+          <div class="p-4 rounded-xl border-2 border-gray-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 transition-all text-center">
             <div class="text-2xl mb-2">🤖</div>
-            <div class="font-semibold text-gray-900 dark:text-white">AI Automation</div>
+            <div class="font-semibold text-white">AI Automation</div>
           </div>
         </label>
         <label class="cursor-pointer">
           <input type="radio" name="service" value="multiple" class="peer sr-only">
-          <div class="p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 peer-checked:border-amber-500 peer-checked:bg-amber-50 dark:peer-checked:bg-amber-900/20 transition-all text-center">
+          <div class="p-4 rounded-xl border-2 border-gray-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 transition-all text-center">
             <div class="text-2xl mb-2">🎨</div>
-            <div class="font-semibold text-gray-900 dark:text-white">Multiple Services</div>
+            <div class="font-semibold text-white">Multiple Services</div>
           </div>
         </label>
       </div>
 
-      <!-- ONE Contact Form Only -->
+      <!-- ONE Form Only -->
       <form class="space-y-6" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
-            <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all" placeholder="Your name">
+            <label class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+            <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all" placeholder="Your name">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
-            <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all" placeholder="you@email.com">
+            <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+            <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all" placeholder="you@email.com">
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
-          <textarea name="message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all resize-none" placeholder="Tell me about your project..."></textarea>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+          <textarea name="message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all resize-none" placeholder="Tell me about your project..."></textarea>
         </div>
 
         <button type="submit" class="w-full py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2">
@@ -68,44 +68,6 @@ import Navigation from '../components/Navigation.astro';
     </div>
   </main>
 </Layout>
-              <option value="Web Dev">Web Development</option>
-              <option value="AI Automation">AI Automation</option>
-              <option value="Multiple">Multiple Services</option>
-            </select>
-          </div>
-
-          <!-- Message -->
-          <div>
-            <label for="message" class="block text-aso-secondary text-sm font-medium mb-2">Message</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              rows="5" 
-              required
-              class="w-full bg-[#050505] border border-aso-border rounded-lg px-4 py-3 text-aso-text placeholder-aso-muted focus:outline-none focus:border-aso-gold transition-colors resize-none"
-              placeholder="Tell me about your project..."
-            ></textarea>
-          </div>
-
-          <!-- Submit Button -->
-          <button 
-            type="submit" 
-            id="submit-btn"
-            class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-aso-gold text-aso-black font-medium hover:bg-[#f59e0b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <span id="btn-text">Send Message</span>
-            <i data-lucide="send" class="w-4 h-4" id="btn-icon"></i>
-            <svg id="btn-spinner" class="hidden w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notifications -->
   <div id="toast-success" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
     <div class="bg-green-500/10 border border-green-500/30 rounded-xl px-6 py-4 flex items-center gap-3">
       <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">

@@ -66,12 +66,10 @@
         id="hero-ctas"
         class="opacity-0 translate-y-8 flex flex-wrap items-center gap-4 mb-14"
       >
-        <a href="#work" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-pill bg-gold-gradient font-heading font-semibold text-[15px] text-background no-underline shadow-gold transition-all"
-        >
+        <a href="#work" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-pill bg-gold-gradient font-heading font-semibold text-[15px] text-background no-underline shadow-gold transition-all duration-300 hover:shadow-lg">
           View My Work →
         </a>
-        <a href="#contact" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-pill border border-border bg-transparent font-heading font-semibold text-[15px] text-primary no-underline transition-all"
-        >
+        <a href="#contact" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-pill border border-border bg-transparent font-heading font-semibold text-[15px] text-primary no-underline transition-all duration-300 hover:bg-border hover:bg-opacity-10">
           Start a Project ↗
         </a>
       </div>
@@ -108,27 +106,57 @@
 
 <style>
   @keyframes float1 {
-    0%,100% { transform:translate(0,0) scale(1); }
-    50%      { transform:translate(20px,30px) scale(1.05); }
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(20px, 30px) scale(1.05);
+    }
   }
+
   @keyframes float2 {
-    0%,100% { transform:translate(0,0) scale(1); }
-    50%      { transform:translate(-25px,-20px) scale(1.08); }
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-25px, -20px) scale(1.08);
+    }
   }
+
   @keyframes float3 {
-    0%,100% { transform:translate(0,0) scale(1); }
-    50%      { transform:translate(15px,-25px) scale(1.03); }
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(15px, -25px) scale(1.03);
+    }
   }
+
   @keyframes ping {
-    75%,100% { transform:scale(2); opacity:0; }
+    75%, 100% {
+      transform: scale(2);
+      opacity: 0;
+    }
   }
+
   @keyframes shimmer {
-    0%   { background-position: 0% center; }
-    100% { background-position: 200% center; }
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
   }
+
   @keyframes chevronBounce {
-    0%,100% { transform:translateY(0);  opacity:0.4; }
-    50%      { transform:translateY(6px); opacity:0.9; }
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translateY(6px);
+      opacity: 0.9;
+    }
   }
 </style>
 
@@ -136,11 +164,11 @@
   window.addEventListener("load", () => {
     if (typeof gsap === "undefined") return;
     const tl = gsap.timeline({ delay: 0.3 });
-    tl.to("#hero-badge",   { opacity:1, y:0, duration:0.6, ease:"power3.out" })
-      .to("#hero-line-1",  { opacity:1, y:0, duration:0.65, ease:"power3.out" }, "-=0.3")
-      .to("#hero-line-2",  { opacity:1, y:0, duration:0.65, ease:"power3.out" }, "-=0.45")
-      .to("#hero-sub",     { opacity:1, y:0, duration:0.6,  ease:"power3.out" }, "-=0.35")
-      .to("#hero-ctas",    { opacity:1, y:0, duration:0.55, ease:"power3.out" }, "-=0.3")
-      .to("#hero-social",  { opacity:1, y:0, duration:0.5,  ease:"power3.out" }, "-=0.25");
+    tl.to("#hero-badge", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" })
+      .to("#hero-line-1", { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, "-=0.3")
+      .to("#hero-line-2", { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, "-=0.45")
+      .to("#hero-sub", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.35")
+      .to("#hero-ctas", { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, "-=0.3")
+      .to("#hero-social", { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.25");
   });
 </script>

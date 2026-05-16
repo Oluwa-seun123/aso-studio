@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
@@ -106,6 +107,24 @@ export default {
         shimmer: {
           "0%": { backgroundPosition: "-200% center" },
           "100%": { backgroundPosition: "200% center" },
+        },
+      },
+
+      transitionTimingFunction: {
+        smooth: "cubic-bezier(0.4, 0, 0.2, 1)",
+        bounce: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        sharp: "cubic-bezier(0.4, 0, 1, 1)",
+      },
+
+      transitionDuration: {
+        250: "250ms",
+        350: "350ms",
+        400: "400ms",
+      },
+    },
+  },
+  plugins: [],
+};
         },
       },
 

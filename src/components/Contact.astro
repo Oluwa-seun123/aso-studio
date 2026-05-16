@@ -238,6 +238,138 @@
     });
   })();
 </script>
+              <option value="Web Dev">Web Development</option>
+              <option value="AI Automation">AI Automation</option>
+              <option value="Multiple">Multiple Services</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-aso-secondary text-sm font-medium mb-2">Message</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="5" 
+              required
+              class="w-full bg-[#050505] border border-aso-border rounded-lg px-4 py-3 text-aso-text placeholder-aso-muted focus:outline-none focus:border-aso-gold transition-colors resize-none"
+              placeholder="Tell me about your project..."
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            id="submit-btn"
+            class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-aso-gold text-aso-black font-medium hover:bg-[#f59e0b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span id="btn-text">Send Message</span>
+            <i data-lucide="send" class="w-4 h-4" id="btn-icon"></i>
+            <svg id="btn-spinner" class="hidden w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast-success" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-green-500/10 border border-green-500/30 rounded-xl px-6 py-4 flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+        <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+      </div>
+      <div>
+        <p class="text-green-400 font-medium text-sm">Message Sent!</p>
+        <p class="text-green-400/70 text-xs">I'll respond within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-error" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-red-500/10 border border-red-500/30 rounded-xl px-6 py-4 flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
+        <i data-lucide="alert-circle" class="w-4 h-4 text-red-500"></i>
+      </div>
+      <div>
+        <p class="text-red-400 font-medium text-sm">Something went wrong.</p>
+        <p class="text-red-400/70 text-xs">Please try again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const toastSuccess = document.getElementById('toast-success');
+    const toastError = document.getElementById('toast-error');
+
+    function showToast(toastEl) {
+      toastEl.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toastEl.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 4000);
+    }
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      if (isLoading) {
+        btnText.textContent = 'Sending...';
+        btnIcon.classList.add('hidden');
+        btnSpinner.classList.remove('hidden');
+      } else {
+        btnText.textContent = 'Send Message';
+        btnIcon.classList.remove('hidden');
+        btnSpinner.classList.add('hidden');
+      }
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        service: document.getElementById('service').value,
+        message: document.getElementById('message').value.trim()
+      };
+
+      if (!formData.name || !formData.email || !formData.service || !formData.message) {
+        showToast(toastError);
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          showToast(toastSuccess);
+          form.reset();
+        } else {
+          showToast(toastError);
+        }
+      } catch (err) {
+        console.error('Form error:', err);
+        showToast(toastError);
+      } finally {
+        setLoading(false);
+      }
+    });
+  })();
+</script>
             </select>
           </div>
 

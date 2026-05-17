@@ -4,50 +4,33 @@ import '../styles/global.css';
 export interface Props {
   title?: string;
   description?: string;
-  image?: string;
 }
 
 const {
   title = "ASO Creative Studio — AI-Powered Creative Agency",
-  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Nigeria-based. Working worldwide.",
-  image = "/og-image.jpg",
+  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems.",
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#c9a227" />
-    <meta name="robots" content="index, follow" />
-
-    <meta property="og:type"        content="website" />
-    <meta property="og:title"       content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image"       content={image} />
-
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content={title} />
-    <meta name="twitter:description" content={description} />
-
     <title>{title}</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   </head>
-
   <body class="bg-aso-black text-aso-text antialiased">
+    
     <slot />
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        /* 1. Mobile Menu Open/Close Handler */
+        
+        /* 1. Bulletproof Mobile Menu Fix */
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         
@@ -57,45 +40,56 @@ const {
             mobileMenu.classList.toggle('hidden');
           });
 
-          // Close menu automatically if a navigation link inside is clicked
-          mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+          document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target as Node) && e.target !== menuToggle) {
               mobileMenu.classList.add('hidden');
-            });
+            }
           });
         }
 
-        /* 2. Optimized Number Counter Logic */
-        const counterElements = document.querySelectorAll('.counter');
-        
-        const runCounter = (el) => {
-          const target = parseInt(el.getAttribute('data-target') || '0', 10);
-          if (target === 0) return;
-          
-          let current = 0;
-          const duration = 1500; // 1.5 seconds
-          const stepTime = Math.max(Math.floor(duration / target), 15);
-          
-          const timer = setInterval(() => {
-            current += 1;
-            el.textContent = current;
-            if (current >= target) {
-              el.textContent = target;
-              clearInterval(timer);
-            }
-          }, stepTime);
-        };
-
-        const counterObserver = new IntersectionObserver((entries) => {
+        /* 2. Unified Intersection Observer (Handles Scroll Animations, Counters, and Process Lines) */
+        const generalObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              runCounter(entry.target);
-              counterObserver.unobserve(entry.target);
+              
+              // Handle Scroll Fades
+              if (entry.target.classList.contains('animate-on-scroll')) {
+                entry.target.classList.add('fade-up-visible');
+              }
+              
+              // Handle Timeline Process Lines
+              if (entry.target.classList.contains('process-animated-line')) {
+                entry.target.classList.add('line-active');
+              }
+              
+              // Handle Number Counters
+              if (entry.target.classList.contains('counter')) {
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-target') || '0', 10);
+                let current = 0;
+                const duration = 1500;
+                const step = Math.max(Math.floor(duration / target), 12);
+                
+                const timer = setInterval(() => {
+                  current += 1;
+                  el.textContent = current.toString();
+                  if (current >= target) {
+                    el.textContent = target.toString();
+                    clearInterval(timer);
+                  }
+                }, step);
+              }
+              
+              // Stop observing once animated
+              generalObserver.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.15 });
 
-        counterElements.forEach(el => counterObserver.observe(el));
+        // Register all items to the script watcher
+        document.querySelectorAll('.animate-on-scroll, .counter, .process-animated-line').forEach(el => {
+          generalObserver.observe(el);
+        });
       });
     </script>
   </body>

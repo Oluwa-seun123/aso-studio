@@ -5,7 +5,10 @@ const testimonials = [
     name: "Victoria Abiodun",
     role: "Founder",
     company: "VeeLuxe",
-    color: "#c9a227",
+    avatarBg:     "rgba(201,162,39,0.15)",
+    avatarBorder: "rgba(201,162,39,0.40)",
+    avatarColor:  "#c9a227",
+    accentGrad:   "rgba(201,162,39,0.40)",
     rating: 5,
     quote: "The whole process felt easy and well thought out. They really understood our vision and brought it to life through clean, modern graphics that feel true to our brand.",
   },
@@ -14,7 +17,10 @@ const testimonials = [
     name: "James Rodriguez",
     role: "Founder",
     company: "BrandSpark",
-    color: "#818cf8",
+    avatarBg:     "rgba(129,140,248,0.15)",
+    avatarBorder: "rgba(129,140,248,0.40)",
+    avatarColor:  "#818cf8",
+    accentGrad:   "rgba(129,140,248,0.40)",
     rating: 5,
     quote: "From concept to final delivery, every piece was pixel-perfect. The graphic design work elevated our entire brand identity to a completely new level.",
   },
@@ -23,7 +29,10 @@ const testimonials = [
     name: "Amara Johnson",
     role: "CEO",
     company: "VibeMedia",
-    color: "#2dd4bf",
+    avatarBg:     "rgba(45,212,191,0.15)",
+    avatarBorder: "rgba(45,212,191,0.40)",
+    avatarColor:  "#2dd4bf",
+    accentGrad:   "rgba(45,212,191,0.40)",
     rating: 5,
     quote: "Professional, creative, and incredibly fast. The AI video content created for our campaign was beyond our expectations. A true creative partner.",
   },
@@ -32,9 +41,8 @@ const testimonials = [
 
 <section id="testimonials" class="relative py-[120px] bg-aso-surface overflow-hidden">
 
-  <!-- Large decorative quote mark -->
-  <div class="absolute top-16 right-10 font-heading font-bold text-[200px] leading-none pointer-events-none select-none hidden lg:block text-aso-gold/4">
-    "
+  <div class="absolute top-16 right-10 font-heading font-bold leading-none pointer-events-none select-none hidden lg:block" style="font-size:200px; color:rgba(201,162,39,0.04);">
+    &#8220;
   </div>
 
   <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-10">
@@ -46,10 +54,10 @@ const testimonials = [
         <div class="w-16 h-px bg-gradient-to-r from-aso-gold to-transparent"></div>
       </div>
       <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
-        <h2 class="font-heading font-bold text-aso-text" style="font-size: clamp(2rem, 4vw, 3.25rem);">What Clients Say</h2>
+        <h2 class="font-heading font-bold text-aso-text text-display-lg">What Clients Say</h2>
         <div class="flex items-center gap-2">
-          <span class="text-aso-gold">★★★★★</span>
-          <span class="font-label text-xs text-aso-text-muted">5.0 · All verified clients</span>
+          <span class="text-aso-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="font-label text-xs text-aso-text-muted">5.0 &middot; All verified clients</span>
         </div>
       </div>
     </div>
@@ -62,7 +70,7 @@ const testimonials = [
           role="listitem"
         >
           <!-- Quote icon -->
-          <div class="mb-6 text-aso-gold/35 transition-colors duration-300 group-hover:text-aso-gold/55">
+          <div class="mb-6 text-aso-gold/35 group-hover:text-aso-gold/55 transition-colors duration-300">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
               <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
@@ -72,13 +80,13 @@ const testimonials = [
           <!-- Stars -->
           <div class="flex gap-1 mb-5">
             {Array(t.rating).fill(0).map(() => (
-              <span class="text-aso-gold text-sm">★</span>
+              <span class="text-aso-gold text-sm">&#9733;</span>
             ))}
           </div>
 
           <!-- Quote -->
           <blockquote class="font-body text-[15px] leading-[1.75] text-aso-text-secondary flex-1 mb-8 italic">
-            "{t.quote}"
+            &ldquo;{t.quote}&rdquo;
           </blockquote>
 
           <!-- Divider -->
@@ -86,21 +94,19 @@ const testimonials = [
 
           <!-- Author -->
           <div class="flex items-center gap-3">
-            <!-- Avatar -->
             <div
               class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-heading font-bold text-sm"
-              style={`background: rgba(from ${t.color} r g b / 0.15); border: 1.5px solid rgba(from ${t.color} r g b / 0.4); color: ${t.color};`}
+              style={`background: ${t.avatarBg}; border: 1.5px solid ${t.avatarBorder}; color: ${t.avatarColor};`}
             >
               {t.initials}
             </div>
-            <!-- Name -->
             <div class="min-w-0">
               <p class="font-heading font-semibold text-sm text-aso-text leading-tight truncate">{t.name}</p>
-              <p class="font-label text-[11px] tracking-wide text-aso-text-muted truncate">{t.role} · {t.company}</p>
+              <p class="font-label text-[11px] tracking-wide text-aso-text-muted truncate">{t.role} &middot; {t.company}</p>
             </div>
-            <!-- Verified -->
-            <div class="ml-auto w-6 h-6 rounded-full bg-aso-green/10 border border-aso-green/25 flex items-center justify-center flex-shrink-0">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Verified badge -->
+            <div class="ml-auto w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             </div>
@@ -109,7 +115,7 @@ const testimonials = [
           <!-- Bottom accent -->
           <div
             class="absolute bottom-0 left-8 right-8 h-px opacity-40"
-            style={`background: linear-gradient(90deg, ${t.color}, transparent);`}
+            style={`background: linear-gradient(90deg, ${t.accentGrad}, transparent);`}
           ></div>
 
         </article>
@@ -119,15 +125,17 @@ const testimonials = [
     <!-- Social proof strip -->
     <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6">
       <div class="flex items-center gap-2 text-aso-text-muted">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
         <span class="font-label text-xs tracking-wide">All reviews from real clients</span>
       </div>
       <span class="hidden sm:block w-1 h-1 rounded-full bg-aso-text-muted"></span>
       <div class="flex items-center gap-2 text-aso-text-muted">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
         <span class="font-label text-xs tracking-wide">Clients across 5 countries</span>
       </div>

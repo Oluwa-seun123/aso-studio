@@ -2,32 +2,39 @@
 // Footer.astro
 ---
 
-<footer
-  style="position:relative; background:#050505; border-top:1px solid #27272a; padding:40px 0;"
->
-  <div
-    style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:400px; height:1px; background:linear-gradient(90deg,transparent,rgba(201,162,39,0.4),transparent);"
-    aria-hidden="true"
-  ></div>
+<footer class="relative bg-aso-surface border-t border-aso-border py-12">
 
-  <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
-    <div class="aso-footer-inner">
+  <!-- Gold top line -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-aso-gold to-transparent pointer-events-none"></div>
 
-      <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <div style="width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-[...]
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 no-underline group">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-aso-gold to-aso-gold-glow flex items-center justify-center font-heading font-bold text-[11px] tracking-widest text-aso-black flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
           ASO
         </div>
-        <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; color:#a1a1aa;">
+        <span class="font-heading font-semibold text-sm text-aso-text-secondary tracking-wide">
           Creative Studio
         </span>
       </a>
 
-      <p style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#52525b; letter-spacing:0.08em; margin:0; text-align:center;">
+      <!-- Copyright -->
+      <p class="font-label text-xs text-aso-text-muted tracking-wide text-center">
         © 2026 ASO Creative Studio. All rights reserved.
       </p>
 
-      <button id="back-to-top" class="aso-back-top" aria-label="Back to top">
-        Back to top ↑
+      <!-- Back to top -->
+      <button
+        id="back-to-top"
+        class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-aso-border bg-transparent text-aso-text-muted font-heading font-medium text-sm cursor-pointer transition-all duration-300 hover:border-aso-gold hover:text-aso-gold hover:bg-aso-gold/5"
+        aria-label="Back to top"
+      >
+        Back to top
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m18 15-6-6-6 6"/>
+        </svg>
       </button>
 
     </div>
@@ -35,7 +42,7 @@
 </footer>
 
 <script is:inline>
-  document.getElementById('back-to-top')?.addEventListener('click', function() {
+  document.getElementById('back-to-top').addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>

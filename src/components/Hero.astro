@@ -103,9 +103,95 @@
 
     </div>
   </div>
+</section>
 
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-on-scroll" style="transition-delay: 600ms;">
-    <span class="font-label text-[10px] tracking-[0.25em] uppercase text-aso-text-muted">Scroll</span>
+<style>
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .animate-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    if (window._heroEnginesInitialized) return;
+    window._heroEnginesInitialized = true;
+
+    /** 
+     * ENGINE 1: Scroll Animation & Viewport Failsafe
+     */
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          window.requestAnimationFrame(() => {
+            entry.target.classList.add('is-revealed');
+          });
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    
+    animatedElements.forEach(el => {
+      scrollObserver.observe(el);
+      
+      // Viewport Failsafe Post-Mount Initialization
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) {
+        window.requestAnimationFrame(() => {
+          el.classList.add('is-revealed');
+        });
+        scrollObserver.unobserve(el);
+      }
+    });
+
+    /** 
+     * ENGINE 2: High-Precision Counter Interpolation
+     */
+    const DURATION_MS = 2000;
+    
+    // Strict Ease-Out Cubic function
+    const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3);
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const targetValue = parseFloat(el.getAttribute('data-target')) || 0;
+          let startTimestamp = null;
+
+          const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.max(0, Math.min((timestamp - startTimestamp) / DURATION_MS, 1));
+            
+            const easedProgress = easeOutCubic(progress);
+            el.textContent = Math.floor(easedProgress * targetValue);
+
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              el.textContent = targetValue; // Force clamp to precise target
+            }
+          };
+
+          window.requestAnimationFrame(step);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.counter').forEach(counter => {
+      counterObserver.observe(counter);
+    });
+  })();
+</script>
     <span class="text-aso-text-muted chevron-bounce text-xl">⌄</span>
   </div>
 

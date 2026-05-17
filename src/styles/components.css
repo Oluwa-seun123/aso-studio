@@ -380,7 +380,7 @@
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
   .about-photo-wrap { max-width: 380px; margin: 0 auto; }
-}
+
 
 /* ── Contact ── */
 .service-radio-label { cursor: pointer; }

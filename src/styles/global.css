@@ -1,85 +1,111 @@
 @import "tailwindcss";
 
 @theme {
-  --color-aso-black: #050505;
-  --color-aso-surface: #0f0f0f;
-  --color-aso-elevated: #1a1a1a;
-  --color-aso-gold: #c9a227;
-  --color-aso-gold-glow: #f59e0b;
-  --color-aso-green: #22c55e;
-  --color-aso-text: #fafafa;
-  --color-aso-text-secondary: #a3a3a3;
-  --color-aso-text-muted: #737373;
-  --color-aso-border: #262626;
+  --color-aso-black: #030303;
+  --color-aso-surface: #0a0a0a;
+  --color-aso-elevated: #121212;
+  --color-aso-gold: #d4af37;
+  --color-aso-gold-glow: #aa7c11;
+  --color-aso-green: #10b981;
+  --color-aso-text: #f5f5f7;
+  --color-aso-text-secondary: #9e9e12;
+  --color-aso-text-muted: #636366;
+  --color-aso-border: rgba(212, 175, 55, 0.12);
 
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-label: 'JetBrains Mono', monospace;
 }
 
-/* Base resets to guarantee dark mode stays locked */
+/* Force rich dark-mode constraints across frames */
 html, body {
-  background-color: #050505 !important;
-  color: #fafafa !important;
+  background-color: #030303 !important;
+  color: #f5f5f7 !important;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Hero Background Grid Lines Pattern */
+/* Premium Fine Grid Matrix Overlay */
 .hero-grid {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px;
+    linear-gradient(to right, rgba(214, 175, 87, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214, 175, 87, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-/* Pure CSS Safe Animations (Prevents text from staying invisible) */
-.fade-up {
-  animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.fade-up-2 { animation-delay: 100ms; }
-.fade-up-3 { animation-delay: 200ms; }
-.fade-up-4 { animation-delay: 300ms; }
-.fade-up-5 { animation-delay: 400ms; }
-
-@keyframes fadeUpIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Hard-coded Scroll Entry Animation States */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Shimmer Premium Effect for Gold Typography */
+.fade-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sequential entry delays for layout balancing */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+
+/* Metallic Shimmering Gold typography */
 .shimmer-gold {
-  background: linear-gradient(to right, #c9a227 20%, #f59e0b 40%, #fff 60%, #c9a227 80%);
+  background: linear-gradient(to right, #b8860b 0%, #e5c158 25%, #fff 50%, #e5c158 75%, #b8860b 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: shine 5s linear infinite;
+  animation: shineGold 6s linear infinite;
 }
 
-@keyframes shine {
+@keyframes shineGold {
   to { background-position: 200% center; }
 }
 
-/* Glow Elements */
-.gold-glow {
-  box-shadow: 0 0 20px rgba(201, 162, 39, 0.1);
-}
-.gold-glow:hover {
-  box-shadow: 0 0 30px rgba(201, 162, 39, 0.25);
-}
-
-/* Pulse Component for Availability Badge */
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.75; }
-  50% { transform: scale(1.2); opacity: 0.4; }
+/* Blinking Status Light Utility */
+@keyframes greenPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.3; }
 }
 .pulse-green {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: greenPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive Process Line Tracker Progress */
+.process-line-container {
+  position: relative;
+}
+.process-animated-line {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background: linear-gradient(to bottom, transparent, #d4af37, #aa7c11, transparent);
+  transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (min-width: 768px) {
+  .process-animated-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.line-active {
+  height: 100%;
+}
+
+/* High-End Card Hover Profiles */
+.premium-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(214, 175, 87, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.premium-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(214, 175, 87, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(214, 175, 87, 0.03);
 }

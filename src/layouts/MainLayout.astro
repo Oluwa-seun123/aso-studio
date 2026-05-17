@@ -44,5 +44,90 @@ const {
 
   <body>
     <slot />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        /* 1. Mobile Menu Toggle */
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (menuToggle && mobileMenu) {
+          menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('menu-is-open');
+            mobileMenu.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+          });
+        }
+
+        /* 2. Theme Toggle Logic */
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+        
+        if (localStorage.getItem('theme') === 'light') {
+          htmlEl.setAttribute('data-theme', 'light');
+        }
+
+        if (themeBtn) {
+          themeBtn.addEventListener('click', () => {
+            if (htmlEl.hasAttribute('data-theme')) {
+              htmlEl.removeAttribute('data-theme');
+              localStorage.setItem('theme', 'dark');
+            } else {
+              htmlEl.setAttribute('data-theme', 'light');
+              localStorage.setItem('theme', 'light');
+            }
+          });
+        }
+
+        /* 3. Scroll Animations (Fade Up) */
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('fade-up');
+              entry.target.style.opacity = '1';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+          if (el instanceof HTMLElement) {
+            el.style.opacity = '0'; 
+            scrollObserver.observe(el);
+          }
+        });
+
+        /* 4. Number Counters Animation */
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const targetStr = entry.target.getAttribute('data-target');
+              if (!targetStr) return;
+              
+              const target = +targetStr;
+              const duration = 2000; // 2 seconds
+              const increment = target / (duration / 16);
+              
+              let current = 0;
+              const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                  entry.target.innerHTML = Math.ceil(current).toString();
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  entry.target.innerHTML = target.toString();
+                }
+              };
+              updateCounter();
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(counter => {
+          counterObserver.observe(counter);
+        });
+      });
+    </script>
   </body>
 </html>

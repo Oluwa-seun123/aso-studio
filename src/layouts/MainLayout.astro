@@ -1,5 +1,4 @@
 ---
-// src/layouts/MainLayout.astro
 import '../styles/global.css';
 
 interface Props {
@@ -7,10 +6,9 @@ interface Props {
   description?: string;
 }
 
-// CRITICAL: We explicitly destructure title and description here so they exist as variables!
-const {
-  title = "ASO Creative Studio — AI-Powered Creative Agency",
-  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems.",
+const { 
+  title = "ASO Creative Studio — AI-Powered Creative Agency", 
+  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems." 
 } = Astro.props;
 ---
 
@@ -31,8 +29,6 @@ const {
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        
-        /* Mobile Menu Toggle Logic */
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         
@@ -51,19 +47,15 @@ const {
           });
         }
 
-        /* Core Intersection Observers (Animations, Counter Scripts, and Lines) */
         const globalObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              
               if (entry.target.classList.contains('animate-on-scroll')) {
                 entry.target.classList.add('fade-up-visible');
               }
-              
               if (entry.target.classList.contains('process-animated-line')) {
                 entry.target.classList.add('line-active');
               }
-              
               if (entry.target.classList.contains('counter')) {
                 const el = entry.target;
                 const target = parseInt(el.getAttribute('data-target') || '0', 10);
@@ -80,7 +72,6 @@ const {
                   }
                 }, step);
               }
-              
               globalObserver.unobserve(entry.target);
             }
           });

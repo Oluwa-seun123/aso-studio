@@ -56,34 +56,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://asocreat
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-    <!-- Global Styles -->
-    <style is:global>
-      /* ── Reset & Base ── */
-      *, *::before, *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      html {
-        font-family: "Inter", sans-serif;
-        background-color: #050505;
-        color: #fafafa;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-      }
-
-      body {
-        min-height: 100vh;
-        overflow-x: hidden;
-        background-color: #050505;
-      }
-
-      /* ── Text Selection ── */
-      ::selection {
-        background-color: rgba(201, 162, 39, 0.3);
-
+    
   </head>
 
   <body>

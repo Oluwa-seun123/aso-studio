@@ -1,168 +1,116 @@
 ---
-import '../styles/global.css';
-
-export interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
+// src/layouts/MainLayout.astro
+interface Props {
+  title: string;
+  description: string;
 }
 
-const {
-  title = "ASO Creative Studio — AI-Powered Creative Agency",
-  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Nigeria-based. Working worldwide.",
-  image = "/og-image.jpg",
-} = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#c9a227" />
-    <meta name="robots" content="index, follow" />
-
-    <meta property="og:type"        content="website" />
-    <meta property="og:title"       content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image"       content={image} />
-
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content={title} />
-    <meta name="twitter:description" content={description} />
-
     <title>{title}</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Add your font links or global CSS imports here -->
   </head>
-
-  <body>
+  <body class="bg-aso-black text-aso-text font-body antialiased selection:bg-aso-gold selection:text-aso-black overflow-x-hidden">
+    
     <slot />
 
-    <style is:global>
-      /* Global high-performance scroll transitions - completely detaches from CSS Keyframe bugs */
-      .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
-      }
-      .animate-on-scroll.is-revealed {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    </style>
-
+    <!-- GLOBAL ANIMATION & COUNTER ENGINE -->
     <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
-        
-        /* 1. Bulletproof Mobile Menu Toggle Logic */
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        if (menuToggle && mobileMenu) {
-          menuToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+      (function() {
+        // High-Precision Counter Engine
+        function easeOutExpo(x) {
+          return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+        }
+
+        function triggerCounters(container) {
+          const counters = container.querySelectorAll('.counter');
+          if (container.classList.contains('counter')) {
+            runCounter(container);
+          }
+          counters.forEach(runCounter);
+        }
+
+        function runCounter(el) {
+          if (el.dataset.hasRun === 'true') return;
+          el.dataset.hasRun = 'true';
+          
+          const target = parseInt(el.getAttribute('data-target') || '0', 10);
+          const duration = 2000; // Strictly 2000ms duration per constraints
+          let startTime = null;
+
+          function updateCounter(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const elapsed = currentTime - startTime;
+            const rawProgress = elapsed / duration;
+            const progress = Math.min(rawProgress, 1);
             
-            const isOpen = menuToggle.classList.contains('menu-is-open');
+            const easedProgress = easeOutExpo(progress);
+            const currentValue = Math.floor(easedProgress * target);
             
-            if (!isOpen) {
-              menuToggle.setAttribute('aria-expanded', 'true');
-              menuToggle.classList.add('menu-is-open');
-              mobileMenu.classList.remove('hidden');
-              document.body.classList.add('overflow-hidden');
+            el.textContent = currentValue;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
             } else {
-              menuToggle.setAttribute('aria-expanded', 'false');
-              menuToggle.classList.remove('menu-is-open');
-              mobileMenu.classList.add('hidden');
-              document.body.classList.remove('overflow-hidden');
+              el.textContent = target; // Clamp exact final value
+            }
+          }
+          requestAnimationFrame(updateCounter);
+        }
+
+        // Scroll Animation Engine
+        function initGlobalObservers() {
+          const animatableElements = document.querySelectorAll('.animate-on-scroll');
+          if (!animatableElements.length) return;
+
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                requestAnimationFrame(() => {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+                  entry.target.classList.add('is-revealed');
+                  triggerCounters(entry.target);
+                });
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+
+          // Viewport Failsafe (Immediate Reveal)
+          animatableElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            // If already inside the viewport on mount, trigger immediately
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              requestAnimationFrame(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+                el.classList.add('is-revealed');
+                triggerCounters(el);
+              });
+            } else {
+              // Standard CSS initialization for off-screen elements
+              el.style.opacity = '0';
+              el.style.transform = 'translateY(20px)';
+              el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+              observer.observe(el);
             }
           });
         }
 
-        /* 2. High-Performance IntersectionObserver (Fade-Ups) */
-        const revealOptions = {
-          root: null,
-          rootMargin: "0px 0px -10% 0px",
-          threshold: 0.05
-        };
-
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              requestAnimationFrame(() => {
-                entry.target.classList.add('is-revealed');
-              });
-              observer.unobserve(entry.target);
-            }
-          });
-        }, revealOptions);
-
-        const animatedElements = document.querySelectorAll('.animate-on-scroll');
-        animatedElements.forEach(el => {
-          scrollObserver.observe(el);
-        });
-
-        /* Failsafe: Direct scroll override loop for immediately visible elements */
-        requestAnimationFrame(() => {
-          const windowHeight = window.innerHeight;
-          animatedElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < windowHeight && !el.classList.contains('is-revealed')) {
-              el.classList.add('is-revealed');
-              scrollObserver.unobserve(el);
-            }
-          });
-        });
-
-        /* 3. High-Precision Number Counter Engine */
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const targetStr = entry.target.getAttribute('data-target');
-              if (!targetStr) return;
-              
-              const target = +targetStr;
-              const duration = 2000;
-              let startTime = null;
-
-              const updateCounter = (currentTime) => {
-                if (!startTime) startTime = currentTime;
-                const elapsed = currentTime - startTime;
-                
-                // Clamp progress between 0 and 1
-                const progress = Math.min(elapsed / duration, 1);
-                
-                // Hardware-independent calculation with ease-out
-                const easeOutQuad = progress * (2 - progress);
-                const currentVal = target * easeOutQuad;
-
-                entry.target.innerHTML = Math.ceil(currentVal).toString();
-
-                if (progress < 1) {
-                  requestAnimationFrame(updateCounter);
-                } else {
-                  entry.target.innerHTML = target.toString();
-                }
-              };
-              
-              requestAnimationFrame(updateCounter);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.counter').forEach(counter => {
-          counterObserver.observe(counter);
-        });
-      });
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initGlobalObservers);
+        } else {
+          initGlobalObservers();
+        }
+      })();
     </script>
   </body>
 </html>

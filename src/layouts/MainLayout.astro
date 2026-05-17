@@ -45,59 +45,72 @@ const {
   <body>
     <slot />
 
-    <script>
+    <style is:global>
+      /* Global high-performance scroll transitions - completely detaches from CSS Keyframe bugs */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .animate-on-scroll.is-revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+
+    <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
-        /* 1. Mobile Menu Toggle */
-        const menuToggle = document.getElementById('menu-toggle');
+        
+        /* 1. Bulletproof Mobile Menu Toggle Logic */
+        const originalMenuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        if (menuToggle && mobileMenu) {
-          menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('menu-is-open');
-            mobileMenu.classList.toggle('hidden');
-            document.body.classList.toggle('overflow-hidden');
-          });
-        }
-
-        /* 2. Theme Toggle Logic */
-        const themeBtn = document.getElementById('theme-toggle');
-        const htmlEl = document.documentElement;
-        
-        if (localStorage.getItem('theme') === 'light') {
-          htmlEl.setAttribute('data-theme', 'light');
-        }
-
-        if (themeBtn) {
-          themeBtn.addEventListener('click', () => {
-            if (htmlEl.hasAttribute('data-theme')) {
-              htmlEl.removeAttribute('data-theme');
-              localStorage.setItem('theme', 'dark');
+        if (originalMenuToggle && mobileMenu) {
+          // Clone node to entirely obliterate any prior hidden event bindings that cause Astro double-fire bugs
+          const menuToggle = originalMenuToggle.cloneNode(true);
+          originalMenuToggle.parentNode.replaceChild(menuToggle, originalMenuToggle);
+          
+          menuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = menuToggle.classList.contains('menu-is-open');
+            
+            if (!isOpen) {
+              menuToggle.classList.add('menu-is-open');
+              mobileMenu.classList.remove('hidden');
+              document.body.classList.add('overflow-hidden');
             } else {
-              htmlEl.setAttribute('data-theme', 'light');
-              localStorage.setItem('theme', 'light');
+              menuToggle.classList.remove('menu-is-open');
+              mobileMenu.classList.add('hidden');
+              document.body.classList.remove('overflow-hidden');
             }
           });
         }
 
-        /* 3. Scroll Animations (Fade Up) */
+        /* 2. High-Performance IntersectionObserver (Fade-Ups) */
+        const revealOptions = {
+          root: null,
+          rootMargin: "0px 0px -10% 0px", // Trigger slightly before element is fully in view
+          threshold: 0
+        };
+
         const scrollObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('fade-up');
-              entry.target.style.opacity = '1';
+              // Defer class addition to next frame rendering cycle to prevent layout trashing
+              requestAnimationFrame(() => {
+                entry.target.classList.add('is-revealed');
+              });
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        }, revealOptions);
 
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
-          if (el instanceof HTMLElement) {
-            el.style.opacity = '0'; 
-            scrollObserver.observe(el);
-          }
+          scrollObserver.observe(el);
         });
 
-        /* 4. Number Counters Animation */
+        /* 3. Number Counters Animation */
         const counterObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -105,7 +118,7 @@ const {
               if (!targetStr) return;
               
               const target = +targetStr;
-              const duration = 2000; // 2 seconds
+              const duration = 2000; 
               const increment = target / (duration / 16);
               
               let current = 0;

@@ -1,71 +1,311 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Portfolio from '../components/Portfolio.astro';
+// ASO Creative Studio — Complete Portfolio
+// Single-file build: no component imports, guaranteed to deploy
 ---
 
-<MainLayout title="ASO Studio — AI-Powered Creative Studio" description="From cinematic AI videos and premium brand graphics to full web experiences and intelligent automation.">
-  
-  <section class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-32 pb-20 overflow-hidden bg-aso-black grid-bg">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-aso-black/50 to-aso-black z-10"></div>
-    
-    <div class="max-w-[800px] text-center relative z-20 flex flex-col items-center">
-      
-      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-aso-elevated border border-aso-border mb-8 animate-on-scroll">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-gold font-bold">Available For Freelance Work</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Nigeria-based. Working worldwide." />
+  <meta name="theme-color" content="#c9a227" />
+  <meta property="og:title" content="ASO Creative Studio — AI-Powered Creative Agency" />
+  <meta property="og:description" content="AI Video · Graphic Design · Web Development · AI Automation" />
+  <title>ASO Creative Studio — AI-Powered Creative Agency</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/global.css" />
+</head>
+
+<body class="bg-black text-text">
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════ -->
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div style="max-width:1280px;" class="mx-auto px-6 lg:px-10">
+    <div class="flex items-center justify-between" style="height:72px;">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 no-underline group">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold tracking-widest text-xs flex-shrink-0 transition-transform duration-200 group-hover:scale-105"
+          style="background:linear-gradient(135deg,#c9a227,#f59e0b); color:#050505; font-family:var(--font-head);">
+          ASO
+        </div>
+        <div class="flex flex-col" style="line-height:1;">
+          <span class="font-semibold text-text" style="font-size:15px; font-family:var(--font-head);">Creative Studio</span>
+          <span class="text-faint" style="font-size:10px; font-family:var(--font-mono); letter-spacing:0.2em; text-transform:uppercase; margin-top:2px;">AI &middot; Design &middot; Web</span>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden lg:flex items-center gap-8" style="list-style:none; margin:0; padding:0;">
+        <li><a href="#work"      class="nav-link">Work</a></li>
+        <li><a href="#services"  class="nav-link">Services</a></li>
+        <li><a href="#process"   class="nav-link">Process</a></li>
+        <li><a href="#about"     class="nav-link">About</a></li>
+        <li><a href="#contact"   class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Desktop right -->
+      <div id="nav-right" class="hidden lg:flex items-center gap-3">
+        <button id="theme-btn" class="w-9 h-9 rounded-xl text-base cursor-pointer flex items-center justify-center transition-all duration-200"
+          style="border:1px solid var(--color-border); background:transparent; color:var(--color-muted);"
+          aria-label="Toggle theme">🌙</button>
+        <a href="#contact" class="flex items-center gap-2 px-5 rounded-full font-semibold text-sm no-underline transition-all duration-300 hover:scale-105 gold-glow"
+          style="padding-top:10px; padding-bottom:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); color:#050505; font-family:var(--font-head);">
+          Start a Project
+        </a>
       </div>
 
-      <h1 class="text-5xl sm:text-7xl font-heading font-bold text-aso-text tracking-tight leading-[1.1] mb-6 animate-on-scroll">
-        AI-Powered <br />
-        <span class="text-gradient">Creative Studio</span>
+      <!-- Hamburger -->
+      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
+        style="background:none; border:none;"
+        aria-label="Toggle menu" aria-expanded="false">
+        <span class="hline-1 block rounded-full transition-all duration-300 origin-center" style="width:24px;height:1.5px;background:var(--color-text);"></span>
+        <span class="hline-2 block rounded-full transition-all duration-300 origin-center" style="width:24px;height:1.5px;background:var(--color-text);"></span>
+        <span class="hline-3 block rounded-full transition-all duration-300 origin-center" style="width:16px;height:1.5px;background:var(--color-gold);"></span>
+      </button>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Overlay -->
+<div id="mob-overlay" class="fixed inset-0 z-40 lg:hidden flex-col items-center justify-center"
+  style="display:none; background:rgba(5,5,5,0.97); backdrop-filter:blur(20px);"
+  aria-hidden="true">
+  <button id="mob-close" class="absolute top-6 right-6 text-2xl cursor-pointer"
+    style="background:none; border:none; color:var(--color-muted);" aria-label="Close menu">&#x2715;</button>
+  <ul class="flex flex-col items-center gap-8 mb-10" style="list-style:none; margin:0; padding:0; margin-bottom:40px;">
+    <li><a href="#work"     class="mob-link">Work</a></li>
+    <li><a href="#services" class="mob-link">Services</a></li>
+    <li><a href="#process"  class="mob-link">Process</a></li>
+    <li><a href="#about"    class="mob-link">About</a></li>
+    <li><a href="#contact"  class="mob-link">Contact</a></li>
+  </ul>
+  <a href="#contact" class="mob-link flex items-center gap-2 px-10 rounded-full font-bold text-lg no-underline"
+    style="padding-top:16px; padding-bottom:16px; background:linear-gradient(135deg,#c9a227,#f59e0b); color:#050505; font-family:var(--font-head);">
+    Start a Project
+  </a>
+  <p class="absolute bottom-8 text-faint" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.3em; text-transform:uppercase;">ASO Creative Studio</p>
+</div>
+
+<style>
+  .nav-link {
+    font-family: var(--font-body);
+    font-size: 14px; font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    position: relative; padding-bottom: 4px;
+    transition: color 0.2s ease;
+  }
+  .nav-link:hover { color: var(--color-text); }
+  .nav-link::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; height: 1px; width: 0;
+    background: var(--color-gold);
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  .mob-link {
+    font-family: var(--font-head);
+    font-weight: 700; font-size: 2.5rem;
+    color: var(--color-text); text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mob-link:hover { color: var(--color-gold); }
+</style>
+
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section id="hero" class="relative flex flex-col justify-center overflow-hidden" style="min-height:100vh; background:var(--color-black);">
+
+  <div class="absolute inset-0 dot-grid opacity-100 pointer-events-none"></div>
+  <div class="absolute pointer-events-none" style="top:-20%;left:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,0.14) 0%,transparent 70%);filter:blur(60px);"></div>
+  <div class="absolute pointer-events-none" style="bottom:-20%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.09) 0%,transparent 70%);filter:blur(80px);"></div>
+
+  <div class="relative z-10 mx-auto px-6 lg:px-10" style="max-width:1280px; padding-top:128px; padding-bottom:96px;">
+    <div style="max-width:900px;">
+
+      <!-- Badge -->
+      <div class="reveal inline-flex items-center gap-2.5 rounded-full mb-8"
+        style="padding:8px 16px; border:1px solid rgba(201,162,39,0.3); background:rgba(201,162,39,0.06);">
+        <span class="relative flex" style="width:10px;height:10px;">
+          <span class="pulse absolute inline-flex rounded-full" style="width:100%;height:100%;background:var(--color-green);opacity:0.75;"></span>
+          <span class="relative inline-flex rounded-full" style="width:10px;height:10px;background:var(--color-green);"></span>
+        </span>
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-gold);">
+          Available for freelance work
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1 style="font-weight:700; line-height:1.05; margin-bottom:24px;">
+        <span class="reveal stagger-1 block text-text" style="font-size:clamp(3rem,8vw,7rem);">AI-Powered</span>
+        <span class="reveal stagger-2 shimmer block" style="font-size:clamp(3rem,8vw,7rem);">Creative Studio</span>
       </h1>
 
-      <p class="text-aso-text-secondary text-base sm:text-xl font-body max-w-xl leading-relaxed mb-10 mx-auto animate-on-scroll">
-        From cinematic AI videos and premium brand graphics to full web experiences and intelligent automation — everything your brand needs to stand out in the <strong class="text-aso-text">AI era.</strong>
+      <!-- Subtitle -->
+      <p class="reveal stagger-2 text-muted leading-relaxed mb-10" style="font-family:var(--font-body); font-size:clamp(1.05rem,2vw,1.25rem); max-width:680px;">
+        From cinematic AI videos and premium brand graphics to full web experiences
+        and intelligent automation — everything your brand needs to stand out in the
+        <strong style="color:var(--color-text); font-weight:500;">AI era.</strong>
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center items-center mb-24 animate-on-scroll">
-        <a href="#work" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-aso-gold hover:bg-aso-gold-hover text-aso-black font-heading font-bold text-sm rounded-full transition-all duration-300 hover:scale-105 shadow-lg shadow-aso-gold/10">
+      <!-- CTAs -->
+      <div class="reveal stagger-3 flex flex-wrap items-center gap-4 mb-14">
+        <a href="#work" class="inline-flex items-center gap-2.5 rounded-full font-semibold no-underline gold-glow transition-all duration-300 hover:scale-105"
+          style="padding:14px 28px; background:linear-gradient(135deg,#c9a227,#f59e0b); color:#050505; font-family:var(--font-head); font-size:15px;">
           View My Work
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-aso-border hover:border-aso-text text-aso-text font-heading font-medium text-sm rounded-full transition-all duration-300">
+        <a href="#contact" class="inline-flex items-center gap-2.5 rounded-full font-semibold no-underline transition-all duration-300 hover:border-gold hover:text-gold"
+          style="padding:14px 28px; border:1px solid var(--color-border); color:var(--color-text); font-family:var(--font-head); font-size:15px;">
           Start a Project
-          <svg class="w-4 h-4 text-aso-text-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </a>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-6 pt-8 border-t border-aso-border/60 w-full animate-on-scroll">
-        <div class="flex -space-x-3">
-          <div class="w-8 h-8 rounded-full bg-aso-gold text-aso-black font-bold text-[10px] flex items-center justify-center border-2 border-aso-black font-heading">A</div>
-          <div class="w-8 h-8 rounded-full bg-indigo-500 text-aso-text font-bold text-[10px] flex items-center justify-center border-2 border-aso-black font-heading">B</div>
-          <div class="w-8 h-8 rounded-full bg-pink-500 text-aso-text font-bold text-[10px] flex items-center justify-center border-2 border-aso-black font-heading">C</div>
-          <div class="w-8 h-8 rounded-full bg-teal-500 text-aso-text font-bold text-[10px] flex items-center justify-center border-2 border-aso-black font-heading">D</div>
+      <!-- Social proof -->
+      <div class="reveal stagger-4 flex items-center gap-3 flex-wrap">
+        <div class="flex" style="margin-right:4px;">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs" style="background:#c9a227;border:2px solid var(--color-black);color:#050505;margin-right:-8px;z-index:4;">A</div>
+          <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs text-white" style="background:#6366f1;border:2px solid var(--color-black);margin-right:-8px;z-index:3;">B</div>
+          <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs text-white" style="background:#ec4899;border:2px solid var(--color-black);margin-right:-8px;z-index:2;">C</div>
+          <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs text-white" style="background:#14b8a6;border:2px solid var(--color-black);z-index:1;">D</div>
         </div>
-        <div class="flex items-center gap-2">
-          <div class="flex text-aso-gold text-xs">★★★★★</div>
-          <span class="font-label text-[10px] uppercase tracking-widest text-aso-text-muted">Trusted Worldwide</span>
-        </div>
+        <span style="color:var(--color-gold);font-size:13px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span style="font-family:var(--font-mono);font-size:11px;color:var(--color-faint);letter-spacing:0.05em;">Trusted by brands worldwide &nbsp;&bull;&nbsp; 100% Remote</span>
       </div>
 
     </div>
-  </section>
+  </div>
 
-  <section class="py-16 bg-aso-black border-y border-aso-border relative z-20">
-    <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
-        <div class="text-center md:text-left animate-on-scroll">
-          <h3 class="text-4xl sm:text-5xl font-heading font-bold text-aso-text mb-1"><span class="counter" data-target="50">0</span>+</h3>
-          <p class="font-label text-[10px] uppercase tracking-widest text-aso-text-muted">Projects Completed</p>
-        </div>
-        <div class="text-center md:text-left animate-on-scroll">
-          <h3 class="text-4xl sm:text-5xl font-heading font-bold text-aso-text mb-1"><span class="counter" data-target="3">0</span>+</h3>
-          <p class="font-label text-[10px] uppercase tracking-widest text-aso-text-muted">Years Experience</p>
-        </div>
+  <!-- Scroll chevron -->
+  <div class="absolute flex flex-col items-center gap-1.5" style="bottom:32px;left:50%;transform:translateX(-50%);">
+    <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--color-faint);">Scroll</span>
+    <span class="bounce-y text-faint" style="font-size:20px;">&#8964;</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     STATS
+═══════════════════════════════════════ -->
+<section id="stats" class="relative py-16" style="background:var(--color-surface); border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border);">
+  <div class="absolute pointer-events-none" style="top:0;left:50%;transform:translateX(-50%);width:400px;height:1px;background:linear-gradient(90deg,transparent,#c9a227,transparent);"></div>
+
+  <div class="mx-auto px-6 lg:px-10" style="max-width:1280px;">
+    <div class="flex justify-center mb-10">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--color-faint);">By the numbers</span>
+    </div>
+
+    <div class="reveal grid grid-cols-2 lg:grid-cols-4" style="gap:1px; background:var(--color-border); border-radius:16px; overflow:hidden;">
+      <div class="stat-box flex flex-col items-center text-center group" style="background:var(--color-surface); padding:40px 24px; transition:background 0.3s ease;">
+        <span data-count="50" data-sfx="+" class="stat-num grad-text font-bold" style="font-family:var(--font-head); font-size:clamp(2.25rem,4vw,3.5rem); line-height:1;">0+</span>
+        <p class="font-semibold mt-2 mb-1 text-text" style="font-family:var(--font-head); font-size:15px;">Projects Delivered</p>
+        <p class="text-faint" style="font-family:var(--font-body); font-size:12px;">Across all services</p>
+      </div>
+      <div class="stat-box flex flex-col items-center text-center group" style="background:var(--color-surface); padding:40px 24px; transition:background 0.3s ease;">
+        <span data-count="30" data-sfx="+" class="stat-num grad-text font-bold" style="font-family:var(--font-head); font-size:clamp(2.25rem,4vw,3.5rem); line-height:1;">0+</span>
+        <p class="font-semibold mt-2 mb-1 text-text" style="font-family:var(--font-head); font-size:15px;">Happy Clients</p>
+        <p class="text-faint" style="font-family:var(--font-body); font-size:12px;">Brands &amp; founders</p>
+      </div>
+      <div class="stat-box flex flex-col items-center text-center group" style="background:var(--color-surface); padding:40px 24px; transition:background 0.3s ease;">
+        <span data-count="5" data-sfx="" class="stat-num grad-text font-bold" style="font-family:var(--font-head); font-size:clamp(2.25rem,4vw,3.5rem); line-height:1;">0</span>
+        <p class="font-semibold mt-2 mb-1 text-text" style="font-family:var(--font-head); font-size:15px;">Countries Reached</p>
+        <p class="text-faint" style="font-family:var(--font-body); font-size:12px;">100% remote</p>
+      </div>
+      <div class="stat-box flex flex-col items-center text-center group" style="background:var(--color-surface); padding:40px 24px; transition:background 0.3s ease;">
+        <span data-count="3" data-sfx="+" class="stat-num grad-text font-bold" style="font-family:var(--font-head); font-size:clamp(2.25rem,4vw,3.5rem); line-height:1;">0+</span>
+        <p class="font-semibold mt-2 mb-1 text-text" style="font-family:var(--font-head); font-size:15px;">Years of Craft</p>
+        <p class="text-faint" style="font-family:var(--font-body); font-size:12px;">Creative &amp; digital</p>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="absolute pointer-events-none" style="bottom:0;left:50%;transform:translateX(-50%);width:400px;height:1px;background:linear-gradient(90deg,transparent,#c9a227,transparent);"></div>
+</section>
 
-  <Portfolio />
 
-</MainLayout>
+<!-- ═══════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════ -->
+<section id="services" class="relative py-24 lg:py-[120px] overflow-hidden" style="background:var(--color-black);">
+  <div class="absolute inset-0 dot-grid" style="opacity:0.25;pointer-events:none;"></div>
+  <div class="absolute pointer-events-none" style="top:0;left:50%;transform:translateX(-50%);width:700px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,39,0.4),transparent);"></div>
+
+  <div class="relative z-10 mx-auto px-6 lg:px-10" style="max-width:1280px;">
+
+    <div class="reveal mb-16">
+      <div class="flex items-center gap-3 mb-5">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:var(--color-gold);">02 / What I Do</span>
+        <div style="width:60px;height:1px;background:linear-gradient(90deg,#c9a227,transparent);"></div>
+      </div>
+      <h2 class="text-text mb-4" style="font-size:clamp(2rem,4vw,3.25rem);">My Services</h2>
+      <p class="text-muted" style="font-family:var(--font-body); max-width:480px; line-height:1.7;">
+        A focused set of services built for modern brands that want results — not just deliverables.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <!-- Card 1 -->
+      <article class="reveal stagger-1 card-lift rounded-2xl p-8 group relative overflow-hidden cursor-pointer" style="background:var(--color-elevated); border:1px solid var(--color-border);">
+        <div class="absolute top-0 right-0 w-32 h-32 rounded-bl-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 pointer-events-none" style="background:rgba(201,162,39,0.05);"></div>
+        <div class="flex items-start justify-between mb-7">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:bg-gold/20" style="background:rgba(201,162,39,0.1); border:1px solid rgba(201,162,39,0.2);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--color-faint);">01</span>
+            <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" style="background:rgba(201,162,39,0.1); border:1px solid rgba(201,162,39,0.25); color:var(--color-gold);">&#x2197;</div>
+          </div>
+        </div>
+        <h3 class="font-bold text-lg mb-1 transition-colors duration-200 group-hover:text-gold" style="font-family:var(--font-head); color:var(--color-text);">AI Video Creation</h3>
+        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-faint);margin-bottom:16px;">Motion that converts</p>
+        <p class="text-muted text-sm leading-relaxed mb-7" style="font-family:var(--font-body);">Cinematic, AI-enhanced video content that stops the scroll and drives action. From concept to final render.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="svc-tag">Promotional Videos</span>
+          <span class="svc-tag">Social Media Reels</span>
+          <span class="svc-tag">Brand Storytelling</span>
+          <span class="svc-tag">Product Showcases</span>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style="background:linear-gradient(90deg,#c9a227,#f59e0b,transparent);"></div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="reveal stagger-2 card-lift rounded-2xl p-8 group relative overflow-hidden cursor-pointer" style="background:var(--color-elevated); border:1px solid var(--color-border);">
+        <div class="absolute top-0 right-0 w-32 h-32 rounded-bl-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 pointer-events-none" style="background:rgba(201,162,39,0.05);"></div>
+        <div class="flex items-start justify-between mb-7">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:bg-gold/20" style="background:rgba(201,162,39,0.1); border:1px solid rgba(201,162,39,0.2);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="#c9a227"/><circle cx="17.5" cy="10.5" r=".5" fill="#c9a227"/><circle cx="8.5" cy="7.5" r=".5" fill="#c9a227"/><circle cx="6.5" cy="12.5" r=".5" fill="#c9a227"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.437-.652-.437-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--color-faint);">02</span>
+            <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" style="background:rgba(201,162,39,0.1); border:1px solid rgba(201,162,39,0.25); color:var(--color-gold);">&#x2197;</div>
+          </div>
+        </div>
+        <h3 class="font-bold text-lg mb-1 transition-colors duration-200 group-hover:text-gold" style="font-family:var(--font-head); color:var(--color-text);">Graphic Design</h3>
+        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-faint);margin-bottom:16px;">Visuals that speak</p>
+        <p class="text-muted text-sm leading-relaxed mb-7" style="font-family:var(--font-body);">Premium brand visuals that communicate authority and build trust across every touchpoint your audience sees.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="svc-tag">Business Branding</span>
+          <span class="svc-tag">Flyer Design</span>
+          <span class="svc-tag">Social Media Graphics</span>
+          <span class="svc-tag">Church Materials</span>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style="background:linear-gradient(90deg,#c9a227,#f59e0b,transparent);"></div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="reveal stagger-3 card-lift rounded-2xl p-8 group relative overflow-hidden cursor-pointer" style="background:var(--color-elevated); border:1px solid var(--color-border);">
+        <div class="absolute top-0 right-0 w-32 h-32 rounded-bl-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 pointer-events-none" style="background:rgba(201,162,39,0.05);"></div>
+        <div class="flex items-start justify-between mb-7">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:bg-gold/20" style="background:rgba(201,162,39,0.1); border:1px solid rgba(

@@ -34,7 +34,7 @@ const steps = [
   <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
 
     <!-- Header -->
-    <div class="mb-20">
+    <div class="mb-20 animate-on-scroll">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-label text-[11px] tracking-[0.35em] uppercase text-aso-gold">03 / How It Works</span>
         <div class="w-16 h-px bg-gradient-to-r from-aso-gold to-transparent"></div>
@@ -50,11 +50,13 @@ const steps = [
     <!-- Desktop steps -->
     <div class="hidden lg:grid lg:grid-cols-3 lg:gap-8 relative">
 
-      <!-- Connecting dashed line -->
-      <div class="absolute top-14 left-[calc(16.66%+32px)] right-[calc(16.66%+32px)] h-px border-t border-dashed border-aso-border pointer-events-none z-0"></div>
+      <!-- Connecting dashed line with embedded progress fill -->
+      <div class="absolute top-14 left-[calc(16.66%+32px)] right-[calc(16.66%+32px)] h-px border-t border-dashed border-aso-border pointer-events-none z-0 overflow-visible">
+        <div id="desktop-process-line" class="absolute -top-[1px] left-0 h-[2px] w-full bg-aso-gold origin-left scale-x-0 will-change-transform z-10"></div>
+      </div>
 
-      {steps.map((step) => (
-        <div class="relative z-10 flex flex-col items-center text-center group">
+      {steps.map((step, i) => (
+        <div class="relative z-10 flex flex-col items-center text-center group animate-on-scroll" style={`transition-delay: ${i * 150}ms;`}>
 
           <!-- Icon circle -->
           <div class="relative mb-8">
@@ -62,8 +64,8 @@ const steps = [
             <span class="absolute -top-3 -right-1 font-label text-[10px] tracking-[0.15em] text-aso-gold px-2 py-0.5 rounded-full bg-aso-gold/10 border border-aso-gold/25 z-10">
               {step.number}
             </span>
-            <div class="w-28 h-28 rounded-full bg-aso-elevated border-2 border-aso-border flex items-center justify-center text-aso-gold transition-all duration-300 group-hover:border-aso-gold group-hover:shadow-[0_0_24px_rgba(201,162,39,0.25)]">
-              <Fragment set:html={step.icon} />
+            <div class="w-28 h-28 rounded-full bg-aso-elevated border-2 border-aso-border flex items-center justify-center text-aso-gold transition-all duration-300 group-hover:border-aso-gold group-hover:shadow-[0_0_24px_rgba(201,162,39,0.25)] relative overflow-hidden">
+              <div class="relative z-10"><Fragment set:html={step.icon} /></div>
             </div>
           </div>
 
@@ -86,15 +88,17 @@ const steps = [
     <!-- Mobile vertical stack -->
     <div class="lg:hidden flex flex-col gap-0">
       {steps.map((step, i) => (
-        <div class="relative flex gap-6 pb-12 last:pb-0">
+        <div class="relative flex gap-6 pb-12 last:pb-0 animate-on-scroll">
 
-          <!-- Vertical connector -->
+          <!-- Vertical connector with progress fill -->
           {i < steps.length - 1 && (
-            <div class="absolute left-7 top-14 bottom-0 w-px bg-gradient-to-b from-aso-gold/60 to-aso-border pointer-events-none"></div>
+            <div class="absolute left-7 top-14 bottom-0 w-px bg-gradient-to-b from-aso-gold/60 to-aso-border pointer-events-none">
+              <div class="mobile-process-line absolute top-0 left-0 w-full h-full bg-aso-gold origin-top scale-y-0 will-change-transform z-10"></div>
+            </div>
           )}
 
           <!-- Icon -->
-          <div class="flex-shrink-0 relative">
+          <div class="flex-shrink-0 relative z-20">
             <span class="absolute -top-2 -right-1 font-label text-[9px] text-aso-gold px-1.5 py-0.5 rounded-full bg-aso-gold/10 border border-aso-gold/25">
               {step.number}
             </span>
@@ -106,6 +110,84 @@ const steps = [
           <!-- Content -->
           <div class="pt-1">
             <h3 class="font-heading font-bold text-lg text-aso-text mb-0.5">{step.title}</h3>
+            <p class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-gold mb-3">{step.subtitle}</p>
+            <p class="font-body text-sm text-aso-text-secondary leading-relaxed mb-4">{step.desc}</p>
+            <ul class="flex flex-col gap-1.5" role="list">
+              {step.bullets.map((b) => (
+                <li class="flex items-center gap-2 font-body text-xs text-aso-text-muted">
+                  <span class="w-1 h-1 rounded-full bg-aso-gold flex-shrink-0"></span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const processSection = document.getElementById('process');
+    const desktopLine = document.getElementById('desktop-process-line');
+    const mobileLines = document.querySelectorAll('.mobile-process-line');
+
+    if (!processSection) return;
+
+    let ticking = false;
+
+    const computeLineProgress = () => {
+      const rect = processSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate how far we've scrolled through the section
+      // 0% when the top of the section reaches the middle of the screen
+      const startTrigger = viewportHeight / 2;
+      const distanceScrolled = startTrigger - rect.top;
+      const totalScrollable = rect.height;
+      
+      let progressRaw = distanceScrolled / totalScrollable;
+      const progress = Math.max(0, Math.min(1, progressRaw));
+
+      // Handle Desktop (One unified track)
+      if (desktopLine && window.innerWidth >= 1024) {
+        desktopLine.style.transform = `scaleX(${progress})`;
+      }
+
+      // Handle Mobile (Sequential filling of fragmented vertical tracks)
+      if (mobileLines.length > 0 && window.innerWidth < 1024) {
+        const segmentCost = 1 / mobileLines.length;
+        
+        mobileLines.forEach((line, index) => {
+          const segmentStart = index * segmentCost;
+          const segmentEnd = (index + 1) * segmentCost;
+          
+          let localProgress = (progress - segmentStart) / (segmentEnd - segmentStart);
+          localProgress = Math.max(0, Math.min(1, localProgress));
+          
+          line.style.transform = `scaleY(${localProgress})`;
+        });
+      }
+
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          computeLineProgress();
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial check on load
+    computeLineProgress();
+  });
+</script>
             <p class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-gold mb-3">{step.subtitle}</p>
             <p class="font-body text-sm text-aso-text-secondary leading-relaxed mb-4">{step.desc}</p>
             <ul class="flex flex-col gap-1.5" role="list">

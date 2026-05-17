@@ -1,14 +1,16 @@
 ---
+// src/layouts/MainLayout.astro
 import '../styles/global.css';
 
-export interface Props {
+interface Props {
   title?: string;
   description?: string;
 }
 
+// CRITICAL: We explicitly destructure title and description here so they exist as variables!
 const {
   title = "ASO Creative Studio — AI-Powered Creative Agency",
-  description = "Nigeria-based. Working worldwide.",
+  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems.",
 } = Astro.props;
 ---
 
@@ -30,7 +32,7 @@ const {
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         
-        /* 1. Bulletproof Mobile Menu Toggle */
+        /* Mobile Menu Toggle Logic */
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         
@@ -41,7 +43,6 @@ const {
             mobileMenu.classList.toggle('flex');
           });
 
-          // Close overlay when clicking outside
           document.addEventListener('click', (e) => {
             if (!mobileMenu.contains(e.target as Node) && e.target !== menuToggle) {
               mobileMenu.classList.add('hidden');
@@ -50,22 +51,19 @@ const {
           });
         }
 
-        /* 2. Unified Scroll, Counter, & Process Line Observer */
+        /* Core Intersection Observers (Animations, Counter Scripts, and Lines) */
         const globalObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               
-              // Reveal Scroll Elements
               if (entry.target.classList.contains('animate-on-scroll')) {
                 entry.target.classList.add('fade-up-visible');
               }
               
-              // Draw Process Timeline Lines
               if (entry.target.classList.contains('process-animated-line')) {
                 entry.target.classList.add('line-active');
               }
               
-              // Animate Stats Numbers
               if (entry.target.classList.contains('counter')) {
                 const el = entry.target;
                 const target = parseInt(el.getAttribute('data-target') || '0', 10);
@@ -88,7 +86,6 @@ const {
           });
         }, { threshold: 0.1 });
 
-        // Register all elements into the global watcher engine
         document.querySelectorAll('.animate-on-scroll, .counter, .process-animated-line').forEach(el => {
           globalObserver.observe(el);
         });

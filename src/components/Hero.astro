@@ -4,91 +4,94 @@
 
 <section
   id="hero"
-  class="relative min-h-screen flex flex-col justify-center overflow-hidden"
+  class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-aso-black"
 >
-  <!-- Background -->
-  <div class="absolute inset-0 z-0">
-    <div class="absolute inset-0 bg-background"></div>
-    <div class="absolute -top-[20%] -left-[10%] w-[600px] h-[600px] rounded-full opacity-[0.18] blur-[80px]" style="background:radial-gradient(circle,#c9a227 0%,transparent 70%); animation:float1 8s ease-in-out infinite;"></div>
-    <div class="absolute -bottom-[20%] -right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.13] blur-[100px]" style="background:radial-gradient(circle,#f59e0b 0%,transparent 70%); animation:float2 10s ease-in-out infinite;"></div>
-    <div class="absolute top-[40%] right-[20%] w-[300px] h-[300px] rounded-full opacity-[0.08] blur-[60px]" style="background:radial-gradient(circle,#c9a227 0%,transparent 70%); animation:float3 12s ease-in-out infinite;"></div>
-    <div class="absolute inset-0 opacity-[0.04]" style="background-image:radial-gradient(circle,#a1a1aa 1px,transparent 1px); background-size:32px 32px;"></div>
-    <div class="absolute inset-0" style="background:radial-gradient(ellipse at center,transparent 40%,#050505 100%);"></div>
+  <!-- Grid overlay -->
+  <div class="absolute inset-0 hero-grid opacity-100 pointer-events-none"></div>
+
+  <!-- Gold ambient orb top-left -->
+  <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full pointer-events-none"
+    style="background: radial-gradient(circle, rgba(201,162,39,0.12) 0%, transparent 70%); filter: blur(60px);">
+  </div>
+
+  <!-- Gold ambient orb bottom-right -->
+  <div class="absolute -bottom-40 -right-20 w-[500px] h-[500px] rounded-full pointer-events-none"
+    style="background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%); filter: blur(80px);">
   </div>
 
   <!-- Content -->
-  <div class="relative z-10 max-w-site mx-auto pt-32 pb-20 px-10">
-    <div class="max-w-[900px]">
+  <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-10 pt-32 pb-24">
+    <div class="max-w-4xl">
 
-      <!-- Availability Badge -->
-      <div
-        id="hero-badge"
-        class="opacity-0 translate-y-8 inline-flex items-center gap-2.5 px-4 py-2 rounded-pill border border-gold border-opacity-30 bg-gold bg-opacity-[0.06] mb-8"
-      >
-        <span class="relative flex w-2 h-2">
-          <span class="absolute inline-flex w-full h-full rounded-full bg-green-500 opacity-75" style="animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;"></span>
-          <span class="relative inline-flex w-2 h-2 rounded-full bg-green-500"></span>
+      <!-- Availability badge -->
+      <div class="fade-up inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-aso-gold/30 bg-aso-gold/5 mb-8">
+        <span class="relative flex w-2.5 h-2.5">
+          <span class="pulse-green absolute inline-flex w-full h-full rounded-full bg-aso-green opacity-75"></span>
+          <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-aso-green"></span>
         </span>
-        <span class="font-label text-xs tracking-[0.15em] uppercase text-gold">
+        <span class="font-label text-[11px] tracking-[0.15em] uppercase text-aso-gold">
           Available for freelance work
         </span>
       </div>
 
       <!-- Headline -->
       <h1 class="font-heading font-bold leading-[1.05] mb-6">
-        <span
-          id="hero-line-1"
-          class="opacity-0 translate-y-8 block text-primary text-display-xl"
-        >
+        <span class="fade-up fade-up-2 block text-aso-text" style="font-size: clamp(3rem, 8vw, 7rem);">
           AI-Powered
         </span>
-        <span
-          id="hero-line-2"
-          class="opacity-0 translate-y-8 block text-display-xl bg-gold-gradient bg-[length:200%_auto] bg-clip-text text-transparent"
-          style="animation:shimmer 3s linear infinite;"
-        >
+        <span class="fade-up fade-up-3 block shimmer-gold" style="font-size: clamp(3rem, 8vw, 7rem);">
           Creative Studio
         </span>
       </h1>
 
       <!-- Subtitle -->
-      <p
-        id="hero-sub"
-        class="opacity-0 translate-y-8 font-body text-secondary leading-relaxed mb-10 max-w-[680px] text-lg"
-      >
-        From cinematic AI videos and premium brand graphics to full web
-        experiences and intelligent automation — everything your brand needs
-        to dominate in the <strong class="text-primary font-medium">AI era.</strong>
+      <p class="fade-up fade-up-3 font-body text-aso-text-secondary leading-relaxed mb-10 max-w-2xl text-balance"
+        style="font-size: clamp(1.05rem, 2vw, 1.25rem);">
+        From cinematic AI videos and premium brand graphics to full web experiences
+        and intelligent automation — everything your brand needs to stand out in the
+        <strong class="text-aso-text font-medium">AI era.</strong>
       </p>
 
       <!-- CTAs -->
-      <div
-        id="hero-ctas"
-        class="opacity-0 translate-y-8 flex flex-wrap items-center gap-4 mb-14"
-      >
-        <a href="#work" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-pill bg-gold-gradient font-heading font-semibold text-[15px] text-background no-underline shadow-gold transition-all duration-300 hover:shadow-lg">
-          View My Work →
+      <div class="fade-up fade-up-4 flex flex-wrap items-center gap-4 mb-14">
+        <a
+          href="#work"
+          class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow font-heading font-semibold text-aso-black no-underline gold-glow transition-all duration-300 hover:scale-105"
+          style="font-size: 15px;"
+        >
+          View My Work
+          <!-- Arrow right SVG -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <a href="#contact" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-pill border border-border bg-transparent font-heading font-semibold text-[15px] text-primary no-underline transition-all duration-300 hover:border-gold hover:text-gold">
-          Start a Project ↗
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border border-aso-text/20 bg-transparent font-heading font-semibold text-aso-text no-underline transition-all duration-300 hover:border-aso-gold hover:text-aso-gold"
+          style="font-size: 15px;"
+        >
+          Start a Project
+          <!-- Send SVG -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
         </a>
       </div>
 
-      <!-- Social Proof -->
-      <div
-        id="hero-social"
-        class="opacity-0 translate-y-8 flex items-center gap-3 flex-wrap"
-      >
-        <div class="flex">
-          <div class="w-8 h-8 rounded-full bg-gold border-2 border-background flex items-center justify-center text-[10px] font-bold text-background -mr-2 z-[4]">A</div>
-          <div class="w-8 h-8 rounded-full bg-indigo-500 border-2 border-background flex items-center justify-center text-[10px] font-bold text-white -mr-2 z-[3]">B</div>
-          <div class="w-8 h-8 rounded-full bg-pink-500 border-2 border-background flex items-center justify-center text-[10px] font-bold text-white -mr-2 z-[2]">C</div>
-          <div class="w-8 h-8 rounded-full bg-teal-500 border-2 border-background flex items-center justify-center text-[10px] font-bold text-white z-[1]">D</div>
+      <!-- Social proof -->
+      <div class="fade-up fade-up-5 flex items-center gap-3 flex-wrap">
+        <!-- Avatar stack -->
+        <div class="flex -space-x-2">
+          <div class="w-8 h-8 rounded-full bg-aso-gold border-2 border-aso-black flex items-center justify-center font-label text-[10px] font-bold text-aso-black z-[4]">A</div>
+          <div class="w-8 h-8 rounded-full bg-indigo-500 border-2 border-aso-black flex items-center justify-center font-label text-[10px] font-bold text-white z-[3]">B</div>
+          <div class="w-8 h-8 rounded-full bg-pink-500 border-2 border-aso-black flex items-center justify-center font-label text-[10px] font-bold text-white z-[2]">C</div>
+          <div class="w-8 h-8 rounded-full bg-teal-500 border-2 border-aso-black flex items-center justify-center font-label text-[10px] font-bold text-white z-[1]">D</div>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-gold text-sm">★★★★★</span>
-          <span class="font-label text-xs text-muted tracking-wide">
-            Trusted by brands worldwide • 100% Remote
+          <span class="text-aso-gold text-sm">★★★★★</span>
+          <span class="font-label text-xs text-aso-text-muted tracking-wide">
+            Trusted by brands worldwide &nbsp;•&nbsp; 100% Remote
           </span>
         </div>
       </div>
@@ -97,22 +100,9 @@
   </div>
 
   <!-- Scroll chevron -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
-    <span class="font-label text-[10px] tracking-[0.25em] uppercase text-muted">Scroll</span>
-    <span class="text-muted" style="animation:chevronBounce 2s ease-in-out infinite;">&#8964;</span>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 fade-up fade-up-5">
+    <span class="font-label text-[10px] tracking-[0.25em] uppercase text-aso-text-muted">Scroll</span>
+    <span class="text-aso-text-muted chevron-bounce text-xl">⌄</span>
   </div>
 
 </section>
-
-<script>
-  window.addEventListener("load", () => {
-    if (typeof gsap === "undefined") return;
-    const tl = gsap.timeline({ delay: 0.3 });
-    tl.to("#hero-badge", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" })
-      .to("#hero-line-1", { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, "-=0.3")
-      .to("#hero-line-2", { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, "-=0.45")
-      .to("#hero-sub", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.35")
-      .to("#hero-ctas", { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, "-=0.3")
-      .to("#hero-social", { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.25");
-  });
-</script>

@@ -8,7 +8,7 @@ export interface Props {
 
 const {
   title = "ASO Creative Studio — AI-Powered Creative Agency",
-  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems.",
+  description = "Nigeria-based. Working worldwide.",
 } = Astro.props;
 ---
 
@@ -21,16 +21,16 @@ const {
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-aso-black text-aso-text antialiased">
+  <body class="bg-aso-black text-aso-text antialiased min-h-screen relative">
     
     <slot />
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         
-        /* 1. Bulletproof Mobile Menu Fix */
+        /* 1. Bulletproof Mobile Menu Toggle */
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         
@@ -38,31 +38,34 @@ const {
           menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
           });
 
+          // Close overlay when clicking outside
           document.addEventListener('click', (e) => {
             if (!mobileMenu.contains(e.target as Node) && e.target !== menuToggle) {
               mobileMenu.classList.add('hidden');
+              mobileMenu.classList.remove('flex');
             }
           });
         }
 
-        /* 2. Unified Intersection Observer (Handles Scroll Animations, Counters, and Process Lines) */
-        const generalObserver = new IntersectionObserver((entries) => {
+        /* 2. Unified Scroll, Counter, & Process Line Observer */
+        const globalObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               
-              // Handle Scroll Fades
+              // Reveal Scroll Elements
               if (entry.target.classList.contains('animate-on-scroll')) {
                 entry.target.classList.add('fade-up-visible');
               }
               
-              // Handle Timeline Process Lines
+              // Draw Process Timeline Lines
               if (entry.target.classList.contains('process-animated-line')) {
                 entry.target.classList.add('line-active');
               }
               
-              // Handle Number Counters
+              // Animate Stats Numbers
               if (entry.target.classList.contains('counter')) {
                 const el = entry.target;
                 const target = parseInt(el.getAttribute('data-target') || '0', 10);
@@ -80,15 +83,14 @@ const {
                 }, step);
               }
               
-              // Stop observing once animated
-              generalObserver.unobserve(entry.target);
+              globalObserver.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
-        // Register all items to the script watcher
+        // Register all elements into the global watcher engine
         document.querySelectorAll('.animate-on-scroll, .counter, .process-animated-line').forEach(el => {
-          generalObserver.observe(el);
+          globalObserver.observe(el);
         });
       });
     </script>

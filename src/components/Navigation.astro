@@ -8,11 +8,7 @@ const links = [
 ];
 ---
 
-<!-- Fixed Nav -->
-<nav
-  id="main-nav"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
->
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
     <div class="flex items-center justify-between h-[72px]">
 
@@ -23,7 +19,7 @@ const links = [
         </div>
         <div class="flex flex-col leading-none">
           <span class="font-heading font-semibold text-[15px] text-aso-text tracking-wide">Creative Studio</span>
-          <span class="font-label text-[10px] text-aso-text-muted tracking-[0.2em] uppercase mt-0.5">AI · Design · Web</span>
+          <span class="font-label text-[10px] text-aso-text-muted tracking-[0.2em] uppercase mt-0.5">AI &middot; Design &middot; Web</span>
         </div>
       </a>
 
@@ -31,10 +27,7 @@ const links = [
       <ul class="hidden lg:flex items-center gap-8 list-none m-0 p-0" role="list">
         {links.map((link) => (
           <li>
-            <a
-              href={link.href}
-              class="nav-desktop-link relative font-body text-sm font-medium text-aso-text-secondary hover:text-aso-text transition-colors duration-200 pb-1 no-underline"
-            >
+            <a href={link.href} class="nav-desktop-link font-body text-sm font-medium text-aso-text-secondary hover:text-aso-text transition-colors duration-200 no-underline">
               {link.label}
             </a>
           </li>
@@ -42,10 +35,10 @@ const links = [
       </ul>
 
       <!-- Desktop Right -->
-      <div class="hidden lg:flex items-center gap-3">
+      <div id="nav-right" class="hidden lg:flex items-center gap-3">
         <button
           id="theme-toggle"
-          class="w-9 h-9 rounded-xl border border-aso-border bg-transparent text-aso-text-secondary hover:border-aso-gold hover:text-aso-gold transition-all duration-200 flex items-center justify-center text-base cursor-pointer"
+          class="w-9 h-9 rounded-xl border border-aso-border bg-transparent text-base cursor-pointer flex items-center justify-center transition-all duration-200 hover:border-aso-gold"
           aria-label="Toggle theme"
         >
           🌙
@@ -58,7 +51,7 @@ const links = [
         </a>
       </div>
 
-      <!-- Mobile Hamburger -->
+      <!-- Hamburger -->
       <button
         id="hamburger-btn"
         class="lg:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer"
@@ -74,68 +67,47 @@ const links = [
   </div>
 </nav>
 
-<!-- Mobile Full-Screen Overlay -->
+<!-- Mobile Overlay -->
 <div
   id="mobile-overlay"
   class="fixed inset-0 z-40 lg:hidden flex-col items-center justify-center bg-aso-black/95 backdrop-blur-xl"
-  style="display: none;"
+  style="display:none;"
   aria-hidden="true"
 >
-  <!-- Close -->
-  <button
-    id="mobile-close"
-    class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-aso-text-secondary hover:text-aso-gold transition-colors duration-200 bg-transparent border-none cursor-pointer text-2xl"
-    aria-label="Close menu"
-  >
-    ✕
+  <button id="mobile-close" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-aso-text-secondary hover:text-aso-gold transition-colors duration-200 bg-transparent border-none cursor-pointer text-2xl" aria-label="Close menu">
+    &#x2715;
   </button>
 
-  <!-- Links -->
   <ul class="flex flex-col items-center gap-8 list-none m-0 p-0 mb-10" role="list">
     {links.map((link) => (
       <li>
-        <a
-          href={link.href}
-          class="mobile-nav-link font-heading font-bold text-5xl text-aso-text hover:text-aso-gold transition-colors duration-200 no-underline"
-        >
+        <a href={link.href} class="mobile-nav-link font-heading font-bold text-5xl text-aso-text hover:text-aso-gold transition-colors duration-200 no-underline">
           {link.label}
         </a>
       </li>
     ))}
   </ul>
 
-  <!-- Mobile CTA -->
-  <a
-    href="#contact"
-    class="mobile-nav-link flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow font-heading font-bold text-lg text-aso-black no-underline"
-  >
+  <a href="#contact" class="mobile-nav-link flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow font-heading font-bold text-lg text-aso-black no-underline">
     Start a Project
   </a>
 
-  <!-- Decorative label -->
   <p class="absolute bottom-8 font-label text-xs text-aso-text-muted tracking-[0.3em] uppercase">
     ASO Creative Studio
   </p>
 </div>
 
-<style is:global>
-  /* Gold underline hover */
-  .nav-desktop-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 1px;
-    background: var(--color-aso-gold);
-    transition: width 0.3s ease;
-  }
-  .nav-desktop-link:hover::after { width: 100%; }
-</style>
-
 <script is:inline>
-  /* ── Nav scroll glassmorphism ── */
-  var mainNav = document.getElementById('main-nav');
+  var mainNav   = document.getElementById('main-nav');
+  var hamburger = document.getElementById('hamburger-btn');
+  var overlay   = document.getElementById('mobile-overlay');
+  var closeBtn  = document.getElementById('mobile-close');
+  var mlinks    = document.querySelectorAll('.mobile-nav-link');
+  var themeBtn  = document.getElementById('theme-toggle');
+  var htmlEl    = document.documentElement;
 
-  window.addEventListener('scroll', function () {
+  /* ── Scroll nav ── */
+  window.addEventListener('scroll', function() {
     if (window.scrollY > 80) {
       mainNav.classList.add('nav-scrolled');
     } else {
@@ -144,11 +116,6 @@ const links = [
   }, { passive: true });
 
   /* ── Mobile menu ── */
-  var hamburger  = document.getElementById('hamburger-btn');
-  var overlay    = document.getElementById('mobile-overlay');
-  var closeBtn   = document.getElementById('mobile-close');
-  var mobileLinks = document.querySelectorAll('.mobile-nav-link');
-
   function openMenu() {
     overlay.style.display = 'flex';
     overlay.setAttribute('aria-hidden', 'false');
@@ -156,7 +123,6 @@ const links = [
     hamburger.classList.add('menu-is-open');
     document.body.style.overflow = 'hidden';
   }
-
   function closeMenu() {
     overlay.style.display = 'none';
     overlay.setAttribute('aria-hidden', 'true');
@@ -167,24 +133,17 @@ const links = [
 
   hamburger.addEventListener('click', openMenu);
   closeBtn.addEventListener('click', closeMenu);
-  mobileLinks.forEach(function (link) {
-    link.addEventListener('click', closeMenu);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeMenu();
-  });
+  mlinks.forEach(function(l) { l.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
 
   /* ── Theme toggle ── */
-  var themeBtn = document.getElementById('theme-toggle');
-  var htmlEl   = document.documentElement;
-
   function applyTheme(t) {
     if (t === 'light') {
       htmlEl.setAttribute('data-theme', 'light');
-      themeBtn.textContent = '☀️';
+      themeBtn.textContent = '\u2600\uFE0F';
     } else {
       htmlEl.removeAttribute('data-theme');
-      themeBtn.textContent = '🌙';
+      themeBtn.textContent = '\uD83C\uDF19';
     }
   }
 
@@ -193,7 +152,7 @@ const links = [
   var preferred = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   applyTheme(preferred);
 
-  themeBtn.addEventListener('click', function () {
+  themeBtn.addEventListener('click', function() {
     var current = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     try { localStorage.setItem('aso-theme', current); } catch(e) {}
     applyTheme(current);

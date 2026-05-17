@@ -14,7 +14,7 @@
     <div class="aso-footer-inner">
 
       <a href="/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <div style="width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; letter-spacing:0.1em; color:#050505;">
+        <div style="width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-weight:700; font-[...]
           ASO
         </div>
         <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; color:#a1a1aa;">
@@ -33,45 +33,6 @@
     </div>
   </div>
 </footer>
-
-<style is:global>
-  .aso-footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  .aso-back-top {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 9999px;
-    border: 1px solid #27272a;
-    background: transparent;
-    color: #a1a1aa;
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .aso-back-top:hover {
-    border-color: rgba(201, 162, 39, 0.4);
-    color: #c9a227;
-    background: rgba(201, 162, 39, 0.06);
-  }
-
-  @media (max-width: 640px) {
-    .aso-footer-inner {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  }
-</style>
 
 <script is:inline>
   document.getElementById('back-to-top')?.addEventListener('click', function() {

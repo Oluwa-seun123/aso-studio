@@ -19,14 +19,12 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
   <!-- Background grid -->
   <div
     class="absolute inset-0 opacity-[0.02]"
-    style="background-image: radial-gradient(circle, #a1a1aa 1px, transparent 1px); background-size: 36px 36px;"
     aria-hidden="true"
   ></div>
 
   <!-- Top ambient line -->
   <div
     class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-px"
-    style="background: linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent);"
     aria-hidden="true"
   ></div>
 
@@ -40,7 +38,6 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
         </span>
         <div
           class="flex-1 h-px max-w-[60px]"
-          style="background: linear-gradient(90deg, #c9a227, transparent);"
           aria-hidden="true"
         ></div>
       </div>
@@ -72,11 +69,6 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
           data-filter={filter}
           role="tab"
           aria-selected={i === 0 ? "true" : "false"}
-          style={
-            i === 0
-              ? "background: #c9a227; border-color: #c9a227; color: #050505;"
-              : "background: transparent; border-color: #27272a; color: #a1a1aa;"
-          }
         >
           {filter}
         </button>
@@ -117,7 +109,7 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
         class="w-14 h-14 rounded-full flex items-center justify-center mb-4 bg-gold/10 border border-gold/20"
       >
         <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 01-2-2Z" />
         </svg>
       </div>
       <p class="font-heading text-lg text-secondary">No projects in this category yet.</p>
@@ -128,7 +120,7 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
     <div class="mt-14 flex justify-center gsap-hidden">
       <a
         href="#contact"
-        class="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-heading font-semibold text-[15px] border border-border text-secondary bg-transparent transition-all duration-300 hover:border-gold hover:text-gold"
+        class="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-heading font-semibold text-[15px] border border-border text-secondary bg-transparent transition-all duration-300 hover:bg-gold/5 hover:border-gold/40"
       >
         Have a project in mind?
         <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -21,29 +23,23 @@ const {
     <meta name="theme-color" content="#c9a227" />
     <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph -->
     <meta property="og:type"        content="website" />
     <meta property="og:title"       content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image"       content={image} />
 
-    <!-- Twitter -->
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content={title} />
     <meta name="twitter:description" content={description} />
 
     <title>{title}</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Global styles -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
 
   <body>

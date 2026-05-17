@@ -2,122 +2,109 @@
 // About.astro
 ---
 
-<section
-  id="about"
-  style="position:relative; padding:120px 0; overflow:hidden; background:#050505;"
->
-  <!-- Background -->
-  <div style="position:absolute; inset:0; opacity:0.025; background-image:radial-gradient(circle,#a1a1aa 1px,transparent 1px); background-size:40px 40px;"></div>
-  <div style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:700px; height:1px; background:linear-gradient(90deg,transparent,rgba(201,162,39,0.3),transparent);"></div>
+<section id="about" class="relative py-[120px] bg-aso-black overflow-hidden">
 
-  <div style="position:relative; z-index:10; max-width:1280px; margin:0 auto; padding:0 2.5rem;">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-px bg-gradient-to-r from-transparent via-aso-gold/30 to-transparent pointer-events-none"></div>
+
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
 
     <!-- Section label -->
-    <div id="about-label" style="opacity:0; transform:translateY(24px); display:flex; align-items:center; gap:12px; margin-bottom:64px;">
-      <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.35em; text-transform:uppercase; color:#c9a227;">06 / About Me</span>
-      <div style="width:60px; height:1px; background:linear-gradient(90deg,#c9a227,transparent);"></div>
+    <div class="flex items-center gap-3 mb-16">
+      <span class="font-label text-[11px] tracking-[0.35em] uppercase text-aso-gold">06 / About Me</span>
+      <div class="w-16 h-px bg-gradient-to-r from-aso-gold to-transparent"></div>
     </div>
 
-    <!-- Split Layout -->
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;" class="about-grid">
+    <!-- Split layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
       <!-- LEFT: Photo -->
-      <div id="about-photo-col" style="opacity:0; transform:translateX(-32px);">
-        <div class="about-photo-wrap">
-          <!-- Decorative offset borders -->
-          <div class="about-deco-2"></div>
-          <div class="about-deco-1"></div>
+      <div class="relative">
 
-          <!-- Photo container -->
-          <div class="about-photo-container">
+        <!-- Photo container with decorative borders -->
+        <div class="relative pr-8 pb-8">
+          <!-- Gold offset borders -->
+          <div class="absolute top-4 right-4 w-full h-full rounded-2xl border border-aso-gold/25 pointer-events-none z-0"></div>
+          <div class="absolute top-8 right-0 w-full h-full rounded-2xl border border-aso-gold/10 pointer-events-none z-0"></div>
+
+          <!-- Photo area -->
+          <div class="relative z-10 rounded-2xl overflow-hidden border border-aso-border bg-aso-elevated" style="aspect-ratio: 4/5;">
+            <!-- Replace the div below with <img src="/images/samuel.jpg" ...> when ready -->
             <img
               src="/images/samuel.jpg"
               alt="Samuel Aina — ASO Creative Studio"
-              style="width:100%; height:100%; object-fit:cover; display:block;"
-              onerror="this.style.display='none'; document.getElementById('about-photo-fallback').style.display='flex';"
+              class="w-full h-full object-cover"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
             />
-            <!-- Fallback if no photo -->
-            <div
-              id="about-photo-fallback"
-              style="display:none; width:100%; height:100%; align-items:center; justify-content:center; flex-direction:column; gap:16px; background:linear-gradient(135deg,#0f0f0f,#1a1a1a);"
-            >
-              <div style="width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,#c9a227,#f59e0b); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:#000;">
+            <!-- Fallback placeholder -->
+            <div class="w-full h-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-aso-elevated to-aso-surface hidden">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow flex items-center justify-center font-heading font-bold text-2xl text-aso-black">
                 ASO
               </div>
-              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#52525b; text-transform:uppercase;">Add your photo to<br>/public/images/samuel.jpg</span>
+              <p class="font-label text-[11px] tracking-[0.2em] uppercase text-aso-text-muted text-center px-6">
+                Add your photo to<br/>/public/images/samuel.jpg
+              </p>
             </div>
           </div>
 
-          <!-- Gold badge overlay -->
-          <div style="position:absolute; bottom:-20px; right:-20px; z-index:10; background:#0f0f0f; border:1px solid rgba(201,162,39,0.3); border-radius:12px; padding:12px 16px; display:flex; align-items:center; gap:8px;">
-            <div style="width:8px; height:8px; border-radius:50%; background:#22c55e;"></div>
-            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#a1a1aa;">Available for work</span>
+          <!-- Availability badge overlay -->
+          <div class="absolute -bottom-4 -right-4 z-20 bg-aso-surface border border-aso-border rounded-xl px-4 py-3 flex items-center gap-2.5 shadow-xl">
+            <span class="w-2.5 h-2.5 rounded-full bg-aso-green pulse-green flex-shrink-0"></span>
+            <span class="font-label text-[11px] tracking-wide text-aso-text-muted">Available for work</span>
           </div>
         </div>
       </div>
 
       <!-- RIGHT: Text -->
-      <div id="about-text-col" style="opacity:0; transform:translateX(32px);">
-
+      <div>
         <!-- Headline -->
-        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(2rem,3.5vw,3rem); line-height:1.1; color:#fafafa; margin:0 0 28px;">
-          Hi, I'm <span style="background:linear-gradient(135deg,#c9a227,#f59e0b); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Samuel Aina</span>
+        <h2 class="font-heading font-bold mb-7" style="font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1;">
+          Hi, I'm <span class="gradient-text">Samuel Aina</span>
         </h2>
 
         <!-- Bio -->
-        <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:36px;">
-          <p style="font-family:'Inter',sans-serif; font-size:15px; color:#a1a1aa; line-height:1.8; margin:0;">
-            I'm the founder of <strong style="color:#fafafa; font-weight:500;">ASO Creative Studio</strong> — a one-person creative powerhouse built at the intersection of AI, design, and technology.
+        <div class="prose-aso mb-8">
+          <p>
+            I'm the founder of <strong class="text-aso-text font-semibold">ASO Creative Studio</strong> — a one-person creative powerhouse built at the intersection of AI, design, and technology. I started ASO because I believe every brand, no matter the size, deserves world-class creative work.
           </p>
-          <p style="font-family:'Inter',sans-serif; font-size:15px; color:#a1a1aa; line-height:1.8; margin:0;">
-            My passion sits at the crossroads of <strong style="color:#fafafa; font-weight:500;">AI video production</strong>, premium brand design, and intelligent automation. I don't just create visuals; I craft experiences.
+          <p>
+            My passion sits at the crossroads of <strong class="text-aso-text font-semibold">AI video production</strong>, premium brand design, and intelligent automation. I don't just create visuals — I build systems and experiences that drive real results.
           </p>
-          <p style="font-family:'Inter',sans-serif; font-size:15px; color:#a1a1aa; line-height:1.8; margin:0;">
-            Based in <strong style="color:#fafafa; font-weight:500;">Nigeria</strong>, working with clients across 5 countries. Whether you're a startup finding your voice or an established brand ready to lead, let's build something extraordinary.
+          <p>
+            Based in <strong class="text-aso-text font-semibold">Nigeria</strong>, working with clients across 5 countries and counting. Whether you're a startup finding your voice or an established brand ready to evolve — I'm the creative partner you need.
           </p>
         </div>
 
-        <!-- Stats row -->
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#27272a; border-radius:12px; overflow:hidden; margin-bottom:36px;">
-          <div class="about-stat">
-            <span class="about-stat-number" data-count="50" data-suffix="+">0+</span>
-            <span class="about-stat-label">Projects</span>
+        <!-- Inline stats -->
+        <div class="grid grid-cols-3 gap-px bg-aso-border rounded-2xl overflow-hidden mb-8">
+          <div class="flex flex-col items-center text-center py-5 px-4 bg-aso-elevated">
+            <span class="font-heading font-bold text-3xl gradient-text">50+</span>
+            <span class="font-label text-[10px] tracking-[0.15em] uppercase text-aso-text-muted mt-1">Projects</span>
           </div>
-          <div class="about-stat">
-            <span class="about-stat-number" data-count="3" data-suffix="+">0+</span>
-            <span class="about-stat-label">Years</span>
+          <div class="flex flex-col items-center text-center py-5 px-4 bg-aso-elevated">
+            <span class="font-heading font-bold text-3xl gradient-text">3+</span>
+            <span class="font-label text-[10px] tracking-[0.15em] uppercase text-aso-text-muted mt-1">Years</span>
           </div>
-          <div class="about-stat">
-            <span class="about-stat-number" data-count="100" data-suffix="%">0%</span>
-            <span class="about-stat-label">Remote</span>
+          <div class="flex flex-col items-center text-center py-5 px-4 bg-aso-elevated">
+            <span class="font-heading font-bold text-3xl gradient-text">100%</span>
+            <span class="font-label text-[10px] tracking-[0.15em] uppercase text-aso-text-muted mt-1">Remote</span>
           </div>
         </div>
 
-        <!-- CTA -->
-        <a href="/resume.pdf" id="about-resume-btn" target="_blank" rel="noopener noreferrer">
-          Download Resume ↓
+        <!-- Resume CTA -->
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border border-aso-gold bg-transparent text-aso-gold font-heading font-semibold no-underline transition-all duration-300 hover:bg-aso-gold/10 hover:shadow-[0_0_24px_rgba(201,162,39,0.2)]"
+          style="font-size: 15px;"
+        >
+          Download Resume
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
         </a>
 
       </div>
     </div>
   </div>
 </section>
-
-<script>
-  window.addEventListener("load", () => {
-    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-
-    gsap.to("#about-label", {
-      opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
-      scrollTrigger: { trigger: "#about", start: "top 80%" },
-    });
-    gsap.to("#about-photo-col", {
-      opacity: 1, x: 0, duration: 0.8, ease: "power3.out", delay: 0.1,
-      scrollTrigger: { trigger: "#about", start: "top 75%" },
-    });
-    gsap.to("#about-text-col", {
-      opacity: 1, x: 0, duration: 0.8, ease: "power3.out", delay: 0.2,
-      scrollTrigger: { trigger: "#about", start: "top 75%" },
-    });
-  });
-</script>

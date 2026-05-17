@@ -66,46 +66,7 @@ const {
     </script>
     -->
   </body>
-</html>              toggleActions: "play none none none",
-            },
-          });
-        });
-
-        /* ── 3. Stagger containers ── */
-        gsap.utils.toArray(".stagger-children").forEach((container) => {
-          const children = container.querySelectorAll(":scope > *");
-          gsap.to(children, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power3.out",
-            stagger: 0.12,
-            scrollTrigger: {
-              trigger: container,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          });
-        });
-
-        /* ── 4. Stats counter animation ── */
-        document.querySelectorAll("[data-count]").forEach((el) => {
-          const target = parseInt(el.getAttribute("data-count") ?? "0", 10);
-          const obj = { val: 0 };
-          gsap.to(obj, {
-            val: target,
-            duration: 2,
-            ease: "power2.out",
-            onUpdate: () => {
-              el.textContent = Math.floor(obj.val) + (el.getAttribute("data-suffix") ?? "");
-            },
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          });
-        });
+</html>
 
         /* ── 5. Lucide icons init ── */
         if (typeof lucide !== "undefined") {

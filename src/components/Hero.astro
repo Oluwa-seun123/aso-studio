@@ -1,5 +1,5 @@
 ---
-// Hero.astro
+// src/components/Hero.astro
 ---
 
 <section
@@ -103,9 +103,12 @@
 
     </div>
   </div>
-</section>
 
-<style>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-on-scroll" style="transition-delay: 600ms;">
+    <span class="font-label text-[10px] tracking-[0.25em] uppercase text-aso-text-muted">Scroll</span>
+    <span class="text-aso-text-muted chevron-bounce text-xl">⌄</span>
+  </div>
+</section>
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(24px);

@@ -3,21 +3,29 @@ const projects = [
   {
     id: "p1",
     title: "AI Brand Campaign Video",
-    desc: "A cinematic AI-generated brand launch video for a luxury fashion brand, blending storytelling with high-end visual effects.",
+    desc: "A cinematic AI-generated brand launch video for a luxury fashion brand, blending storytelling with high-end visual effects to drive awareness and sales.",
     category: "AI Video",
     client: "VeeLuxe",
     date: "Oct 2024",
-    color: "#c9a227",
+    tagColor:    "#c9a227",
+    tagBg:       "rgba(201,162,39,0.12)",
+    tagBorder:   "rgba(201,162,39,0.35)",
+    iconBg:      "rgba(201,162,39,0.10)",
+    iconBorder:  "rgba(201,162,39,0.25)",
     link: "#",
   },
   {
     id: "p2",
     title: "Complete Brand Identity System",
-    desc: "Full brand identity design for a fast-growing Nigerian tech startup — logo, colour system, typography, business cards, and social media kit.",
+    desc: "Full brand identity for a fast-growing Nigerian tech startup — logo, colour system, typography, business cards, social media kit, and brand guidelines.",
     category: "Graphics",
     client: "BrandSpark",
     date: "Sep 2024",
-    color: "#818cf8",
+    tagColor:    "#818cf8",
+    tagBg:       "rgba(129,140,248,0.12)",
+    tagBorder:   "rgba(129,140,248,0.35)",
+    iconBg:      "rgba(129,140,248,0.10)",
+    iconBorder:  "rgba(129,140,248,0.25)",
     link: "#",
   },
   {
@@ -27,17 +35,25 @@ const projects = [
     category: "Web Dev",
     client: "VibeMedia",
     date: "Jul 2024",
-    color: "#2dd4bf",
+    tagColor:    "#2dd4bf",
+    tagBg:       "rgba(45,212,191,0.12)",
+    tagBorder:   "rgba(45,212,191,0.35)",
+    iconBg:      "rgba(45,212,191,0.10)",
+    iconBorder:  "rgba(45,212,191,0.25)",
     link: "#",
   },
   {
     id: "p4",
     title: "Customer Support Chatbot Automation",
-    desc: "Built and deployed an AI-powered customer support chatbot with automated email sequences and CRM integration, cutting response time by 80%.",
+    desc: "Built and deployed an AI-powered chatbot with automated email sequences and CRM integration, cutting response time by 80%.",
     category: "AI Automation",
     client: "AutoFlow Co.",
     date: "Jun 2024",
-    color: "#f472b6",
+    tagColor:    "#f472b6",
+    tagBg:       "rgba(244,114,182,0.12)",
+    tagBorder:   "rgba(244,114,182,0.35)",
+    iconBg:      "rgba(244,114,182,0.10)",
+    iconBorder:  "rgba(244,114,182,0.25)",
     link: "#",
   },
 ];
@@ -58,18 +74,20 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
         <div class="w-16 h-px bg-gradient-to-r from-aso-gold to-transparent"></div>
       </div>
       <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
-        <h2 class="font-heading font-bold text-aso-text" style="font-size: clamp(2rem, 4vw, 3.25rem);">My Works</h2>
+        <h2 class="font-heading font-bold text-aso-text text-display-lg">My Works</h2>
         <p class="font-body text-sm text-aso-text-muted max-w-xs leading-relaxed lg:text-right">
           A selection of projects across every service.<br />Each one built with intention.
         </p>
       </div>
     </div>
 
-    <!-- Filter buttons -->
+    <!-- Filters -->
     <div class="flex flex-wrap gap-3 mb-12" id="filter-bar" role="tablist">
       {filters.map((f, i) => (
         <button
-          class={`filter-btn font-label text-[11px] tracking-[0.18em] uppercase px-5 py-2.5 rounded-full border transition-all duration-250 cursor-pointer ${i === 0 ? 'bg-aso-gold border-aso-gold text-aso-black' : 'bg-transparent border-aso-border text-aso-text-secondary hover:border-aso-gold hover:text-aso-gold'}`}
+          class={i === 0
+            ? "filter-btn font-label text-[11px] tracking-[0.18em] uppercase px-5 py-2.5 rounded-full border cursor-pointer bg-aso-gold border-aso-gold text-aso-black transition-all duration-200"
+            : "filter-btn font-label text-[11px] tracking-[0.18em] uppercase px-5 py-2.5 rounded-full border cursor-pointer bg-transparent border-aso-border text-aso-text-secondary hover:border-aso-gold hover:text-aso-gold transition-all duration-200"}
           data-filter={f}
           role="tab"
         >
@@ -78,7 +96,7 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
       ))}
     </div>
 
-    <!-- Cards grid -->
+    <!-- Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
       {projects.map((p) => (
         <article
@@ -86,25 +104,24 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
           data-category={p.category}
         >
           <!-- Image container -->
-          <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
-
-            <!-- Gradient placeholder (replace with real <img> when images are ready) -->
-            <div
-              class="w-full h-full flex items-center justify-center text-center p-6"
-              style={`background: linear-gradient(135deg, #0f0f0f, #1a1a1a); border-bottom: 1px solid #27272a;`}
-            >
-              <span class="font-label text-xs tracking-[0.2em] uppercase text-aso-text-muted">{p.category}</span>
+          <div class="relative overflow-hidden" style="aspect-ratio:16/10;">
+            <!-- Placeholder gradient — replace with <img> when you have images -->
+            <div class="w-full h-full flex items-center justify-center" style={`background: linear-gradient(135deg, #0f0f0f, ${p.tagBg});`}>
+              <span class="font-label text-xs tracking-[0.2em] uppercase" style={`color: ${p.tagColor};`}>{p.category}</span>
             </div>
 
             <!-- Hover overlay -->
-            <div class="absolute inset-0 flex items-center justify-center bg-aso-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm" style="background:rgba(5,5,5,0.72);">
               <a
                 href={p.link}
-                class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow font-heading font-semibold text-sm text-aso-black no-underline transition-transform duration-200 hover:scale-105"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-semibold text-sm text-aso-black no-underline transition-transform duration-200 hover:scale-105"
+                style={`background: linear-gradient(135deg, #c9a227, #f59e0b);`}
               >
                 View Project
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
                 </svg>
               </a>
             </div>
@@ -113,19 +130,18 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
             <div class="absolute top-4 left-4">
               <span
                 class="font-label text-[10px] tracking-[0.18em] uppercase px-3 py-1.5 rounded-full"
-                style={`background: rgba(from ${p.color} r g b / 0.15); border: 1px solid rgba(from ${p.color} r g b / 0.35); color: ${p.color};`}
+                style={`background: ${p.tagBg}; border: 1px solid ${p.tagBorder}; color: ${p.tagColor};`}
               >
                 {p.category}
               </span>
             </div>
-
           </div>
 
           <!-- Card body -->
           <div class="p-6">
-            {p.client && (
-              <p class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-text-muted mb-2">{p.client} · {p.date}</p>
-            )}
+            <p class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-text-muted mb-2">
+              {p.client} &middot; {p.date}
+            </p>
             <h3 class="font-heading font-bold text-[17px] text-aso-text mb-3 leading-tight transition-colors duration-200 group-hover:text-aso-gold">
               {p.title}
             </h3>
@@ -136,13 +152,12 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
               <div class="h-px flex-1 mr-4 bg-aso-border"></div>
               <div
                 class="w-8 h-8 rounded-full flex items-center justify-center text-sm transition-transform duration-300 group-hover:scale-110"
-                style={`background: rgba(from ${p.color} r g b / 0.12); border: 1px solid rgba(from ${p.color} r g b / 0.3); color: ${p.color};`}
+                style={`background: ${p.iconBg}; border: 1px solid ${p.iconBorder}; color: ${p.tagColor};`}
               >
-                ↗
+                &#x2197;
               </div>
             </div>
           </div>
-
         </article>
       ))}
     </div>
@@ -169,15 +184,14 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
 </section>
 
 <script is:inline>
-  var filterBtns  = document.querySelectorAll('.filter-btn');
-  var cards       = document.querySelectorAll('[data-category]');
-  var emptyState  = document.getElementById('portfolio-empty');
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var cards      = document.querySelectorAll('[data-category]');
+  var emptyState = document.getElementById('portfolio-empty');
 
   filterBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
       var filter = this.getAttribute('data-filter');
 
-      /* Update button styles */
       filterBtns.forEach(function(b) {
         b.classList.remove('bg-aso-gold', 'border-aso-gold', 'text-aso-black');
         b.classList.add('bg-transparent', 'border-aso-border', 'text-aso-text-secondary');
@@ -185,7 +199,6 @@ const filters = ["All", "AI Video", "Graphics", "Web Dev", "AI Automation"];
       this.classList.remove('bg-transparent', 'border-aso-border', 'text-aso-text-secondary');
       this.classList.add('bg-aso-gold', 'border-aso-gold', 'text-aso-black');
 
-      /* Show/hide cards */
       var visible = 0;
       cards.forEach(function(card) {
         if (filter === 'All' || card.getAttribute('data-category') === filter) {

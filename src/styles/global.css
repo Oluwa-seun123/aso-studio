@@ -18,8 +18,10 @@
   --font-body:    'Inter', sans-serif;
   --font-label:   'JetBrains Mono', monospace;
 
-  /* ── Border Radius ── */
-  --radius-pill: 9999px;
+  /* ── Custom text sizes ── */
+  --text-display-xl: clamp(3rem, 8vw, 7rem);
+  --text-display-lg: clamp(2rem, 4vw, 3.25rem);
+  --text-display-md: clamp(2rem, 3.5vw, 3rem);
 }
 
 /* ── Base ── */
@@ -51,16 +53,14 @@
     color: var(--color-aso-black);
   }
 
-  /* ── Custom Scrollbar ── */
-  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar       { width: 5px; }
   ::-webkit-scrollbar-track { background: var(--color-aso-black); }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-aso-border);
-    border-radius: 3px;
-  }
+  ::-webkit-scrollbar-thumb { background: var(--color-aso-border); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--color-aso-gold); }
 
-  /* ── Light Mode Overrides ── */
+  [id] { scroll-margin-top: 80px; }
+
+  /* ── Light mode ── */
   [data-theme="light"] {
     --color-aso-black:          #ffffff;
     --color-aso-surface:        #f5f5f5;
@@ -70,13 +70,12 @@
     --color-aso-text-secondary: #52525b;
     --color-aso-text-muted:     #a1a1aa;
   }
-
-  /* ── Scroll anchors clear fixed nav ── */
-  [id] { scroll-margin-top: 80px; }
 }
 
 /* ── Utilities ── */
 @layer utilities {
+
+  /* ── Text & Gradients ── */
   .gradient-text {
     background: linear-gradient(135deg, var(--color-aso-gold) 0%, var(--color-aso-gold-glow) 100%);
     -webkit-background-clip: text;
@@ -84,29 +83,156 @@
     background-clip: text;
   }
 
-  .gold-glow {
-    box-shadow:
-      0 0 24px rgba(201, 162, 39, 0.4),
-      0 0 48px rgba(201, 162, 39, 0.15);
+  .shimmer-gold {
+    background: linear-gradient(135deg, var(--color-aso-gold) 0%, var(--color-aso-gold-glow) 50%, var(--color-aso-gold) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
   }
 
+  .gold-glow {
+    box-shadow: 0 0 24px rgba(201,162,39,0.4), 0 0 48px rgba(201,162,39,0.15);
+  }
   .gold-glow:hover {
-    box-shadow:
-      0 0 32px rgba(245, 158, 11, 0.6),
-      0 0 64px rgba(245, 158, 11, 0.2);
+    box-shadow: 0 0 32px rgba(245,158,11,0.6), 0 0 64px rgba(245,158,11,0.2);
   }
 
   .text-balance { text-wrap: balance; }
 
-  /* ── Nav scrolled state ── */
+  /* ── Background patterns ── */
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ── Navigation ── */
   .nav-scrolled {
-    background-color: rgba(5, 5, 5, 0.88) !important;
+    background-color: rgba(5,5,5,0.88) !important;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid var(--color-aso-border);
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
   }
 
+  .nav-desktop-link {
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .nav-desktop-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--color-aso-gold);
+    transition: width 0.3s ease;
+  }
+  .nav-desktop-link:hover::after { width: 100%; }
+
+  /* ── Hamburger animation ── */
+  .menu-is-open .ham-1 { transform: rotate(45deg) translate(5px, 6px); }
+  .menu-is-open .ham-2 { opacity: 0; transform: scaleX(0); }
+  .menu-is-open .ham-3 { transform: rotate(-45deg) translate(5px, -6px); }
+
+  /* ── Card hover lift ── */
+  .card-hover {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-aso-gold) !important;
+    box-shadow: 0 0 32px rgba(201,162,39,0.15), 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  /* ── Portfolio filter ── */
+  .filter-hidden { display: none !important; }
+
+  /* ── Social icon chips (Contact) ── */
+  .social-chip {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--color-aso-border);
+    background: transparent;
+    color: var(--color-aso-text-secondary);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .social-chip:hover {
+    border-color: rgba(201,162,39,0.4);
+    color: var(--color-aso-gold);
+    background: rgba(201,162,39,0.06);
+  }
+
+  /* ── Toast notifications (Contact) ── */
+  .aso-toast {
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 14px;
+    display: flex; align-items: center; gap: 10px;
+    min-width: 280px; max-width: 360px;
+    pointer-events: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    animation: toastIn 0.3s ease;
+  }
+  .aso-toast-success {
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: #86efac;
+  }
+  .aso-toast-error {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: #fca5a5;
+  }
+
+  /* ── Prose ── */
+  .prose-aso p {
+    color: var(--color-aso-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Animations ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .fade-up-2 { animation-delay: 0.15s; }
+  .fade-up-3 { animation-delay: 0.3s;  }
+  .fade-up-4 { animation-delay: 0.45s; }
+  .fade-up-5 { animation-delay: 0.6s;  }
+
+  .pulse-green { animation: pulseGreen 2s ease-in-out infinite; }
+  .chevron-bounce { animation: chevronBounce 2s ease-in-out infinite; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: 0% center;   }
+    100% { background-position: 200% center; }
+  }
+  @keyframes pulseGreen {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4);   }
+    50%       { box-shadow: 0 0 0 6px rgba(34,197,94,0);   }
+  }
+  @keyframes chevronBounce {
+    0%, 100% { transform: translateY(0);    opacity: 0.4; }
+    50%       { transform: translateY(8px); opacity: 1;   }
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0);    }
+  }
+}
   /* ── Hero grid overlay ── */
   .hero-grid {
     background-image:

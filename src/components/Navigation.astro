@@ -1,160 +1,92 @@
 ---
-const links = [
-  { label: "Work",     href: "#work"     },
-  { label: "Services", href: "#services" },
-  { label: "Process",  href: "#process"  },
-  { label: "About",    href: "#about"    },
-  { label: "Contact",  href: "#contact"  },
-];
+// src/components/Navigation.astro
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
-    <div class="flex items-center justify-between h-[72px]">
+<header class="fixed top-0 left-0 w-full z-50 bg-aso-black/80 backdrop-blur-md border-b border-aso-border/50">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+    <a href="/" class="font-heading font-bold text-xl text-aso-text tracking-wide no-underline z-[60]">
+      ASO <span class="text-aso-gold">STUDIO</span>
+    </a>
 
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 no-underline group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-aso-gold to-aso-gold-glow flex items-center justify-center font-heading font-bold text-xs tracking-widest text-aso-black flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
-          ASO
-        </div>
-        <div class="flex flex-col leading-none">
-          <span class="font-heading font-semibold text-[15px] text-aso-text tracking-wide">Creative Studio</span>
-          <span class="font-label text-[10px] text-aso-text-muted tracking-[0.2em] uppercase mt-0.5">AI &middot; Design &middot; Web</span>
-        </div>
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#work" class="font-label text-sm text-aso-text-secondary hover:text-aso-gold transition-colors">Work</a>
+      <a href="#services" class="font-label text-sm text-aso-text-secondary hover:text-aso-gold transition-colors">Services</a>
+      <a href="#about" class="font-label text-sm text-aso-text-secondary hover:text-aso-gold transition-colors">About</a>
+      <a href="#contact" class="px-5 py-2 rounded-full border border-aso-gold text-aso-gold font-label text-sm hover:bg-aso-gold hover:text-aso-black transition-all">
+        Hire Me
       </a>
+    </nav>
 
-      <!-- Desktop Links -->
-      <ul class="hidden lg:flex items-center gap-8 list-none m-0 p-0" role="list">
-        {links.map((link) => (
-          <li>
-            <a href={link.href} class="nav-desktop-link font-body text-sm font-medium text-aso-text-secondary hover:text-aso-text transition-colors duration-200 no-underline">
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <!-- Desktop Right -->
-      <div id="nav-right" class="hidden lg:flex items-center gap-3">
-        <button
-          id="theme-toggle"
-          class="w-9 h-9 rounded-xl border border-aso-border bg-transparent text-base cursor-pointer flex items-center justify-center transition-all duration-200 hover:border-aso-gold"
-          aria-label="Toggle theme"
-        >
-          🌙
-        </button>
-        <a
-          href="#contact"
-          class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow font-heading font-semibold text-sm text-aso-black no-underline gold-glow transition-all duration-300 hover:scale-105"
-        >
-          Start a Project
-        </a>
-      </div>
-
-      <!-- Hamburger -->
-      <button
-        id="hamburger-btn"
-        class="lg:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer"
-        aria-label="Open menu"
-        aria-expanded="false"
-      >
-        <span class="ham-1 block w-6 h-[1.5px] bg-aso-text rounded-full transition-all duration-300 origin-center"></span>
-        <span class="ham-2 block w-6 h-[1.5px] bg-aso-text rounded-full transition-all duration-300 origin-center"></span>
-        <span class="ham-3 block w-4 h-[1.5px] bg-aso-gold rounded-full transition-all duration-300 origin-center"></span>
-      </button>
-
-    </div>
+    <!-- Mobile Menu Trigger -->
+    <button 
+      id="mobile-menu-trigger" 
+      class="md:hidden relative z-[60] p-2 text-aso-text focus:outline-none"
+      aria-label="Toggle Menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
   </div>
-</nav>
 
-<!-- Mobile Overlay -->
-<div
-  id="mobile-overlay"
-  class="fixed inset-0 z-40 lg:hidden flex-col items-center justify-center bg-aso-black/95 backdrop-blur-xl"
-  style="display:none;"
-  aria-hidden="true"
->
-  <button id="mobile-close" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-aso-text-secondary hover:text-aso-gold transition-colors duration-200 bg-transparent border-none cursor-pointer text-2xl" aria-label="Close menu">
-    &#x2715;
-  </button>
-
-  <ul class="flex flex-col items-center gap-8 list-none m-0 p-0 mb-10" role="list">
-    {links.map((link) => (
-      <li>
-        <a href={link.href} class="mobile-nav-link font-heading font-bold text-5xl text-aso-text hover:text-aso-gold transition-colors duration-200 no-underline">
-          {link.label}
-        </a>
-      </li>
-    ))}
-  </ul>
-
-  <a href="#contact" class="mobile-nav-link flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow font-heading font-bold text-lg text-aso-black no-underline">
-    Start a Project
-  </a>
-
-  <p class="absolute bottom-8 font-label text-xs text-aso-text-muted tracking-[0.3em] uppercase">
-    ASO Creative Studio
-  </p>
-</div>
+  <!-- Mobile Menu Overlay -->
+  <div 
+    id="mobile-menu-overlay"
+    class="fixed inset-0 bg-aso-black flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 z-50"
+    data-state="closed"
+  >
+    <nav class="flex flex-col items-center gap-6">
+      <a href="#work" class="mobile-link font-heading text-3xl text-aso-text hover:text-aso-gold transition-colors">Work</a>
+      <a href="#services" class="mobile-link font-heading text-3xl text-aso-text hover:text-aso-gold transition-colors">Services</a>
+      <a href="#about" class="mobile-link font-heading text-3xl text-aso-text hover:text-aso-gold transition-colors">About</a>
+      <a href="#contact" class="mobile-link mt-4 px-8 py-3 rounded-full bg-aso-gold text-aso-black font-heading text-xl font-bold">
+        Hire Me
+      </a>
+    </nav>
+  </div>
+</header>
 
 <script is:inline>
-  var mainNav   = document.getElementById('main-nav');
-  var hamburger = document.getElementById('hamburger-btn');
-  var overlay   = document.getElementById('mobile-overlay');
-  var closeBtn  = document.getElementById('mobile-close');
-  var mlinks    = document.querySelectorAll('.mobile-nav-link');
-  var themeBtn  = document.getElementById('theme-toggle');
-  var htmlEl    = document.documentElement;
+  (function() {
+    const trigger = document.getElementById('mobile-menu-trigger');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const links = document.querySelectorAll('.mobile-link');
+    
+    if (!trigger || !overlay) return;
 
-  /* ── Scroll nav ── */
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 80) {
-      mainNav.classList.add('nav-scrolled');
-    } else {
-      mainNav.classList.remove('nav-scrolled');
+    function toggleMenu(forceClose = false) {
+      const isClosed = overlay.getAttribute('data-state') === 'closed';
+      
+      if (isClosed && !forceClose) {
+        overlay.setAttribute('data-state', 'open');
+        requestAnimationFrame(() => {
+          overlay.classList.remove('opacity-0', 'pointer-events-none');
+          overlay.classList.add('opacity-100', 'pointer-events-auto');
+        });
+        document.body.classList.add('overflow-hidden');
+      } else {
+        overlay.setAttribute('data-state', 'closed');
+        requestAnimationFrame(() => {
+          overlay.classList.remove('opacity-100', 'pointer-events-auto');
+          overlay.classList.add('opacity-0', 'pointer-events-none');
+        });
+        document.body.classList.remove('overflow-hidden');
+      }
     }
-  }, { passive: true });
 
-  /* ── Mobile menu ── */
-  function openMenu() {
-    overlay.style.display = 'flex';
-    overlay.setAttribute('aria-hidden', 'false');
-    hamburger.setAttribute('aria-expanded', 'true');
-    hamburger.classList.add('menu-is-open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    overlay.style.display = 'none';
-    overlay.setAttribute('aria-hidden', 'true');
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.classList.remove('menu-is-open');
-    document.body.style.overflow = '';
-  }
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
 
-  hamburger.addEventListener('click', openMenu);
-  closeBtn.addEventListener('click', closeMenu);
-  mlinks.forEach(function(l) { l.addEventListener('click', closeMenu); });
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
-
-  /* ── Theme toggle ── */
-  function applyTheme(t) {
-    if (t === 'light') {
-      htmlEl.setAttribute('data-theme', 'light');
-      themeBtn.textContent = '\u2600\uFE0F';
-    } else {
-      htmlEl.removeAttribute('data-theme');
-      themeBtn.textContent = '\uD83C\uDF19';
-    }
-  }
-
-  var saved = '';
-  try { saved = localStorage.getItem('aso-theme') || ''; } catch(e) {}
-  var preferred = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  applyTheme(preferred);
-
-  themeBtn.addEventListener('click', function() {
-    var current = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    try { localStorage.setItem('aso-theme', current); } catch(e) {}
-    applyTheme(current);
-  });
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMenu(true);
+      });
+    });
+  })();
 </script>

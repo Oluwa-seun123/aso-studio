@@ -1,107 +1,92 @@
 ---
 // src/components/Portfolio.astro
-
-// Define clean data structures with explicit typing implicit to the array map
-const categories = ["All", "AI Video", "Branding", "Web Apps"];
-
-const projects = [
-  {
-    title: "Cinematic Sci-Fi Short",
-    category: "AI Video",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
-    link: "#",
-    tags: ["Runway Gen-3", "Midjourney", "Premiere"]
-  },
-  {
-    title: "Neo-Finance Brand Identity",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80",
-    link: "#",
-    tags: ["Vector Design", "3D Assets", "Guidelines"]
-  },
-  {
-    title: "Automation SaaS Dashboard",
-    category: "Web Apps",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    link: "#",
-    tags: ["Astro", "Tailwind v4", "FastAPI"]
-  }
-];
 ---
-
-<section id="work" class="relative py-24 bg-aso-black overflow-hidden border-t border-aso-border/30">
-  <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-10">
+<section id="work" class="py-32 bg-aso-black relative border-t border-aso-border">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
     
-    <!-- Section Header -->
-    <div class="max-w-3xl mb-16">
-      <h2 class="animate-on-scroll text-4xl md:text-5xl font-heading font-bold text-aso-text mb-4">
-        Selected Works
-      </h2>
-      <p class="animate-on-scroll text-aso-text-secondary font-body text-lg max-w-xl">
-        Explore our latest experiments and high-end client productions engineered at the intersection of AI and design.
+    <div class="mb-20 animate-on-scroll">
+      <span class="font-label text-[11px] text-aso-gold uppercase tracking-[0.25em] block mb-3">Selected Catalog</span>
+      <h2 class="text-4xl sm:text-5xl font-heading font-bold text-aso-text tracking-tight">Featured Creations</h2>
+      <p class="text-aso-text-secondary mt-4 max-w-xl text-base sm:text-lg font-body">
+        A precise compilation of technical artwork, cinematic assets, and structural designs.
       </p>
     </div>
 
-    <!-- Category Filter Bar -->
-    <div class="animate-on-scroll flex flex-wrap gap-2.5 mb-12" id="portfolio-filters">
-      {categories.map((category) => (
-        <button
-          data-filter={category.toLowerCase().replace(/\s+/g, '-')}
-          class="portfolio-filter-btn px-5 py-2 rounded-full border border-aso-text/10 bg-aso-white/5 font-label text-xs uppercase tracking-wider text-aso-text-secondary transition-all hover:border-aso-gold hover:text-aso-text active"
-        >
-          {category}
-        </button>
-      ))}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
+        <div class="w-full h-72 bg-aso-elevated relative flex flex-col items-center justify-center overflow-hidden border-b border-aso-border group">
+          <div class="absolute inset-0 bg-gradient-to-t from-aso-black via-transparent to-transparent opacity-60 z-10"></div>
+          <svg class="w-12 h-12 text-aso-gold relative z-20 opacity-80 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <span class="font-label text-[10px] uppercase tracking-widest text-aso-text-muted absolute bottom-4 left-4 z-20">Video Workspace Placeholder</span>
+        </div>
+        <div class="p-8 flex-grow flex flex-col justify-between">
+          <div>
+            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Video Production</span>
+            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">AI Video Concepts</h3>
+            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">Generative video sequencing, stylistic composition control, and premium post-production storytelling frameworks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
+        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border">
+          <img src="/images/1000611783.jpg" alt="Premium Church Graphics" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
+            Asset Reference: 1000611783.jpg
+          </div>
+        </div>
+        <div class="p-8 flex-grow flex flex-col justify-between">
+          <div>
+            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Creative Design</span>
+            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">Premium Church Graphics</h3>
+            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">High-impact typographic hierarchies, asset balancing, and crisp flyer templates for media presentations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
+        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border">
+          <img src="/images/1000611848.jpg" alt="Visual Asset Design System" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
+            Asset Reference: 1000611848.jpg
+          </div>
+        </div>
+        <div class="p-8 flex-grow flex flex-col justify-between">
+          <div>
+            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Identity Systems</span>
+            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">Visual Asset Design</h3>
+            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">Structured asset packages, vector layout alignments, and presentation mockups tailored for scaling companies.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
+        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border">
+          <img src="/images/1000613254.jpg" alt="Web Applications Layout System" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
+            Asset Reference: 1000613254.jpg
+          </div>
+        </div>
+        <div class="p-8 flex-grow flex flex-col justify-between">
+          <div>
+            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Web Development</span>
+            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">Full Web Experiences</h3>
+            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">Architecture-first responsive code bases, lightweight portfolio structures, and polished front-end animations.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Master Projects Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
-      {projects.map((project) => (
-        <div 
-          data-category={project.category.toLowerCase().replace(/\s+/g, '-')}
-          class="portfolio-item animate-on-scroll group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-aso-border/40 bg-gradient-to-b from-aso-white/5 to-transparent p-4 transition-all duration-300 hover:border-aso-gold/30 hover:shadow-[0_12px_40px_rgba(201,162,39,0.05)]"
-        >
-          <div>
-            <div class="relative aspect-video w-full overflow-hidden rounded-xl mb-5">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-aso-black/80 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-4">
-                <span class="font-label text-[10px] uppercase tracking-widest text-aso-gold bg-aso-black/60 px-2.5 py-1 rounded-md backdrop-blur-sm">
-                  {project.category}
-                </span>
-              </div>
-            </div>
-
-            <h3 class="text-xl font-heading font-semibold text-aso-text mb-2 transition-colors group-hover:text-aso-gold">
-              {project.title}
-            </h3>
-
-            <!-- Tags Sub-Loop -->
-            <div class="flex flex-wrap gap-1.5 mb-6">
-              {project.tags.map((tag) => (
-                <span class="font-label text-[10px] text-aso-text-muted border border-aso-text/10 px-2 py-0.5 rounded">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <a 
-            href={project.link}
-            class="inline-flex items-center gap-2 font-heading text-sm font-medium text-aso-text no-underline transition-colors group-hover:text-aso-gold-glow mt-2"
-          >
-            Explore Case Study
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"/>
-              <polyline points="7 7 17 7 17 17"/>
-            </svg>
-          </a>
-        </div>
-      ))}
+    <div class="mt-24 text-center animate-on-scroll">
+      <p class="text-aso-text-muted mb-6 font-body text-sm tracking-wide">Looking for my extended asset libraries?</p>
+      <a href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-aso-gold rounded-full text-aso-gold font-heading font-bold text-sm transition-all duration-300 hover:bg-[rgba(214,175,55,0.08)] hover:scale-105">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M7.71 3.5L1.15 15l3.43 6 6.55-11.5M9.73 15L6.3 21h13.12l3.43-6M10.88 1.5h-6.86L15.42 21h6.86"/></svg>
+        Explore Full Portfolio Drive
+      </a>
     </div>
 
   </div>

@@ -63,23 +63,23 @@ const {
       document.addEventListener('DOMContentLoaded', () => {
         
         /* 1. Bulletproof Mobile Menu Toggle Logic */
-        const originalMenuToggle = document.getElementById('menu-toggle');
+        const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        if (originalMenuToggle && mobileMenu) {
-          // Clone node to entirely obliterate any prior hidden event bindings that cause Astro double-fire bugs
-          const menuToggle = originalMenuToggle.cloneNode(true);
-          originalMenuToggle.parentNode.replaceChild(menuToggle, originalMenuToggle);
-          
+        if (menuToggle && mobileMenu) {
           menuToggle.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
+            
             const isOpen = menuToggle.classList.contains('menu-is-open');
             
             if (!isOpen) {
+              menuToggle.setAttribute('aria-expanded', 'true');
               menuToggle.classList.add('menu-is-open');
               mobileMenu.classList.remove('hidden');
               document.body.classList.add('overflow-hidden');
             } else {
+              menuToggle.setAttribute('aria-expanded', 'false');
               menuToggle.classList.remove('menu-is-open');
               mobileMenu.classList.add('hidden');
               document.body.classList.remove('overflow-hidden');
@@ -90,14 +90,13 @@ const {
         /* 2. High-Performance IntersectionObserver (Fade-Ups) */
         const revealOptions = {
           root: null,
-          rootMargin: "0px 0px -10% 0px", // Trigger slightly before element is fully in view
-          threshold: 0
+          rootMargin: "0px 0px -10% 0px",
+          threshold: 0.05
         };
 
         const scrollObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              // Defer class addition to next frame rendering cycle to prevent layout trashing
               requestAnimationFrame(() => {
                 entry.target.classList.add('is-revealed');
               });
@@ -106,11 +105,24 @@ const {
           });
         }, revealOptions);
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        animatedElements.forEach(el => {
           scrollObserver.observe(el);
         });
 
-        /* 3. Number Counters Animation */
+        /* Failsafe: Direct scroll override loop for immediately visible elements */
+        requestAnimationFrame(() => {
+          const windowHeight = window.innerHeight;
+          animatedElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < windowHeight && !el.classList.contains('is-revealed')) {
+              el.classList.add('is-revealed');
+              scrollObserver.unobserve(el);
+            }
+          });
+        });
+
+        /* 3. High-Precision Number Counter Engine */
         const counterObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -118,24 +130,34 @@ const {
               if (!targetStr) return;
               
               const target = +targetStr;
-              const duration = 2000; 
-              const increment = target / (duration / 16);
-              
-              let current = 0;
-              const updateCounter = () => {
-                current += increment;
-                if (current < target) {
-                  entry.target.innerHTML = Math.ceil(current).toString();
+              const duration = 2000;
+              let startTime = null;
+
+              const updateCounter = (currentTime) => {
+                if (!startTime) startTime = currentTime;
+                const elapsed = currentTime - startTime;
+                
+                // Clamp progress between 0 and 1
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Hardware-independent calculation with ease-out
+                const easeOutQuad = progress * (2 - progress);
+                const currentVal = target * easeOutQuad;
+
+                entry.target.innerHTML = Math.ceil(currentVal).toString();
+
+                if (progress < 1) {
                   requestAnimationFrame(updateCounter);
                 } else {
                   entry.target.innerHTML = target.toString();
                 }
               };
-              updateCounter();
+              
+              requestAnimationFrame(updateCounter);
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.counter').forEach(counter => {
           counterObserver.observe(counter);

@@ -1,111 +1,113 @@
-@import "tailwindcss";
+---
+import '../styles/global.css';
 
-@theme {
-  --color-aso-black: #050505;
-  --color-aso-surface: #0f0f0f;
-  --color-aso-elevated: #1a1a1a;
-  --color-aso-gold: #c9a227;
-  --color-aso-gold-glow: #f59e0b;
-  --color-aso-border: #27272a;
-  --color-aso-text: #fafafa;
-  --color-aso-text-secondary: #a1a1aa;
-  --color-aso-text-muted: #52525b;
-  --color-aso-green: #22c55e;
-  
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-label: 'JetBrains Mono', monospace;
-  
-  --text-display-xl: clamp(3rem, 8vw, 7rem);
-  --text-display-lg: clamp(2rem, 4vw, 3.25rem);
-  --text-display-md: clamp(2rem, 3.5vw, 3rem);
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
 }
 
-/* ── Base Styles (Vanilla CSS) ── */
-*, *::before, *::after { 
-  box-sizing: border-box; 
-}
+const {
+  title = "ASO Creative Studio — AI-Powered Creative Agency",
+  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Nigeria-based. Working worldwide.",
+  image = "/og-image.jpg",
+} = Astro.props;
+---
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#c9a227" />
+    <meta name="robots" content="index, follow" />
 
-body {
-  background-color: var(--color-aso-black);
-  color: var(--color-aso-text);
-  font-family: var(--font-body);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={image} />
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.1;
-}
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
 
-::selection {
-  background-color: var(--color-aso-gold);
-  color: var(--color-aso-black);
-}
+    <title>{title}</title>
 
-::-webkit-scrollbar { 
-  width: 5px; 
-}
-::-webkit-scrollbar-track { 
-  background: var(--color-aso-black); 
-}
-::-webkit-scrollbar-thumb { 
-  background: var(--color-aso-border); 
-  border-radius: 3px; 
-}
-::-webkit-scrollbar-thumb:hover { 
-  background: var(--color-aso-gold); 
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-[id] { 
-  scroll-margin-top: 80px; 
-}
+  <body class="bg-aso-black text-aso-text">
+    <slot />
 
-[data-theme="light"] {
-  --color-aso-black: #ffffff;
-  --color-aso-surface: #f5f5f5;
-  --color-aso-elevated: #ebebeb;
-  --color-aso-border: #e4e4e7;
-  --color-aso-text: #09090b;
-  --color-aso-text-secondary: #52525b;
-  --color-aso-text-muted: #a1a1aa;
-}
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        /* 1. Mobile Menu Toggle Fix (Open on 1st click, Close on 2nd click) */
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (menuToggle && mobileMenu) {
+          menuToggle.addEventListener('click', () => {
+            // Toggles visibility of the mobile menu panel
+            mobileMenu.classList.toggle('hidden');
+            // Toggles active state class for the hamburger animation if you have one
+            menuToggle.classList.toggle('menu-is-open');
+          });
+        }
 
-/* ── Utilities & Custom Classes ── */
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-aso-gold) 0%, var(--color-aso-gold-glow) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+        /* 2. Number Counters Animation */
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const targetStr = entry.target.getAttribute('data-target');
+              if (!targetStr) return;
+              
+              const target = +targetStr;
+              const duration = 2000; // 2 seconds
+              const increment = target / (duration / 16); // 60fps
+              
+              let current = 0;
+              const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                  entry.target.innerHTML = Math.ceil(current).toString();
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  entry.target.innerHTML = target.toString();
+                }
+              };
+              updateCounter();
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
 
-.shimmer-gold {
-  background: linear-gradient(135deg, var(--color-aso-gold) 0%, var(--color-aso-gold-glow) 50%, var(--color-aso-gold) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
-}
+        document.querySelectorAll('.counter').forEach(counter => {
+          counterObserver.observe(counter);
+        });
 
-.gold-glow {
-  box-shadow: 0 0 24px rgba(201,162,39,0.4), 0 0 48px rgba(201,162,39,0.15);
-}
-.gold-glow:hover {
-  box-shadow: 0 0 32px rgba(245,158,11,0.6), 0 0 64px rgba(245,158,11,0.2);
-}
+        /* 3. Scroll Entry Animations */
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('fade-up-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
 
-.text-balance { 
-  text-wrap: balance; 
-}
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+          scrollObserver.observe(el);
+        });
+      });
+    </script>
+  </body>
+</html>
 
 .hero-grid {
   background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);

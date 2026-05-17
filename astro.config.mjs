@@ -1,24 +1,9 @@
-import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   output: "static",
-
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-  ],
-
-  image: {
-    service: {
-      entrypoint: "astro/assets/services/passthrough",
-    },
-  },
-
   vite: {
-    build: {
-      cssCodeSplit: true,
-    },
-  },
+    plugins: [tailwindcss()]
+  }
 });

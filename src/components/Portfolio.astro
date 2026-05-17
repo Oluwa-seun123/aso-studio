@@ -14,7 +14,7 @@ const portfolioItems = [
   {
     id: "graphics-design",
     category: "Graphics Design",
-    title: "Premium Church Graphics & Visual Identity Systems",
+    title: "Premium Visual Identity & Graphic Systems",
     image: "/images/1000611783.jpg",
     link: driveLinkPlaceholder,
   },
@@ -166,12 +166,6 @@ const categories = ["All", "AI Video", "Graphics Design", "Web Dev", "Automation
 <style>
   @import "tailwindcss";
 
-  /* 
-    Tailwind v4 strict compatibility rules:
-    NO @layer base, @layer components, or @layer utilities.
-    Pure vanilla CSS mapped natively.
-  */
-
   .card-hover {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
   }
@@ -179,19 +173,6 @@ const categories = ["All", "AI Video", "Graphics Design", "Web Dev", "Automation
   .card-hover:hover {
     transform: translateY(-8px);
     box-shadow: 0 25px 50px -12px rgba(201, 162, 39, 0.15);
-  }
-
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  @keyframes fadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   /* Utility for JS filtering to prevent display layout issues */

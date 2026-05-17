@@ -1,1 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+:root {
+  --aso-black: #050505;
+  --aso-surface: #0f0f0f;
+  --aso-elevated: #1a1a1a;
+  --aso-gold: #c9a227;
+  --aso-gold-glow: #f59e0b;
+  --aso-border: #27272a;
+  --aso-text: #fafafa;
+  --aso-text-secondary: #a1a1aa;
+  --aso-text-muted: #52525b;
+}
+
+[data-theme="light"] {
+  --aso-black: #ffffff;
+  --aso-surface: #f8f8f8;
+  --aso-elevated: #f0f0f0;
+  --aso-gold: #b48a1e;
+  --aso-gold-glow: #d97706;
+  --aso-border: #e4e4e7;
+  --aso-text: #18181b;
+  --aso-text-secondary: #52525b;
+  --aso-text-muted: #a1a1aa;
+}
+
+@theme {
+  --color-aso-black: var(--aso-black);
+  --color-aso-surface: var(--aso-surface);
+  --color-aso-elevated: var(--aso-elevated);
+  --color-aso-gold: var(--aso-gold);
+  --color-aso-gold-glow: var(--aso-gold-glow);
+  --color-aso-border: var(--aso-border);
+  --color-aso-text: var(--aso-text);
+  --color-aso-text-secondary: var(--aso-text-secondary);
+  --color-aso-text-muted: var(--aso-text-muted);
+  --font-family-heading: 'Space Grotesk', sans-serif;
+  --font-family-body: 'Inter', sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--aso-black);
+    color: var(--aso-text);
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  ::selection {
+    background-color: var(--aso-gold);
+    color: var(--aso-black);
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(135deg, var(--aso-gold) 0%, var(--aso-gold-glow) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(201, 162, 39, 0.3);
+  }
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}

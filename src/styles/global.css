@@ -1,252 +1,85 @@
----
-import '../styles/global.css';
+@import "tailwindcss";
 
-export interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
+@theme {
+  --color-aso-black: #050505;
+  --color-aso-surface: #0f0f0f;
+  --color-aso-elevated: #1a1a1a;
+  --color-aso-gold: #c9a227;
+  --color-aso-gold-glow: #f59e0b;
+  --color-aso-green: #22c55e;
+  --color-aso-text: #fafafa;
+  --color-aso-text-secondary: #a3a3a3;
+  --color-aso-text-muted: #737373;
+  --color-aso-border: #262626;
+
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-label: 'JetBrains Mono', monospace;
 }
 
-const {
-  title = "ASO Creative Studio — AI-Powered Creative Agency",
-  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Nigeria-based. Working worldwide.",
-  image = "/og-image.jpg",
-} = Astro.props;
----
+/* Base resets to guarantee dark mode stays locked */
+html, body {
+  background-color: #050505 !important;
+  color: #fafafa !important;
+  margin: 0;
+  padding: 0;
+}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#c9a227" />
-    <meta name="robots" content="index, follow" />
-
-    <meta property="og:type"        content="website" />
-    <meta property="og:title"       content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image"       content={image} />
-
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content={title} />
-    <meta name="twitter:description" content={description} />
-
-    <title>{title}</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-
-  <body class="bg-aso-black text-aso-text">
-    <slot />
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        /* 1. Mobile Menu Toggle Fix (Open on 1st click, Close on 2nd click) */
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        if (menuToggle && mobileMenu) {
-          menuToggle.addEventListener('click', () => {
-            // Toggles visibility of the mobile menu panel
-            mobileMenu.classList.toggle('hidden');
-            // Toggles active state class for the hamburger animation if you have one
-            menuToggle.classList.toggle('menu-is-open');
-          });
-        }
-
-        /* 2. Number Counters Animation */
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const targetStr = entry.target.getAttribute('data-target');
-              if (!targetStr) return;
-              
-              const target = +targetStr;
-              const duration = 2000; // 2 seconds
-              const increment = target / (duration / 16); // 60fps
-              
-              let current = 0;
-              const updateCounter = () => {
-                current += increment;
-                if (current < target) {
-                  entry.target.innerHTML = Math.ceil(current).toString();
-                  requestAnimationFrame(updateCounter);
-                } else {
-                  entry.target.innerHTML = target.toString();
-                }
-              };
-              updateCounter();
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.counter').forEach(counter => {
-          counterObserver.observe(counter);
-        });
-
-        /* 3. Scroll Entry Animations */
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('fade-up-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-          scrollObserver.observe(el);
-        });
-      });
-    </script>
-  </body>
-</html>
-
+/* Hero Background Grid Lines Pattern */
 .hero-grid {
-  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
-.nav-scrolled {
-  background-color: rgba(5,5,5,0.88) !important;
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--color-aso-border);
-  box-shadow: 0 4px 32px rgba(0,0,0,0.5);
-}
-
-.nav-desktop-link {
-  position: relative;
-  padding-bottom: 4px;
-}
-.nav-desktop-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 0; height: 1px;
-  background: var(--color-aso-gold);
-  transition: width 0.3s ease;
-}
-.nav-desktop-link:hover::after { 
-  width: 100%; 
-}
-
-.menu-is-open .ham-1 { transform: rotate(45deg) translate(5px, 6px); }
-.menu-is-open .ham-2 { opacity: 0; transform: scaleX(0); }
-.menu-is-open .ham-3 { transform: rotate(-45deg) translate(5px, -6px); }
-
-.card-hover {
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.card-hover:hover {
-  transform: translateY(-8px);
-  border-color: var(--color-aso-gold) !important;
-  box-shadow: 0 0 32px rgba(201,162,39,0.15), 0 20px 60px rgba(0,0,0,0.4);
-}
-
-.filter-hidden { 
-  display: none !important; 
-}
-
-.social-chip {
-  width: 40px; 
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid var(--color-aso-border);
-  background: transparent;
-  color: var(--color-aso-text-secondary);
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-.social-chip:hover {
-  border-color: rgba(201,162,39,0.4);
-  color: var(--color-aso-gold);
-  background: rgba(201,162,39,0.06);
-}
-
-.aso-toast {
-  padding: 14px 18px;
-  border-radius: 12px;
-  font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: 14px;
-  display: flex; 
-  align-items: center; 
-  gap: 10px;
-  min-width: 280px; 
-  max-width: 360px;
-  pointer-events: auto;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  animation: toastIn 0.3s ease;
-}
-
-.aso-toast-success {
-  background: rgba(34,197,94,0.1);
-  border: 1px solid rgba(34,197,94,0.3);
-  color: #86efac;
-}
-
-.aso-toast-error {
-  background: rgba(239,68,68,0.1);
-  border: 1px solid rgba(239,68,68,0.3);
-  color: #fca5a5;
-}
-
-.prose-aso p {
-  color: var(--color-aso-text-secondary);
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
-
+/* Pure CSS Safe Animations (Prevents text from staying invisible) */
 .fade-up {
-  opacity: 0;
-  transform: translateY(24px);
-  animation: fadeUp 0.7s ease forwards;
+  animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.fade-up-2 { animation-delay: 0.15s; }
-.fade-up-3 { animation-delay: 0.3s; }
-.fade-up-4 { animation-delay: 0.45s; }
-.fade-up-5 { animation-delay: 0.6s; }
+.fade-up-2 { animation-delay: 100ms; }
+.fade-up-3 { animation-delay: 200ms; }
+.fade-up-4 { animation-delay: 300ms; }
+.fade-up-5 { animation-delay: 400ms; }
 
-.pulse-green { 
-  animation: pulseGreen 2s ease-in-out infinite; 
-}
-.chevron-bounce { 
-  animation: chevronBounce 2s ease-in-out infinite; 
-}
-
-/* ── Keyframes ── */
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes pulseGreen {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-  50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+/* Shimmer Premium Effect for Gold Typography */
+.shimmer-gold {
+  background: linear-gradient(to right, #c9a227 20%, #f59e0b 40%, #fff 60%, #c9a227 80%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 5s linear infinite;
 }
 
-@keyframes chevronBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50% { transform: translateY(8px); opacity: 1; }
+@keyframes shine {
+  to { background-position: 200% center; }
 }
 
-@keyframes shimmer {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+/* Glow Elements */
+.gold-glow {
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.1);
+}
+.gold-glow:hover {
+  box-shadow: 0 0 30px rgba(201, 162, 39, 0.25);
 }
 
-@keyframes toastIn {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+/* Pulse Component for Availability Badge */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50% { transform: scale(1.2); opacity: 0.4; }
+}
+.pulse-green {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

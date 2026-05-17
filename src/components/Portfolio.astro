@@ -1,5 +1,6 @@
 ---
 // src/components/Portfolio.astro
+// Frontmatter clean and empty to prevent scope leakage variables
 ---
 <section id="work" class="py-32 bg-aso-black relative border-t border-aso-border">
   <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
@@ -83,7 +84,7 @@
 
     <div class="mt-24 text-center animate-on-scroll">
       <p class="text-aso-text-muted mb-6 font-body text-sm tracking-wide">Looking for my extended asset libraries?</p>
-      <a href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-aso-gold rounded-full text-aso-gold font-heading font-bold text-sm transition-all duration-300 hover:bg-[rgba(214,175,55,0.08)] hover:scale-105">
+      <a href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-aso-gold rounded-full text-aso-gold font-heading font-bold text-sm transition-all duration-300 hover:bg-[rgba(212,175,55,0.08)] hover:scale-105">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M7.71 3.5L1.15 15l3.43 6 6.55-11.5M9.73 15L6.3 21h13.12l3.43-6M10.88 1.5h-6.86L15.42 21h6.86"/></svg>
         Explore Full Portfolio Drive
       </a>
@@ -91,21 +92,6 @@
 
   </div>
 </section>
-
-<script is:inline>
-  (function() {
-    if (window._portfolioEngineInitialized) return;
-    window._portfolioEngineInitialized = true;
-
-    const filterButtons = document.querySelectorAll('.portfolio-filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    if (filterButtons.length === 0 || portfolioItems.length === 0) return;
-
-    // Set 'All' filter as structurally active on mount
-    filterButtons[0].classList.add('border-aso-gold', 'text-aso-text');
-    filterButtons[0].classList.remove('text-aso-text-secondary');
-
     filterButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();

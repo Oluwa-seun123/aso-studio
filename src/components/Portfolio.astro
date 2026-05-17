@@ -1,6 +1,5 @@
 ---
 // src/components/Portfolio.astro
-// Frontmatter clean and empty to prevent scope leakage variables
 ---
 <section id="work" class="py-32 bg-aso-black relative border-t border-aso-border">
   <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
@@ -33,9 +32,9 @@
       </div>
 
       <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
-        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border">
-          <img src="/images/1000611783.jpg" alt="Premium Church Graphics" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
+        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border flex items-center justify-center">
+          <img src="/images/1000611783.jpg" alt="Premium Church Graphics" class="portfolio-img w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          <div class="fallback-msg hidden absolute inset-0 bg-aso-elevated flex flex-col items-center justify-center text-aso-text-muted font-label text-xs">
             Asset Reference: 1000611783.jpg
           </div>
         </div>
@@ -49,9 +48,9 @@
       </div>
 
       <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
-        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border">
-          <img src="/images/1000611848.jpg" alt="Visual Asset Design System" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
+        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border flex items-center justify-center">
+          <img src="/images/1000611848.jpg" alt="Visual Asset Design System" class="portfolio-img w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          <div class="fallback-msg hidden absolute inset-0 bg-aso-elevated flex flex-col items-center justify-center text-aso-text-muted font-label text-xs">
             Asset Reference: 1000611848.jpg
           </div>
         </div>
@@ -65,9 +64,9 @@
       </div>
 
       <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
-        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border">
-          <img src="/images/1000613254.jpg" alt="Web Applications Layout System" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
+        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border flex items-center justify-center">
+          <img src="/images/1000613254.jpg" alt="Web Applications Layout System" class="portfolio-img w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          <div class="fallback-msg hidden absolute inset-0 bg-aso-elevated flex flex-col items-center justify-center text-aso-text-muted font-label text-xs">
             Asset Reference: 1000613254.jpg
           </div>
         </div>
@@ -92,102 +91,17 @@
 
   </div>
 </section>
-    filterButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const targetFilter = button.getAttribute('data-filter');
 
-        // Update active class typography states
-        filterButtons.forEach(btn => {
-          btn.classList.remove('border-aso-gold', 'text-aso-text');
-          btn.classList.add('text-aso-text-secondary');
-        });
-        button.classList.add('border-aso-gold', 'text-aso-text');
-        button.classList.remove('text-aso-text-secondary');
-
-        // Filter calculation grid loop
-        portfolioItems.forEach(item => {
-          const itemCategory = item.getAttribute('data-category');
-          
-          if (targetFilter === 'all' || itemCategory === targetFilter) {
-            window.requestAnimationFrame(() => {
-              item.style.display = 'flex';
-              setTimeout(() => { item.style.opacity = '1'; }, 10);
-            });
-          } else {
-            window.requestAnimationFrame(() => {
-              item.style.opacity = '0';
-              item.style.display = 'none';
-            });
-          }
-        });
-      });
-    });
-  })();
-</script>
-</section>
-
-<style>
-  @import "tailwindcss";
-
-  .card-hover {
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-  }
-  
-  .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px -12px rgba(201, 162, 39, 0.15);
-  }
-
-  /* Utility for JS filtering to prevent display layout issues */
-  .filter-hidden {
-    display: none !important;
-  }
-</style>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const portfolioCards = document.querySelectorAll('.portfolio-card');
-    const emptyState = document.getElementById('portfolio-empty');
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filterValue = button.getAttribute('data-filter');
-
-        // 1. Manage Active Button States (Vanilla class toggling)
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-[#c9a227]', 'text-[#050505]', 'border-[#c9a227]');
-          btn.classList.add('bg-transparent', 'text-gray-300', 'border-gray-800');
-        });
-        
-        button.classList.remove('bg-transparent', 'text-gray-300', 'border-gray-800');
-        button.classList.add('bg-[#c9a227]', 'text-[#050505]', 'border-[#c9a227]');
-
-        // 2. Filter Grid Items
-        let visibleCount = 0;
-        
-        portfolioCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          
-          if (filterValue === 'All' || filterValue === category) {
-            card.classList.remove('filter-hidden');
-            // Trigger a quick reflow for animation if needed
-            void card.offsetWidth; 
-            visibleCount++;
-          } else {
-            card.classList.add('filter-hidden');
-          }
-        });
-
-        // 3. Handle Empty State Container
-        if (visibleCount === 0) {
-          emptyState.classList.remove('filter-hidden');
-        } else {
-          emptyState.classList.add('filter-hidden');
-        }
-      });
+<script>
+  // Safe, decoupled fallback handler targeting error objects out of compilation paths
+  document.querySelectorAll('.portfolio-img').forEach((img) => {
+    img.addEventListener('error', () => {
+      (img as HTMLElement).style.display = 'none';
+      const fallback = img.nextElementSibling;
+      if (fallback) {
+        fallback.classList.remove('hidden');
+        fallback.classList.add('flex');
+      }
     });
   });
 </script>

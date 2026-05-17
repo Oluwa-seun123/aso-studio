@@ -1,5 +1,4 @@
 ---
-import "../styles/global.css";
 export interface Props {
   title?: string;
   description?: string;
@@ -8,36 +7,30 @@ export interface Props {
 
 const {
   title = "ASO Creative Studio — AI-Powered Creative Agency",
-  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Based in Nigeria. Working worldwide.",
+  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Nigeria-based. Working worldwide.",
   image = "/og-image.jpg",
 } = Astro.props;
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://asocreativestudio.com");
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
-    <!-- Core Meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#c9a227" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image"       content={image} />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
 
     <title>{title}</title>
 
@@ -49,64 +42,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://asocreat
       rel="stylesheet"
     />
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest" defer></script>
-
-    <!-- GSAP + ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-
-    
+    <!-- Global styles -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
 
   <body>
     <slot />
 
-    <!-- ── Tawk.to Live Chat ── -->
-    <!-- REPLACE WITH YOUR TAWK_ID below -->
     <!--
+      Tawk.to Live Chat
+      REPLACE YOUR_TAWK_ID below then uncomment
+
     <script type="text/javascript">
-      var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
       (function(){
-        var s1 = document.createElement("script"),
-            s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/YOUR_TAWK_ID/default';
-        s1.charset = 'UTF-8';
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/YOUR_TAWK_ID/default';
+        s1.charset='UTF-8';
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);
       })();
     </script>
     -->
-
-    <!-- ── GSAP Init ── -->
-    <script>
-      window.addEventListener("load", () => {
-        if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        /* ── 1. Nav background on scroll ── */
-        const nav = document.querySelector("#main-nav");
-        if (nav) {
-          ScrollTrigger.create({
-            start: "top -80px",
-            onEnter: () => nav.classList.add("nav-scrolled"),
-            onLeaveBack: () => nav.classList.remove("nav-scrolled"),
-          });
-        }
-
-        /* ── 2. Section reveals (.gsap-hidden) ── */
-        gsap.utils.toArray(".gsap-hidden").forEach((el) => {
-          gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 88%",
-              toggleActions: "play none none none",
+  </body>
+</html>              toggleActions: "play none none none",
             },
           });
         });

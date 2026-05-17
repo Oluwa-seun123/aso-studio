@@ -141,10 +141,11 @@ const steps = [
 
     const computeLineProgress = () => {
       const rect = processSection.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
+      const viewportCenter = window.innerHeight / 2;
       
-      const startTrigger = viewportHeight / 2;
-      const distanceScrolled = startTrigger - rect.top;
+      // Calculate start relative to when the top of the container hits the screen center
+      const startTrigger = rect.top - viewportCenter;
+      const distanceScrolled = -startTrigger;
       const totalScrollable = rect.height;
       
       let progressRaw = distanceScrolled / totalScrollable;

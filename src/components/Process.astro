@@ -55,29 +55,29 @@ const steps = [
         <div id="desktop-process-line" class="absolute -top-[1px] left-0 h-[2px] w-full bg-aso-gold origin-left scale-x-0 will-change-transform z-10"></div>
       </div>
 
-      {steps.map((step, i) => (
+      {steps.map(({ number, title, subtitle, desc, bullets, icon }, i) => (
         <div class="relative z-10 flex flex-col items-center text-center group animate-on-scroll" style={`transition-delay: ${i * 150}ms;`}>
 
           <!-- Icon circle -->
           <div class="relative mb-8">
             <!-- Number badge -->
             <span class="absolute -top-3 -right-1 font-label text-[10px] tracking-[0.15em] text-aso-gold px-2 py-0.5 rounded-full bg-aso-gold/10 border border-aso-gold/25 z-10">
-              {step.number}
+              {number}
             </span>
             <div class="w-28 h-28 rounded-full bg-aso-elevated border-2 border-aso-border flex items-center justify-center text-aso-gold transition-all duration-300 group-hover:border-aso-gold group-hover:shadow-[0_0_24px_rgba(201,162,39,0.25)] relative overflow-hidden">
-              <div class="relative z-10"><Fragment set:html={step.icon} /></div>
+              <div class="relative z-10"><Fragment set:html={icon} /></div>
             </div>
           </div>
 
-          <h3 class="font-heading font-bold text-xl text-aso-text mb-1">{step.title}</h3>
-          <p class="font-label text-[11px] tracking-[0.2em] uppercase text-aso-gold mb-4">{step.subtitle}</p>
-          <p class="font-body text-sm text-aso-text-secondary leading-relaxed mb-6 max-w-[260px]">{step.desc}</p>
+          <h3 class="font-heading font-bold text-xl text-aso-text mb-1">{title}</h3>
+          <p class="font-label text-[11px] tracking-[0.2em] uppercase text-aso-gold mb-4">{subtitle}</p>
+          <p class="font-body text-sm text-aso-text-secondary leading-relaxed mb-6 max-w-[260px]">{desc}</p>
 
           <ul class="flex flex-col gap-2 items-center" role="list">
-            {step.bullets.map((b) => (
+            {bullets.map((bullet) => (
               <li class="flex items-center gap-2 font-body text-xs text-aso-text-muted">
                 <span class="w-1 h-1 rounded-full bg-aso-gold flex-shrink-0"></span>
-                {b}
+                {bullet}
               </li>
             ))}
           </ul>
@@ -87,7 +87,7 @@ const steps = [
 
     <!-- Mobile vertical stack -->
     <div class="lg:hidden flex flex-col gap-0">
-      {steps.map((step, i) => (
+      {steps.map(({ number, title, subtitle, desc, bullets, icon }, i) => (
         <div class="relative flex gap-6 pb-12 last:pb-0 animate-on-scroll">
 
           <!-- Vertical connector with progress fill -->
@@ -100,23 +100,23 @@ const steps = [
           <!-- Icon -->
           <div class="flex-shrink-0 relative z-20">
             <span class="absolute -top-2 -right-1 font-label text-[9px] text-aso-gold px-1.5 py-0.5 rounded-full bg-aso-gold/10 border border-aso-gold/25">
-              {step.number}
+              {number}
             </span>
             <div class="w-14 h-14 rounded-full bg-aso-elevated border-2 border-aso-border flex items-center justify-center text-aso-gold">
-              <Fragment set:html={step.icon} />
+              <Fragment set:html={icon} />
             </div>
           </div>
 
           <!-- Content -->
           <div class="pt-1">
-            <h3 class="font-heading font-bold text-lg text-aso-text mb-0.5">{step.title}</h3>
-            <p class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-gold mb-3">{step.subtitle}</p>
-            <p class="font-body text-sm text-aso-text-secondary leading-relaxed mb-4">{step.desc}</p>
+            <h3 class="font-heading font-bold text-lg text-aso-text mb-0.5">{title}</h3>
+            <p class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-gold mb-3">{subtitle}</p>
+            <p class="font-body text-sm text-aso-text-secondary leading-relaxed mb-4">{desc}</p>
             <ul class="flex flex-col gap-1.5" role="list">
-              {step.bullets.map((b) => (
+              {bullets.map((bullet) => (
                 <li class="flex items-center gap-2 font-body text-xs text-aso-text-muted">
                   <span class="w-1 h-1 rounded-full bg-aso-gold flex-shrink-0"></span>
-                  {b}
+                  {bullet}
                 </li>
               ))}
             </ul>
@@ -143,8 +143,6 @@ const steps = [
       const rect = processSection.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       
-      // Calculate how far we've scrolled through the section
-      // 0% when the top of the section reaches the middle of the screen
       const startTrigger = viewportHeight / 2;
       const distanceScrolled = startTrigger - rect.top;
       const totalScrollable = rect.height;
@@ -152,12 +150,10 @@ const steps = [
       let progressRaw = distanceScrolled / totalScrollable;
       const progress = Math.max(0, Math.min(1, progressRaw));
 
-      // Handle Desktop (One unified track)
       if (desktopLine && window.innerWidth >= 1024) {
         desktopLine.style.transform = `scaleX(${progress})`;
       }
 
-      // Handle Mobile (Sequential filling of fragmented vertical tracks)
       if (mobileLines.length > 0 && window.innerWidth < 1024) {
         const segmentCost = 1 / mobileLines.length;
         
@@ -184,25 +180,6 @@ const steps = [
       }
     }, { passive: true });
 
-    // Initial check on load
     computeLineProgress();
   });
 </script>
-            <p class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-gold mb-3">{step.subtitle}</p>
-            <p class="font-body text-sm text-aso-text-secondary leading-relaxed mb-4">{step.desc}</p>
-            <ul class="flex flex-col gap-1.5" role="list">
-              {step.bullets.map((b) => (
-                <li class="flex items-center gap-2 font-body text-xs text-aso-text-muted">
-                  <span class="w-1 h-1 rounded-full bg-aso-gold flex-shrink-0"></span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-      ))}
-    </div>
-
-  </div>
-</section>

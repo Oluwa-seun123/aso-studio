@@ -2,77 +2,87 @@
 // Hero.astro
 ---
 
-<section id="hero" class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-aso-black pt-40 pb-20">
-  <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
 
-  <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-    style="background: radial-gradient(circle, rgba(214,175,55,0.07) 0%, transparent 70%); filter: blur(50px);">
-  </div>
-  <div class="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-    style="background: radial-gradient(circle, rgba(170,124,17,0.05) 0%, transparent 70%); filter: blur(70px);">
-  </div>
+  <!-- Background layers -->
+  <div class="absolute inset-0 bg-aso-black z-0"></div>
+  <div class="absolute inset-0 dot-grid z-0 opacity-100"></div>
+  <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-aso-gold/10 rounded-full blur-[120px] animate-pulse z-0"></div>
+  <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-aso-gold-glow/5 rounded-full blur-[100px] animate-pulse z-0" style="animation-delay:1s;"></div>
 
-  <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-10 w-full">
-    <div class="max-w-4xl">
+  <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-8 text-center">
 
-      <div class="animate-on-scroll inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[rgba(214,175,55,0.2)] bg-[rgba(214,175,55,0.04)] mb-8">
-        <span class="relative flex h-2 w-2">
-          <span class="pulse-green absolute inline-flex h-full w-full rounded-full bg-aso-green opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-aso-green"></span>
-        </span>
-        <span class="font-label text-[10px] tracking-[0.2em] uppercase text-aso-gold">
-          Available for freelance work
-        </span>
-      </div>
-
-      <h1 class="font-heading font-bold leading-[1.1] mb-6 tracking-tight">
-        <span class="animate-on-scroll block text-aso-text text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
-          AI-Powered
-        </span>
-        <span class="animate-on-scroll delay-100 block shimmer-gold text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
-          Creative Studio
-        </span>
-      </h1>
-
-      <p class="animate-on-scroll delay-200 font-body text-aso-text-secondary leading-relaxed mb-10 max-w-2xl text-base sm:text-lg md:text-xl">
-        From cinematic AI videos and premium brand graphics to full web experiences
-        and intelligent automation — everything your brand needs to stand out in the
-        <strong class="text-aso-text font-medium">AI era.</strong>
-      </p>
-
-      <div class="animate-on-scroll delay-300 flex flex-wrap items-center gap-4 mb-16">
-        <a href="#work" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-aso-gold to-aso-gold-glow font-heading font-bold text-aso-black no-underline transition-all duration-300 hover:scale-105 shadow-lg">
-          View My Work
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#contact" class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-aso-border bg-transparent font-heading font-bold text-aso-text no-underline transition-all duration-300 hover:border-aso-gold hover:text-aso-gold">
-          Start a Project
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </a>
-      </div>
-
-      <div class="animate-on-scroll delay-300 flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-12 pt-6 border-t border-aso-border">
-        <div class="flex items-center gap-3">
-          <div class="flex -space-x-2">
-            <div class="w-8 h-8 rounded-full bg-aso-gold border border-aso-black flex items-center justify-center font-label text-[10px] font-bold text-aso-black">A</div>
-            <div class="w-8 h-8 rounded-full bg-aso-text-secondary border border-aso-black flex items-center justify-center font-label text-[10px] font-bold text-aso-black">B</div>
-            <div class="w-8 h-8 rounded-full bg-aso-text-muted border border-aso-black flex items-center justify-center font-label text-[10px] font-bold text-white">C</div>
-          </div>
-          <span class="font-label text-xs text-aso-text-muted uppercase tracking-wider">Trusted Worldwide</span>
-        </div>
-
-        <div class="flex items-center gap-8">
-          <div>
-            <h4 class="text-3xl font-heading font-bold text-aso-text"><span class="counter" data-target="50">0</span>+</h4>
-            <p class="text-aso-text-muted font-label text-[10px] uppercase tracking-wider mt-1">Projects Completed</p>
-          </div>
-          <div>
-            <h4 class="text-3xl font-heading font-bold text-aso-text"><span class="counter" data-target="3">0</span>+</h4>
-            <p class="text-aso-text-muted font-label text-[10px] uppercase tracking-wider mt-1">Years Experience</p>
-          </div>
-        </div>
-      </div>
-
+    <!-- Availability badge -->
+    <div class="hero-item gsap-hidden inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-aso-surface border border-aso-border mb-8">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+      </span>
+      <span class="text-sm text-aso-text-secondary font-medium">Available for freelance work</span>
     </div>
+
+    <!-- Headline -->
+    <h1 class="hero-item gsap-hidden mb-6">
+      <span class="block font-heading font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-aso-text tracking-tight leading-[1.05]">
+        AI-Powered
+      </span>
+      <span class="block font-heading font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl gradient-text tracking-tight leading-[1.05] mt-2">
+        Creative Studio
+      </span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-item gsap-hidden mt-6 text-lg sm:text-xl text-aso-text-secondary max-w-2xl mx-auto leading-relaxed mb-10">
+      I craft <span class="text-aso-gold font-medium">AI videos</span>,
+      <span class="text-aso-gold font-medium">stunning graphics</span>,
+      <span class="text-aso-gold font-medium">modern websites</span>, and
+      <span class="text-aso-gold font-medium">smart automations</span> that help brands grow faster and work smarter.
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-item gsap-hidden flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+      <a href="#work" class="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-aso-gold text-aso-black font-heading font-semibold transition-all duration-300 hover:gold-glow-strong transform hover:-translate-y-1">
+        View My Work
+        <i data-lucide="arrow-down" class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1"></i>
+      </a>
+      <a href="#contact" class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-aso-border text-aso-text hover:border-aso-gold hover:text-aso-gold transition-all duration-300 transform hover:-translate-y-1">
+        Start a Project
+      </a>
+    </div>
+
+    <!-- Social proof -->
+    <p class="hero-item gsap-hidden text-sm text-aso-text-muted font-mono tracking-wide">
+      Trusted by brands worldwide &nbsp;&bull;&nbsp; 100% Remote
+    </p>
+
   </div>
+
+  <!-- Scroll chevron -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+    <a href="#stats" class="text-aso-text-muted hover:text-aso-gold transition-colors duration-300">
+      <i data-lucide="chevron-down" class="w-6 h-6"></i>
+    </a>
+  </div>
+
 </section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!window.gsap) return;
+    var items = document.querySelectorAll('.hero-item');
+    items.forEach(function (item) {
+      item.classList.remove('gsap-hidden');
+    });
+    window.gsap.fromTo(
+      items,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out',
+        delay: 0.2
+      }
+    );
+  });
+</script>

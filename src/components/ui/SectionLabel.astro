@@ -1,9 +1,6 @@
 ---
-interface Props {
-  number: string;
-  text: string;
-}
-const { number, text } = Astro.props;
+var number = Astro.props.number;
+var text   = Astro.props.text;
 ---
 
 <div class="flex items-center gap-4">

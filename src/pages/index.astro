@@ -1,112 +1,34 @@
 ---
-// ASO Creative Studio — Complete Portfolio
-// Single-file build: no component imports, guaranteed to deploy
+import MainLayout   from '../layouts/MainLayout.astro';
+import Navigation   from '../components/Navigation.astro';
+import Hero         from '../components/Hero.astro';
+import Stats        from '../components/Stats.astro';
+import Services     from '../components/Services.astro';
+import Process      from '../components/Process.astro';
+import Portfolio    from '../components/Portfolio.astro';
+import Testimonials from '../components/Testimonials.astro';
+import About        from '../components/About.astro';
+import Contact      from '../components/Contact.astro';
+import Footer       from '../components/Footer.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems for forward-thinking brands. Nigeria-based. Working worldwide." />
-  <meta name="theme-color" content="#c9a227" />
-  <meta property="og:title" content="ASO Creative Studio — AI-Powered Creative Agency" />
-  <meta property="og:description" content="AI Video · Graphic Design · Web Development · AI Automation" />
-  <title>ASO Creative Studio — AI-Powered Creative Agency</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/src/styles/global.css" />
-</head>
-
-<body class="bg-black text-text">
-
-<!-- ═══════════════════════════════════════
-     NAVIGATION
-═══════════════════════════════════════ -->
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div style="max-width:1280px;" class="mx-auto px-6 lg:px-10">
-    <div class="flex items-center justify-between" style="height:72px;">
-
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 no-underline group">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold tracking-widest text-xs flex-shrink-0 transition-transform duration-200 group-hover:scale-105"
-          style="background:linear-gradient(135deg,#c9a227,#f59e0b); color:#050505; font-family:var(--font-head);">
-          ASO
-        </div>
-        <div class="flex flex-col" style="line-height:1;">
-          <span class="font-semibold text-text" style="font-size:15px; font-family:var(--font-head);">Creative Studio</span>
-          <span class="text-faint" style="font-size:10px; font-family:var(--font-mono); letter-spacing:0.2em; text-transform:uppercase; margin-top:2px;">AI &middot; Design &middot; Web</span>
-        </div>
-      </a>
-
-      <!-- Desktop links -->
-      <ul class="hidden lg:flex items-center gap-8" style="list-style:none; margin:0; padding:0;">
-        <li><a href="#work"      class="nav-link">Work</a></li>
-        <li><a href="#services"  class="nav-link">Services</a></li>
-        <li><a href="#process"   class="nav-link">Process</a></li>
-        <li><a href="#about"     class="nav-link">About</a></li>
-        <li><a href="#contact"   class="nav-link">Contact</a></li>
-      </ul>
-
-      <!-- Desktop right -->
-      <div id="nav-right" class="hidden lg:flex items-center gap-3">
-        <button id="theme-btn" class="w-9 h-9 rounded-xl text-base cursor-pointer flex items-center justify-center transition-all duration-200"
-          style="border:1px solid var(--color-border); background:transparent; color:var(--color-muted);"
-          aria-label="Toggle theme">🌙</button>
-        <a href="#contact" class="flex items-center gap-2 px-5 rounded-full font-semibold text-sm no-underline transition-all duration-300 hover:scale-105 gold-glow"
-          style="padding-top:10px; padding-bottom:10px; background:linear-gradient(135deg,#c9a227,#f59e0b); color:#050505; font-family:var(--font-head);">
-          Start a Project
-        </a>
-      </div>
-
-      <!-- Hamburger -->
-      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
-        style="background:none; border:none;"
-        aria-label="Toggle menu" aria-expanded="false">
-        <span class="hline-1 block rounded-full transition-all duration-300 origin-center" style="width:24px;height:1.5px;background:var(--color-text);"></span>
-        <span class="hline-2 block rounded-full transition-all duration-300 origin-center" style="width:24px;height:1.5px;background:var(--color-text);"></span>
-        <span class="hline-3 block rounded-full transition-all duration-300 origin-center" style="width:16px;height:1.5px;background:var(--color-gold);"></span>
-      </button>
-
-    </div>
-  </div>
-</nav>
-
-<!-- Mobile Overlay -->
-<div id="mob-overlay" class="fixed inset-0 z-40 lg:hidden flex-col items-center justify-center"
-  style="display:none; background:rgba(5,5,5,0.97); backdrop-filter:blur(20px);"
-  aria-hidden="true">
-  <button id="mob-close" class="absolute top-6 right-6 text-2xl cursor-pointer"
-    style="background:none; border:none; color:var(--color-muted);" aria-label="Close menu">&#x2715;</button>
-  <ul class="flex flex-col items-center gap-8 mb-10" style="list-style:none; margin:0; padding:0; margin-bottom:40px;">
-    <li><a href="#work"     class="mob-link">Work</a></li>
-    <li><a href="#services" class="mob-link">Services</a></li>
-    <li><a href="#process"  class="mob-link">Process</a></li>
-    <li><a href="#about"    class="mob-link">About</a></li>
-    <li><a href="#contact"  class="mob-link">Contact</a></li>
-  </ul>
-  <a href="#contact" class="mob-link flex items-center gap-2 px-10 rounded-full font-bold text-lg no-underline"
-    style="padding-top:16px; padding-bottom:16px; background:linear-gradient(135deg,#c9a227,#f59e0b); color:#050505; font-family:var(--font-head);">
-    Start a Project
-  </a>
-  <p class="absolute bottom-8 text-faint" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.3em; text-transform:uppercase;">ASO Creative Studio</p>
-</div>
-
-<style>
-  .nav-link {
-    font-family: var(--font-body);
-    font-size: 14px; font-weight: 500;
-    color: var(--color-muted);
-    text-decoration: none;
-    position: relative; padding-bottom: 4px;
-    transition: color 0.2s ease;
-  }
-  .nav-link:hover { color: var(--color-text); }
-  .nav-link::after {
-    content: ''; position: absolute;
-    bottom: 0; left: 0; height: 1px; width: 0;
+<MainLayout
+  title="ASO Creative Studio | AI-Powered Creative Solutions"
+  description="Samuel Aina — AI Video Creation, Graphic Design, Web Development & AI Automation. Building brands that stand out."
+>
+  <Navigation />
+  <main>
+    <Hero />
+    <Stats />
+    <Services />
+    <Process />
+    <Portfolio />
+    <Testimonials />
+    <About />
+    <Contact />
+  </main>
+  <Footer />
+</MainLayout>    bottom: 0; left: 0; height: 1px; width: 0;
     background: var(--color-gold);
     transition: width 0.3s ease;
   }

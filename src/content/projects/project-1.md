@@ -1,10 +1,10 @@
 ---
 title: "AI Brand Campaign Video"
-description: "A cinematic AI-generated brand launch video for a luxury fashion brand, blending storytelling with high-end visual effects to drive awareness and sales."
+description: "A cinematic AI-generated brand campaign video featuring dynamic AI scenes, custom color grading, and professional post-production storytelling that captured the essence of modern luxury fashion."
 category: "AI Video"
-image: "https://placehold.co/800x500/0f0f0f/c9a227?text=AI+Brand+Video"
-link: "https://example.com/project-1"
+image: "/images/projects/ai-video-placeholder.jpg"
+link: "https://example.com"
 client: "VeeLuxe"
-date: "2024-10-15"
+date: "2026-03-15"
 featured: true
 ---

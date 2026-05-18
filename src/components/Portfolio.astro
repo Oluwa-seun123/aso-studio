@@ -1,107 +1,107 @@
 ---
-// Zero variables in frontmatter. Completely static component scope.
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+import SectionLabel from './ui/SectionLabel.astro';
+
+const projects = await getCollection('projects');
+const sorted   = projects.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
 ---
-<section id="work" class="py-32 bg-aso-black relative border-t border-aso-border">
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
-    
-    <div class="mb-20 animate-on-scroll">
-      <span class="font-label text-[11px] text-aso-gold uppercase tracking-[0.25em] block mb-3">Selected Catalog</span>
-      <h2 class="text-4xl sm:text-5xl font-heading font-bold text-aso-text tracking-tight">Featured Creations</h2>
-      <p class="text-aso-text-secondary mt-4 max-w-xl text-base sm:text-lg font-body">
-        A precise compilation of technical artwork, cinematic assets, and structural designs.
-      </p>
+
+<section id="work" class="reveal-section py-[120px]">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+
+    <SectionLabel number="04" text="Portfolio" />
+
+    <h2 class="mt-6 font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-aso-text mb-4">
+      My <span class="gradient-text">Works</span>
+    </h2>
+    <p class="text-aso-text-secondary mb-10 max-w-xl leading-relaxed">
+      A selection of projects across every service. Each one built with intention.
+    </p>
+
+    <!-- Filter buttons -->
+    <div class="flex flex-wrap gap-3 mb-12" id="portfolio-filters">
+      {categories.map((cat) => (
+        <button
+          data-filter={cat}
+          class={`filter-btn px-5 py-2 rounded-full text-sm font-heading font-medium transition-all duration-300 border ${
+            cat === 'All'
+              ? 'bg-aso-gold text-aso-black border-aso-gold'
+              : 'bg-transparent text-aso-text-secondary border-aso-border hover:border-aso-gold hover:text-aso-gold'
+          }`}
+        >
+          {cat}
+        </button>
+      ))}
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      
-      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
-        <div class="w-full h-72 bg-aso-elevated relative flex flex-col items-center justify-center overflow-hidden border-b border-aso-border group">
-          <div class="absolute inset-0 bg-gradient-to-t from-aso-black via-transparent to-transparent opacity-60 z-10"></div>
-          <svg class="w-12 h-12 text-aso-gold relative z-20 opacity-80 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-          <span class="font-label text-[10px] uppercase tracking-widest text-aso-text-muted absolute bottom-4 left-4 z-20">Video Workspace Placeholder</span>
+    <!-- Projects grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-container" id="projects-grid">
+      {sorted.map((project) => (
+        <div class="stagger-item">
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            category={project.data.category}
+            image={project.data.image}
+            link={project.data.link}
+            client={project.data.client}
+            slug={project.slug}
+          />
         </div>
-        <div class="p-8 flex-grow flex flex-col justify-between">
-          <div>
-            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Video Production</span>
-            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">AI Video Concepts</h3>
-            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">Generative video sequencing, stylistic composition control, and premium post-production storytelling frameworks.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
-        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border flex items-center justify-center">
-          <img src="/images/1000611783.jpg" alt="Premium Church Graphics" class="portfolio-img w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-          <div class="fallback-msg hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
-            Asset Reference: 1000611783.jpg
-          </div>
-        </div>
-        <div class="p-8 flex-grow flex flex-col justify-between">
-          <div>
-            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Creative Design</span>
-            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">Premium Church Graphics</h3>
-            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">High-impact typographic hierarchies, asset balancing, and crisp flyer templates for media presentations.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
-        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border flex items-center justify-center">
-          <img src="/images/1000611848.jpg" alt="Visual Asset Design System" class="portfolio-img w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-          <div class="fallback-msg hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
-            Asset Reference: 1000611848.jpg
-          </div>
-        </div>
-        <div class="p-8 flex-grow flex flex-col justify-between">
-          <div>
-            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Identity Systems</span>
-            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">Visual Asset Design</h3>
-            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">Structured asset packages, vector layout alignments, and presentation mockups tailored for scaling companies.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="premium-card rounded-2xl overflow-hidden flex flex-col h-full animate-on-scroll">
-        <div class="w-full h-72 bg-aso-elevated relative overflow-hidden border-b border-aso-border flex items-center justify-center">
-          <img src="/images/1000613254.jpg" alt="Web Applications Layout System" class="portfolio-img w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-          <div class="fallback-msg hidden absolute inset-0 bg-aso-elevated flex-col items-center justify-center text-aso-text-muted font-label text-xs">
-            Asset Reference: 1000613254.jpg
-          </div>
-        </div>
-        <div class="p-8 flex-grow flex flex-col justify-between">
-          <div>
-            <span class="font-label text-[10px] text-aso-gold uppercase tracking-wider block mb-2">Web Development</span>
-            <h3 class="text-xl font-bold text-aso-text font-heading mb-3">Full Web Experiences</h3>
-            <p class="text-aso-text-secondary text-sm leading-relaxed font-body">Architecture-first responsive code bases, lightweight portfolio structures, and polished front-end animations.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="mt-24 text-center animate-on-scroll">
-      <p class="text-aso-text-muted mb-6 font-body text-sm tracking-wide">Looking for my extended asset libraries?</p>
-      <a href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-aso-gold rounded-full text-aso-gold font-heading font-bold text-sm transition-all duration-300 hover:bg-[rgba(212,175,55,0.08)] hover:scale-105">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M7.71 3.5L1.15 15l3.43 6 6.55-11.5M9.73 15L6.3 21h13.12l3.43-6M10.88 1.5h-6.86L15.42 21h6.86"/></svg>
-        Explore Full Portfolio Drive
-      </a>
+      ))}
     </div>
 
   </div>
 </section>
 
-<script>
-  // Clean event listeners. Astro compilation will not complain about this.
-  document.querySelectorAll('.portfolio-img').forEach((img) => {
-    img.addEventListener('error', function() {
-      (this as HTMLElement).style.display = 'none';
-      const fallback = this.nextElementSibling;
-      if (fallback) {
-        fallback.classList.remove('hidden');
-        fallback.classList.add('flex');
-      }
+<script is:inline>
+  (function () {
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    var cards      = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = btn.getAttribute('data-filter');
+
+        /* Update active button styles */
+        filterBtns.forEach(function (b) {
+          b.classList.remove('bg-aso-gold', 'text-aso-black', 'border-aso-gold');
+          b.classList.add('bg-transparent', 'text-aso-text-secondary', 'border-aso-border');
+        });
+        btn.classList.remove('bg-transparent', 'text-aso-text-secondary', 'border-aso-border');
+        btn.classList.add('bg-aso-gold', 'text-aso-black', 'border-aso-gold');
+
+        /* Show/hide cards */
+        cards.forEach(function (card) {
+          var category = card.getAttribute('data-category');
+          var show     = filter === 'All' || category === filter;
+
+          if (show) {
+            card.classList.remove('filter-hidden');
+            if (window.gsap) {
+              window.gsap.fromTo(
+                card,
+                { opacity: 0, scale: 0.95 },
+                { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }
+              );
+            }
+          } else {
+            if (window.gsap) {
+              window.gsap.to(card, {
+                opacity: 0, scale: 0.95, duration: 0.3, ease: 'power2.in',
+                onComplete: function () { card.classList.add('filter-hidden'); }
+              });
+            } else {
+              card.classList.add('filter-hidden');
+            }
+          }
+        });
+      });
     });
-  });
+  })();
 </script>

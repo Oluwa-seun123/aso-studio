@@ -5,5 +5,10 @@ export default defineConfig({
   output: 'static',
   vite: {
     plugins: [tailwindcss()]
+  },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/passthrough'
+    }
   }
 });

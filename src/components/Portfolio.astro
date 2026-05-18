@@ -1,14 +1,45 @@
 ---
-import { getCollection } from 'astro:content';
-import ProjectCard from './ProjectCard.astro';
-import SectionLabel from './ui/SectionLabel.astro';
+import ProjectCard    from './ProjectCard.astro';
+import SectionLabel   from './ui/SectionLabel.astro';
 
-const projects = await getCollection('projects');
-const sorted   = projects.sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+var projects = [
+  {
+    slug:        'ai-brand-video',
+    title:       'AI Brand Campaign Video',
+    description: 'A cinematic AI-generated brand campaign video featuring dynamic AI scenes, custom color grading, and professional post-production storytelling that captured the essence of modern luxury fashion.',
+    category:    'AI Video',
+    image:       '/images/1000611783.jpg',
+    link:        '#',
+    client:      'VeeLuxe',
+  },
+  {
+    slug:        'church-graphics',
+    title:       'Premium Church Graphics Package',
+    description: 'High-impact typographic hierarchies, asset balancing, and crisp flyer templates for ministry media presentations — including event banners and social media kits.',
+    category:    'Graphics',
+    image:       '/images/1000611783.jpg',
+    client:      'AFCF FUOYE',
+  },
+  {
+    slug:        'visual-asset-design',
+    title:       'Visual Asset Design System',
+    description: 'Structured asset packages, vector layout alignments, and presentation mockups tailored for scaling companies — including brand identity and social media templates.',
+    category:    'Graphics',
+    image:       '/images/1000611848.jpg',
+    client:      'Brand Work',
+  },
+  {
+    slug:        'web-experience',
+    title:       'Full Web Experience Build',
+    description: 'Architecture-first responsive codebase with lightweight portfolio structures and polished front-end animations built for performance, SEO, and conversion.',
+    category:    'Web Dev',
+    image:       '/images/1000613254.jpg',
+    link:        '#',
+    client:      'Client Work',
+  },
+];
 
-const categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
+var categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
 ---
 
 <section id="work" class="reveal-section py-[120px]">
@@ -25,35 +56,38 @@ const categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
 
     <!-- Filter buttons -->
     <div class="flex flex-wrap gap-3 mb-12" id="portfolio-filters">
-      {categories.map((cat) => (
-        <button
-          data-filter={cat}
-          class={`filter-btn px-5 py-2 rounded-full text-sm font-heading font-medium transition-all duration-300 border ${
-            cat === 'All'
-              ? 'bg-aso-gold text-aso-black border-aso-gold'
-              : 'bg-transparent text-aso-text-secondary border-aso-border hover:border-aso-gold hover:text-aso-gold'
-          }`}
-        >
-          {cat}
-        </button>
-      ))}
+      {categories.map(function(cat) {
+        return (
+          <button
+            data-filter={cat}
+            class={cat === 'All'
+              ? 'filter-btn px-5 py-2 rounded-full text-sm font-heading font-medium transition-all duration-300 border bg-aso-gold text-aso-black border-aso-gold'
+              : 'filter-btn px-5 py-2 rounded-full text-sm font-heading font-medium transition-all duration-300 border bg-transparent text-aso-text-secondary border-aso-border hover:border-aso-gold hover:text-aso-gold'
+            }
+          >
+            {cat}
+          </button>
+        );
+      })}
     </div>
 
     <!-- Projects grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-container" id="projects-grid">
-      {sorted.map((project) => (
-        <div class="stagger-item">
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            category={project.data.category}
-            image={project.data.image}
-            link={project.data.link}
-            client={project.data.client}
-            slug={project.slug}
-          />
-        </div>
-      ))}
+      {projects.map(function(project) {
+        return (
+          <div class="stagger-item">
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              category={project.category}
+              image={project.image}
+              link={project.link}
+              client={project.client}
+              slug={project.slug}
+            />
+          </div>
+        );
+      })}
     </div>
 
   </div>
@@ -68,7 +102,6 @@ const categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
       btn.addEventListener('click', function () {
         var filter = btn.getAttribute('data-filter');
 
-        /* Update active button styles */
         filterBtns.forEach(function (b) {
           b.classList.remove('bg-aso-gold', 'text-aso-black', 'border-aso-gold');
           b.classList.add('bg-transparent', 'text-aso-text-secondary', 'border-aso-border');
@@ -76,16 +109,13 @@ const categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
         btn.classList.remove('bg-transparent', 'text-aso-text-secondary', 'border-aso-border');
         btn.classList.add('bg-aso-gold', 'text-aso-black', 'border-aso-gold');
 
-        /* Show/hide cards */
         cards.forEach(function (card) {
-          var category = card.getAttribute('data-category');
-          var show     = filter === 'All' || category === filter;
-
+          var cat  = card.getAttribute('data-category');
+          var show = filter === 'All' || cat === filter;
           if (show) {
             card.classList.remove('filter-hidden');
             if (window.gsap) {
-              window.gsap.fromTo(
-                card,
+              window.gsap.fromTo(card,
                 { opacity: 0, scale: 0.95 },
                 { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }
               );

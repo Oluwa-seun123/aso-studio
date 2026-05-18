@@ -1,10 +1,9 @@
 ---
-title: "E-Commerce Website Redesign"
-description: "A full redesign and rebuild of an e-commerce storefront using modern web technology — fast load times, mobile-first layout, seamless checkout, and Paystack integration."
-category: "Web Dev"
-image: "https://placehold.co/800x500/0f0f0f/2dd4bf?text=E-Commerce+Web"
-link: "https://example.com/project-3"
-client: "VibeMedia"
-date: "2024-07-20"
+title: "Visual Asset Design System"
+description: "Structured asset packages, vector layout alignments, and presentation mockups tailored for scaling companies — including brand identity, social templates, and comprehensive style guides."
+category: "Graphics"
+image: "/images/1000611848.jpg"
+client: "Brand Work"
+date: "2026-01-10"
 featured: false
 ---

@@ -1,52 +1,44 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  link?: string;
-  client: string;
-  slug: string;
-}
+var title       = Astro.props.title;
+var description = Astro.props.description;
+var category    = Astro.props.category;
+var image       = Astro.props.image;
+var link        = Astro.props.link || '#';
+var client      = Astro.props.client;
+var slug        = Astro.props.slug;
 
-const { title, description, category, image, link, client, slug } = Astro.props;
-
-/* No TypeScript generic annotation — plain JS object */
-const catColors = {
+var catColors = {
   'AI Video':      { bg: 'rgba(201,162,39,0.12)',  border: 'rgba(201,162,39,0.4)',  text: '#c9a227' },
   'Graphics':      { bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.4)', text: '#818cf8' },
   'Web Dev':       { bg: 'rgba(45,212,191,0.12)',  border: 'rgba(45,212,191,0.4)',  text: '#2dd4bf' },
   'AI Automation': { bg: 'rgba(244,114,182,0.12)', border: 'rgba(244,114,182,0.4)', text: '#f472b6' },
 };
 
-const c = catColors[category] ?? catColors['AI Video'];
+var c = catColors[category] || catColors['AI Video'];
 ---
 
 <div
   class="project-card group relative bg-aso-black border border-aso-border rounded-2xl overflow-hidden transition-all duration-500 hover:border-aso-gold hover:-translate-y-1 hover:gold-glow"
   data-category={category}
 >
-  <!-- Image -->
   <div class="relative aspect-[16/10] overflow-hidden">
     <img
       src={image}
       alt={title}
       class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy"
-      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
     />
-    <!-- Fallback -->
     <div
       class="w-full h-full items-center justify-center"
-      style={`display:none; background:linear-gradient(135deg,#0f0f0f,${c.bg});`}
+      style={`display:none;background:linear-gradient(135deg,#0f0f0f,${c.bg});`}
     >
       <span class="font-mono text-xs tracking-widest uppercase" style={`color:${c.text};`}>{category}</span>
     </div>
 
-    <!-- Hover overlay -->
     <div class="absolute inset-0 bg-aso-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-      <a
-        href={link || `#project-${slug}`}
+      
+        href={link}
         class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-aso-gold text-aso-black font-heading font-medium transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 hover:gold-glow-strong"
       >
         View Project
@@ -54,18 +46,16 @@ const c = catColors[category] ?? catColors['AI Video'];
       </a>
     </div>
 
-    <!-- Category badge -->
     <div class="absolute top-4 left-4">
       <span
         class="px-3 py-1 rounded-full text-xs font-heading font-semibold uppercase tracking-wide"
-        style={`background:${c.bg}; border:1px solid ${c.border}; color:${c.text};`}
+        style={`background:${c.bg};border:1px solid ${c.border};color:${c.text};`}
       >
         {category}
       </span>
     </div>
   </div>
 
-  <!-- Card body -->
   <div class="p-6">
     <h3 class="font-heading font-semibold text-xl text-aso-text group-hover:text-aso-gold transition-colors duration-300 mb-2">
       {title}

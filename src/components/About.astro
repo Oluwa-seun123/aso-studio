@@ -9,33 +9,32 @@ import Button from './ui/Button.astro';
 
       <!-- Photo column -->
       <div class="relative order-2 lg:order-1">
-        <!-- Decorative offset borders -->
         <div class="absolute -top-4 -left-4 w-full h-full rounded-2xl border border-aso-gold/25 pointer-events-none z-0"></div>
         <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border border-aso-gold/12 pointer-events-none z-0"></div>
 
-        <!-- Photo container -->
         <div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-aso-surface border border-aso-border z-10">
+          <!-- Path matches: public/profile/samuel-aina.jpg → URL: /profile/samuel-aina.jpg -->
           <img
-            src="/images/profile/samuel-aina.jpg"
+            src="/profile/samuel-aina.jpg"
             alt="Samuel Aina — Founder of ASO Creative Studio"
             class="w-full h-full object-cover"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
-          <!-- Fallback -->
+          <!-- Fallback when no photo -->
           <div
             class="w-full h-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-aso-elevated to-aso-surface"
-            style="display: none;"
+            style="display:none;"
           >
             <div class="w-24 h-24 rounded-full bg-aso-gold flex items-center justify-center font-heading font-bold text-3xl text-aso-black">
               ASO
             </div>
             <p class="font-mono text-xs text-aso-text-muted text-center px-8 leading-relaxed tracking-widest uppercase">
-              Add photo to<br />public/images/profile/samuel-aina.jpg
+              Add photo to<br />public/profile/samuel-aina.jpg
             </p>
           </div>
 
           <!-- Availability badge -->
-          <div class="absolute bottom-4 right-4 z-10 flex items-center gap-2.5 px-4 py-2 rounded-xl bg-aso-black/90 border border-aso-border backdrop-blur-sm">
+          <div class="absolute bottom-4 right-4 z-10 flex items-center gap-2.5 px-4 py-2 rounded-xl border border-aso-border backdrop-blur-sm" style="background:rgba(5,5,5,0.85);">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -56,10 +55,10 @@ import Button from './ui/Button.astro';
 
         <div class="space-y-4 text-aso-text-secondary leading-relaxed mb-8">
           <p>
-            I'm the founder of <strong class="text-aso-text">ASO Creative Studio</strong>, where I blend artificial intelligence with human creativity to build brands that truly stand out. Based in Nigeria, I work with clients globally — from startups to established businesses.
+            I'm the founder of <strong class="text-aso-text">ASO Creative Studio</strong>, where I blend artificial intelligence with human creativity to build brands that truly stand out. Based in Nigeria, I work with clients globally.
           </p>
           <p>
-            My passion lies at the intersection of <span class="text-aso-gold">AI technology</span> and <span class="text-aso-gold">design excellence</span>. Whether it's generating stunning AI videos, crafting pixel-perfect graphics, building modern websites, or automating complex workflows — I bring a unique mix of technical skill and creative vision to every project.
+            My passion lies at the intersection of <span class="text-aso-gold">AI technology</span> and <span class="text-aso-gold">design excellence</span>. Whether it's generating stunning AI videos, crafting pixel-perfect graphics, building modern websites, or automating complex workflows — I bring a unique mix of technical skill and creative vision.
           </p>
           <p>
             When I'm not creating, I'm learning. The AI landscape evolves daily, and I make it my mission to stay ahead — so my clients always get cutting-edge solutions.

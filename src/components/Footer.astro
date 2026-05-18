@@ -2,39 +2,31 @@
 // Footer.astro
 ---
 
-<footer class="relative bg-aso-surface border-t border-aso-border py-12">
-
-  <!-- Gold top line -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-aso-gold to-transparent pointer-events-none"></div>
-
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+<footer class="bg-aso-black border-t border-aso-border py-12">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
 
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 no-underline group">
-        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-aso-gold to-aso-gold-glow flex items-center justify-center font-heading font-bold text-[11px] tracking-widest text-aso-black flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-lg bg-aso-gold flex items-center justify-center text-aso-black font-heading font-bold text-sm transition-all duration-300 group-hover:gold-glow">
           ASO
         </div>
-        <span class="font-heading font-semibold text-sm text-aso-text-secondary tracking-wide">
-          Creative Studio
-        </span>
+        <span class="font-heading font-medium text-aso-text-secondary text-sm">Creative Studio</span>
       </a>
 
       <!-- Copyright -->
-      <p class="font-label text-xs text-aso-text-muted tracking-wide text-center">
-        © 2026 ASO Creative Studio. All rights reserved.
+      <p class="text-aso-text-muted text-sm text-center font-mono">
+        &copy; 2026 ASO Creative Studio &mdash; All rights reserved.
       </p>
 
       <!-- Back to top -->
       <button
         id="back-to-top"
-        class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-aso-border bg-transparent text-aso-text-muted font-heading font-medium text-sm cursor-pointer transition-all duration-300 hover:border-aso-gold hover:text-aso-gold hover:bg-aso-gold/5"
+        class="group flex items-center gap-2 text-aso-text-muted hover:text-aso-gold transition-colors duration-300 text-sm font-heading bg-transparent border-none cursor-pointer"
         aria-label="Back to top"
       >
         Back to top
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m18 15-6-6-6 6"/>
-        </svg>
+        <i data-lucide="arrow-up" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1"></i>
       </button>
 
     </div>
@@ -42,7 +34,7 @@
 </footer>
 
 <script is:inline>
-  document.getElementById('back-to-top').addEventListener('click', function() {
+  document.getElementById('back-to-top').addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>

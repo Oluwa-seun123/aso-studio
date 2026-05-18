@@ -1,13 +1,6 @@
 ---
-interface Props {
-  title?: string;
-  description?: string;
-}
-
-const {
-  title       = "ASO Creative Studio | AI-Powered Creative Solutions",
-  description = "Samuel Aina — AI Video Creation, Graphic Design, Web Development & AI Automation. Building brands that stand out."
-} = Astro.props;
+var pageTitle = Astro.props.title || 'ASO Creative Studio | AI-Powered Creative Solutions';
+var pageDesc  = Astro.props.description || 'Samuel Aina — AI Video Creation, Graphic Design, Web Development & AI Automation. Building brands that stand out.';
 ---
 
 <!DOCTYPE html>
@@ -15,38 +8,21 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
+  <meta name="description" content={pageDesc} />
   <meta name="theme-color" content="#050505" />
   <meta name="author" content="Samuel Aina" />
-  <meta property="og:title"       content={title} />
-  <meta property="og:description" content={description} />
+  <meta property="og:title"       content={pageTitle} />
+  <meta property="og:description" content={pageDesc} />
   <meta property="og:type"        content="website" />
-  <title>{title}</title>
+  <title>{pageTitle}</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- GSAP (defer — loads before DOMContentLoaded, after HTML parse) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
-
-  <!-- Tawk.to Live Chat — REPLACE YOUR_TAWK_ID then uncomment -->
-  <!--
-  <script type="text/javascript">
-    var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();
-    (function(){
-      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-      s1.async=true; s1.src='https://embed.tawk.to/YOUR_TAWK_ID/default';
-      s1.charset='UTF-8'; s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1,s0);
-    })();
-  </script>
-  -->
 
   <slot name="head" />
 </head>
@@ -54,70 +30,54 @@ const {
 <body class="bg-aso-black text-aso-text font-sans antialiased overflow-x-hidden">
   <slot />
 
-  <!-- ── Global GSAP + Lucide init ── -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', function () {
 
-      /* Lucide icons */
       if (window.lucide) window.lucide.createIcons();
 
-      /* GSAP check */
       if (!window.gsap || !window.ScrollTrigger) return;
-      var gsap         = window.gsap;
+
+      var gsap          = window.gsap;
       var ScrollTrigger = window.ScrollTrigger;
       gsap.registerPlugin(ScrollTrigger);
 
-      /* ── Nav scroll glassmorphism ── */
-      var nav = document.querySelector('nav#main-nav');
+      /* Nav glassmorphism on scroll */
+      var nav = document.getElementById('main-nav');
       if (nav) {
         window.addEventListener('scroll', function () {
-          if (window.scrollY > 80) {
-            nav.classList.add('glass');
-          } else {
-            nav.classList.remove('glass');
-          }
+          if (window.scrollY > 80) nav.classList.add('glass');
+          else                      nav.classList.remove('glass');
         }, { passive: true });
       }
 
-      /* ── Section reveal animations ── */
+      /* Section reveal */
       document.querySelectorAll('.reveal-section').forEach(function (section) {
         gsap.fromTo(section,
           { opacity: 0, y: 50 },
           {
-            opacity: 1, y: 0,
-            duration: 0.8, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 85%',
-              toggleActions: 'play none none none'
-            }
+            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: section, start: 'top 85%', toggleActions: 'play none none none' }
           }
         );
       });
 
-      /* ── Stagger containers ── */
+      /* Stagger items */
       document.querySelectorAll('.stagger-container').forEach(function (container) {
         var items = container.querySelectorAll('.stagger-item');
         gsap.fromTo(items,
           { opacity: 0, y: 30 },
           {
-            opacity: 1, y: 0,
-            duration: 0.6, stagger: 0.15, ease: 'power2.out',
-            scrollTrigger: {
-              trigger: container,
-              start: 'top 80%',
-              toggleActions: 'play none none none'
-            }
+            opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out',
+            scrollTrigger: { trigger: container, start: 'top 80%', toggleActions: 'play none none none' }
           }
         );
       });
 
-      /* ── Stat counters ── */
+      /* Stat counters */
       document.querySelectorAll('.stat-number').forEach(function (el) {
         var target = parseInt(el.getAttribute('data-target') || '0', 10);
         var suffix = el.getAttribute('data-suffix') || '';
         if (!target) return;
-
         ScrollTrigger.create({
           trigger: el,
           start: 'top 85%',
@@ -128,12 +88,8 @@ const {
               value: target,
               duration: 2,
               ease: 'power2.out',
-              onUpdate: function () {
-                el.textContent = Math.floor(obj.value) + suffix;
-              },
-              onComplete: function () {
-                el.textContent = target + suffix;
-              }
+              onUpdate: function () { el.textContent = Math.floor(obj.value) + suffix; },
+              onComplete: function () { el.textContent = target + suffix; }
             });
           }
         });

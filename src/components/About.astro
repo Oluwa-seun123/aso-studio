@@ -1,108 +1,91 @@
 ---
-// About.astro
+import SectionLabel from './ui/SectionLabel.astro';
+import Button from './ui/Button.astro';
 ---
 
-<section id="about" class="relative py-[120px] bg-aso-black overflow-hidden">
+<section id="about" class="reveal-section py-[120px]">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-px bg-gradient-to-r from-transparent via-aso-gold/30 to-transparent pointer-events-none"></div>
+      <!-- Photo column -->
+      <div class="relative order-2 lg:order-1">
+        <!-- Decorative offset borders -->
+        <div class="absolute -top-4 -left-4 w-full h-full rounded-2xl border border-aso-gold/25 pointer-events-none z-0"></div>
+        <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border border-aso-gold/12 pointer-events-none z-0"></div>
 
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
-
-    <!-- Section label -->
-    <div class="flex items-center gap-3 mb-16">
-      <span class="font-label text-[11px] tracking-[0.35em] uppercase text-aso-gold">06 / About Me</span>
-      <div class="w-16 h-px bg-gradient-to-r from-aso-gold to-transparent"></div>
-    </div>
-
-    <!-- Split layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-      <!-- LEFT: Photo -->
-      <div class="relative">
-
-        <!-- Photo container with decorative borders -->
-        <div class="relative pr-8 pb-8">
-          <!-- Gold offset borders -->
-          <div class="absolute top-4 right-4 w-full h-full rounded-2xl border border-aso-gold/25 pointer-events-none z-0"></div>
-          <div class="absolute top-8 right-0 w-full h-full rounded-2xl border border-aso-gold/10 pointer-events-none z-0"></div>
-
-          <!-- Photo area -->
-          <div class="relative z-10 rounded-2xl overflow-hidden border border-aso-border bg-aso-elevated" style="aspect-ratio: 4/5;">
-            <!-- Replace the div below with <img src="/images/samuel.jpg" ...> when ready -->
-            <img
-              src="/images/samuel.jpg"
-              alt="Samuel Aina — ASO Creative Studio"
-              class="w-full h-full object-cover"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-            />
-            <!-- Fallback placeholder -->
-            <div class="w-full h-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-aso-elevated to-aso-surface hidden">
-              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-aso-gold to-aso-gold-glow flex items-center justify-center font-heading font-bold text-2xl text-aso-black">
-                ASO
-              </div>
-              <p class="font-label text-[11px] tracking-[0.2em] uppercase text-aso-text-muted text-center px-6">
-                Add your photo to<br/>/public/images/samuel.jpg
-              </p>
+        <!-- Photo container -->
+        <div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-aso-surface border border-aso-border z-10">
+          <img
+            src="/images/profile/samuel-aina.jpg"
+            alt="Samuel Aina — Founder of ASO Creative Studio"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback -->
+          <div
+            class="w-full h-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-aso-elevated to-aso-surface"
+            style="display: none;"
+          >
+            <div class="w-24 h-24 rounded-full bg-aso-gold flex items-center justify-center font-heading font-bold text-3xl text-aso-black">
+              ASO
             </div>
+            <p class="font-mono text-xs text-aso-text-muted text-center px-8 leading-relaxed tracking-widest uppercase">
+              Add photo to<br />public/images/profile/samuel-aina.jpg
+            </p>
           </div>
 
-          <!-- Availability badge overlay -->
-          <div class="absolute -bottom-4 -right-4 z-20 bg-aso-surface border border-aso-border rounded-xl px-4 py-3 flex items-center gap-2.5 shadow-xl">
-            <span class="w-2.5 h-2.5 rounded-full bg-aso-green pulse-green flex-shrink-0"></span>
-            <span class="font-label text-[11px] tracking-wide text-aso-text-muted">Available for work</span>
+          <!-- Availability badge -->
+          <div class="absolute bottom-4 right-4 z-10 flex items-center gap-2.5 px-4 py-2 rounded-xl bg-aso-black/90 border border-aso-border backdrop-blur-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span class="font-mono text-xs text-aso-text-muted">Available for work</span>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT: Text -->
-      <div>
-        <!-- Headline -->
-        <h2 class="font-heading font-bold mb-7" style="font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1;">
+      <!-- Text column -->
+      <div class="order-1 lg:order-2">
+
+        <SectionLabel number="06" text="About Me" />
+
+        <h2 class="mt-6 font-heading font-bold text-4xl sm:text-5xl text-aso-text mb-6">
           Hi, I'm <span class="gradient-text">Samuel Aina</span>
         </h2>
 
-        <!-- Bio -->
-        <div class="prose-aso mb-8">
+        <div class="space-y-4 text-aso-text-secondary leading-relaxed mb-8">
           <p>
-            I'm the founder of <strong class="text-aso-text font-semibold">ASO Creative Studio</strong> — a one-person creative powerhouse built at the intersection of AI, design, and technology. I started ASO because I believe every brand, no matter the size, deserves world-class creative work.
+            I'm the founder of <strong class="text-aso-text">ASO Creative Studio</strong>, where I blend artificial intelligence with human creativity to build brands that truly stand out. Based in Nigeria, I work with clients globally — from startups to established businesses.
           </p>
           <p>
-            My passion sits at the crossroads of <strong class="text-aso-text font-semibold">AI video production</strong>, premium brand design, and intelligent automation. I don't just create visuals — I build systems and experiences that drive real results.
+            My passion lies at the intersection of <span class="text-aso-gold">AI technology</span> and <span class="text-aso-gold">design excellence</span>. Whether it's generating stunning AI videos, crafting pixel-perfect graphics, building modern websites, or automating complex workflows — I bring a unique mix of technical skill and creative vision to every project.
           </p>
           <p>
-            Based in <strong class="text-aso-text font-semibold">Nigeria</strong>, working with clients across 5 countries and counting. Whether you're a startup finding your voice or an established brand ready to evolve — I'm the creative partner you need.
+            When I'm not creating, I'm learning. The AI landscape evolves daily, and I make it my mission to stay ahead — so my clients always get cutting-edge solutions.
           </p>
         </div>
 
         <!-- Inline stats -->
-        <div class="grid grid-cols-3 gap-px bg-aso-border rounded-2xl overflow-hidden mb-8">
-          <div class="flex flex-col items-center text-center py-5 px-4 bg-aso-elevated">
-            <span class="font-heading font-bold text-3xl gradient-text">50+</span>
-            <span class="font-label text-[10px] tracking-[0.15em] uppercase text-aso-text-muted mt-1">Projects</span>
+        <div class="grid grid-cols-3 gap-4 mb-8 py-6 border-y border-aso-border">
+          <div>
+            <div class="font-heading font-bold text-2xl text-aso-gold">50+</div>
+            <div class="text-sm text-aso-text-muted mt-1">Projects</div>
           </div>
-          <div class="flex flex-col items-center text-center py-5 px-4 bg-aso-elevated">
-            <span class="font-heading font-bold text-3xl gradient-text">3+</span>
-            <span class="font-label text-[10px] tracking-[0.15em] uppercase text-aso-text-muted mt-1">Years</span>
+          <div>
+            <div class="font-heading font-bold text-2xl text-aso-gold">3+</div>
+            <div class="text-sm text-aso-text-muted mt-1">Years</div>
           </div>
-          <div class="flex flex-col items-center text-center py-5 px-4 bg-aso-elevated">
-            <span class="font-heading font-bold text-3xl gradient-text">100%</span>
-            <span class="font-label text-[10px] tracking-[0.15em] uppercase text-aso-text-muted mt-1">Remote</span>
+          <div>
+            <div class="font-heading font-bold text-2xl text-aso-gold">100%</div>
+            <div class="text-sm text-aso-text-muted mt-1">Remote</div>
           </div>
         </div>
 
-        <!-- Resume CTA -->
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border border-aso-gold bg-transparent text-aso-gold font-heading font-semibold no-underline transition-all duration-300 hover:bg-aso-gold/10 hover:shadow-[0_0_24px_rgba(201,162,39,0.2)]"
-          style="font-size: 15px;"
-        >
+        <Button href="/resume.pdf" variant="outline" size="lg" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="download" class="w-4 h-4"></i>
           Download Resume
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </a>
+        </Button>
 
       </div>
     </div>

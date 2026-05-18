@@ -1,10 +1,9 @@
 ---
-title: "Complete Brand Identity System"
-description: "Full brand identity design for a fast-growing Nigerian tech startup — logo, colour system, typography, business cards, social media kit, and brand guidelines."
+title: "Premium Church Graphics Package"
+description: "High-impact typographic hierarchies, asset balancing, and crisp flyer templates for ministry media presentations — including event banners, social media kits, and print-ready designs."
 category: "Graphics"
-image: "https://placehold.co/800x500/0f0f0f/818cf8?text=Brand+Identity"
-link: "https://example.com/project-2"
-client: "BrandSpark"
-date: "2024-09-02"
+image: "/images/1000611783.jpg"
+client: "AFCF FUOYE"
+date: "2026-02-20"
 featured: true
 ---

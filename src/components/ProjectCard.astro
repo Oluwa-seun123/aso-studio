@@ -11,7 +11,8 @@ interface Props {
 
 const { title, description, category, image, link, client, slug } = Astro.props;
 
-const catColors: Record<string, { bg: string; border: string; text: string }> = {
+/* No TypeScript generic annotation — plain JS object */
+const catColors = {
   'AI Video':      { bg: 'rgba(201,162,39,0.12)',  border: 'rgba(201,162,39,0.4)',  text: '#c9a227' },
   'Graphics':      { bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.4)', text: '#818cf8' },
   'Web Dev':       { bg: 'rgba(45,212,191,0.12)',  border: 'rgba(45,212,191,0.4)',  text: '#2dd4bf' },
@@ -37,9 +38,9 @@ const c = catColors[category] ?? catColors['AI Video'];
     <!-- Fallback -->
     <div
       class="w-full h-full items-center justify-center"
-      style={`display:none; background: linear-gradient(135deg, #0f0f0f, ${c.bg});`}
+      style={`display:none; background:linear-gradient(135deg,#0f0f0f,${c.bg});`}
     >
-      <span class="font-mono text-xs tracking-widest uppercase" style={`color: ${c.text};`}>{category}</span>
+      <span class="font-mono text-xs tracking-widest uppercase" style={`color:${c.text};`}>{category}</span>
     </div>
 
     <!-- Hover overlay -->
@@ -57,7 +58,7 @@ const c = catColors[category] ?? catColors['AI Video'];
     <div class="absolute top-4 left-4">
       <span
         class="px-3 py-1 rounded-full text-xs font-heading font-semibold uppercase tracking-wide"
-        style={`background: ${c.bg}; border: 1px solid ${c.border}; color: ${c.text};`}
+        style={`background:${c.bg}; border:1px solid ${c.border}; color:${c.text};`}
       >
         {category}
       </span>

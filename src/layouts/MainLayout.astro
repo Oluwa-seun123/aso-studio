@@ -1,86 +1,145 @@
 ---
-import '../styles/global.css';
-
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
-  title = "ASO Creative Studio — AI-Powered Creative Agency", 
-  description = "ASO Creative Studio crafts AI videos, brand graphics, web experiences, and automation systems." 
+const {
+  title       = "ASO Creative Studio | AI-Powered Creative Solutions",
+  description = "Samuel Aina — AI Video Creation, Graphic Design, Web Development & AI Automation. Building brands that stand out."
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  </head>
-  <body class="bg-aso-black text-aso-text antialiased min-h-screen relative">
-    
-    <slot />
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#050505" />
+  <meta name="author" content="Samuel Aina" />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type"        content="website" />
+  <title>{title}</title>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        if (menuToggle && mobileMenu) {
-          menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-          });
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-          document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target as Node) && e.target !== menuToggle) {
-              mobileMenu.classList.add('hidden');
-              mobileMenu.classList.remove('flex');
+  <!-- GSAP (defer — loads before DOMContentLoaded, after HTML parse) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+
+  <!-- Tawk.to Live Chat — REPLACE YOUR_TAWK_ID then uncomment -->
+  <!--
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true; s1.src='https://embed.tawk.to/YOUR_TAWK_ID/default';
+      s1.charset='UTF-8'; s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+  -->
+
+  <slot name="head" />
+</head>
+
+<body class="bg-aso-black text-aso-text font-sans antialiased overflow-x-hidden">
+  <slot />
+
+  <!-- ── Global GSAP + Lucide init ── -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      /* Lucide icons */
+      if (window.lucide) window.lucide.createIcons();
+
+      /* GSAP check */
+      if (!window.gsap || !window.ScrollTrigger) return;
+      var gsap         = window.gsap;
+      var ScrollTrigger = window.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* ── Nav scroll glassmorphism ── */
+      var nav = document.querySelector('nav#main-nav');
+      if (nav) {
+        window.addEventListener('scroll', function () {
+          if (window.scrollY > 80) {
+            nav.classList.add('glass');
+          } else {
+            nav.classList.remove('glass');
+          }
+        }, { passive: true });
+      }
+
+      /* ── Section reveal animations ── */
+      document.querySelectorAll('.reveal-section').forEach(function (section) {
+        gsap.fromTo(section,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0,
+            duration: 0.8, ease: 'power3.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
             }
-          });
-        }
+          }
+        );
+      });
 
-        const globalObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              if (entry.target.classList.contains('animate-on-scroll')) {
-                entry.target.classList.add('fade-up-visible');
-              }
-              if (entry.target.classList.contains('process-animated-line')) {
-                entry.target.classList.add('line-active');
-              }
-              if (entry.target.classList.contains('counter')) {
-                const el = entry.target;
-                const target = parseInt(el.getAttribute('data-target') || '0', 10);
-                let current = 0;
-                const duration = 1500;
-                const step = Math.max(Math.floor(duration / target), 12);
-                
-                const timer = setInterval(() => {
-                  current += 1;
-                  el.textContent = current.toString();
-                  if (current >= target) {
-                    el.textContent = target.toString();
-                    clearInterval(timer);
-                  }
-                }, step);
-              }
-              globalObserver.unobserve(entry.target);
+      /* ── Stagger containers ── */
+      document.querySelectorAll('.stagger-container').forEach(function (container) {
+        var items = container.querySelectorAll('.stagger-item');
+        gsap.fromTo(items,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1, y: 0,
+            duration: 0.6, stagger: 0.15, ease: 'power2.out',
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
             }
-          });
-        }, { threshold: 0.1 });
+          }
+        );
+      });
 
-        document.querySelectorAll('.animate-on-scroll, .counter, .process-animated-line').forEach(el => {
-          globalObserver.observe(el);
+      /* ── Stat counters ── */
+      document.querySelectorAll('.stat-number').forEach(function (el) {
+        var target = parseInt(el.getAttribute('data-target') || '0', 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        if (!target) return;
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+          onEnter: function () {
+            var obj = { value: 0 };
+            gsap.to(obj, {
+              value: target,
+              duration: 2,
+              ease: 'power2.out',
+              onUpdate: function () {
+                el.textContent = Math.floor(obj.value) + suffix;
+              },
+              onComplete: function () {
+                el.textContent = target + suffix;
+              }
+            });
+          }
         });
       });
-    </script>
-  </body>
+
+    });
+  </script>
+</body>
 </html>

@@ -1,42 +1,162 @@
 ---
-// src/components/Navigation.astro
+const navLinks = [
+  { label: 'Work',     href: '#work'     },
+  { label: 'Services', href: '#services' },
+  { label: 'Process',  href: '#process'  },
+  { label: 'About',    href: '#about'    },
+  { label: 'Contact',  href: '#contact'  },
+];
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 bg-aso-black/80 backdrop-blur-md border-b border-aso-border">
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
-    
-    <a href="#hero" class="font-heading font-bold text-xl tracking-tight no-underline text-aso-text flex items-center gap-1">
-      ASO <span class="text-aso-gold">STUDIO</span>
-    </a>
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
 
-    <nav class="hidden md:flex items-center gap-8">
-      <a href="#services" class="text-sm font-medium text-aso-text-secondary hover:text-aso-gold transition-colors no-underline">Services</a>
-      <a href="#work" class="text-sm font-medium text-aso-text-secondary hover:text-aso-gold transition-colors no-underline">Portfolio</a>
-      <a href="#process" class="text-sm font-medium text-aso-text-secondary hover:text-aso-gold transition-colors no-underline">Process</a>
-      <a href="#about" class="text-sm font-medium text-aso-text-secondary hover:text-aso-gold transition-colors no-underline">About</a>
-    </nav>
-
-    <div class="hidden md:block">
-      <a href="#contact" class="px-5 py-2.5 bg-aso-gold hover:bg-aso-gold-glow text-aso-black text-xs font-bold font-heading rounded-full transition-all duration-200 shadow-md">
-        Hire Me
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-aso-gold flex items-center justify-center text-aso-black font-heading font-bold text-lg transition-all duration-300 group-hover:gold-glow">
+          ASO
+        </div>
+        <span class="font-heading font-semibold text-aso-text hidden sm:block">Creative Studio</span>
       </a>
-    </div>
 
-    <button id="menu-toggle" class="block md:hidden text-aso-text p-2 focus:outline-none cursor-pointer" aria-label="Toggle Menu">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
-      </svg>
-    </button>
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="relative text-aso-text-secondary hover:text-aso-text transition-colors duration-300 text-sm font-medium group"
+          >
+            {link.label}
+            <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-aso-gold transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        ))}
+      </div>
 
-    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-aso-surface/95 backdrop-blur-xl border-b border-aso-border flex-col p-6 gap-5 shadow-2xl md:hidden z-50">
-      <a href="#services" class="text-base font-semibold text-aso-text no-underline py-2 border-b border-aso-border/40">Services</a>
-      <a href="#work" class="text-base font-semibold text-aso-text no-underline py-2 border-b border-aso-border/40">Portfolio</a>
-      <a href="#process" class="text-base font-semibold text-aso-text no-underline py-2 border-b border-aso-border/40">Process</a>
-      <a href="#about" class="text-base font-semibold text-aso-text no-underline py-2 border-b border-aso-border/40">About</a>
-      <a href="#contact" class="mt-2 w-full py-3 bg-aso-gold text-aso-black font-bold font-heading rounded-xl text-center no-underline">
-        Hire Me
+      <!-- Desktop CTA -->
+      <a
+        href="#contact"
+        class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-aso-gold text-aso-black font-heading font-medium text-sm transition-all duration-300 hover:gold-glow-strong transform hover:-translate-y-0.5"
+      >
+        Start a Project
       </a>
-    </div>
 
+      <!-- Mobile hamburger -->
+      <button
+        id="menu-toggle"
+        class="md:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-[6px] bg-transparent border-none cursor-pointer"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <span id="hline-1" class="block w-6 h-[2px] bg-aso-text rounded-full transition-all duration-300 origin-center"></span>
+        <span id="hline-2" class="block w-6 h-[2px] bg-aso-text rounded-full transition-all duration-300 origin-center"></span>
+        <span id="hline-3" class="block w-4 h-[2px] bg-aso-gold rounded-full transition-all duration-300 origin-center"></span>
+      </button>
+
+    </div>
   </div>
-</header>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-40 md:hidden flex-col items-center justify-center"
+  style="display: none; background: rgba(5,5,5,0.98); backdrop-filter: blur(20px);"
+  aria-hidden="true"
+>
+  <div class="flex flex-col items-center gap-8">
+    {navLinks.map((link, i) => (
+      <a
+        href={link.href}
+        class="mobile-link text-3xl font-heading font-semibold text-aso-text hover:text-aso-gold transition-colors duration-300 opacity-0 translate-y-4"
+        style={`transition-delay: ${i * 60}ms`}
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="#contact"
+      class="mobile-link mt-4 px-8 py-3 rounded-full bg-aso-gold text-aso-black font-heading font-semibold text-lg opacity-0 translate-y-4"
+      style={`transition-delay: ${navLinks.length * 60}ms`}
+    >
+      Start a Project
+    </a>
+  </div>
+  <p class="absolute bottom-8 font-mono text-xs text-aso-text-muted tracking-[0.3em] uppercase">
+    ASO Creative Studio
+  </p>
+</div>
+
+<script is:inline>
+  (function () {
+    var toggle      = document.getElementById('menu-toggle');
+    var menu        = document.getElementById('mobile-menu');
+    var h1          = document.getElementById('hline-1');
+    var h2          = document.getElementById('hline-2');
+    var h3          = document.getElementById('hline-3');
+    var mobileLinks = document.querySelectorAll('.mobile-link');
+    var isOpen      = false;
+
+    function openMenu() {
+      isOpen = true;
+      toggle.setAttribute('aria-expanded', 'true');
+      menu.style.display = 'flex';
+      menu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      /* Hamburger → X */
+      h1.style.transform = 'rotate(45deg) translate(5px, 5px)';
+      h2.style.opacity   = '0';
+      h2.style.transform = 'scaleX(0)';
+      h3.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+
+      /* Stagger links in */
+      mobileLinks.forEach(function (link, i) {
+        setTimeout(function () {
+          link.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          link.style.opacity    = '1';
+          link.style.transform  = 'translateY(0)';
+        }, 80 + i * 60);
+      });
+    }
+
+    function closeMenu() {
+      isOpen = false;
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      /* X → Hamburger */
+      h1.style.transform = '';
+      h2.style.opacity   = '';
+      h2.style.transform = '';
+      h3.style.transform = '';
+
+      /* Reset links */
+      mobileLinks.forEach(function (link) {
+        link.style.opacity   = '0';
+        link.style.transform = 'translateY(16px)';
+      });
+
+      /* Slight delay before hiding overlay so animation is visible */
+      setTimeout(function () {
+        menu.style.display = 'none';
+      }, 300);
+    }
+
+    /* ── Toggle: open if closed, close if open ── */
+    toggle.addEventListener('click', function () {
+      if (isOpen) { closeMenu(); } else { openMenu(); }
+    });
+
+    /* Close on link click */
+    mobileLinks.forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    /* Close on Escape */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen) closeMenu();
+    });
+  })();
+</script>

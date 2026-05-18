@@ -1,116 +1,94 @@
 ---
+import SectionLabel from './ui/SectionLabel.astro';
+
 const testimonials = [
   {
-    initials: "VA",
-    name: "Victoria Abiodun",
-    role: "Founder",
-    company: "VeeLuxe",
-    avatarBg:     "rgba(201,162,39,0.15)",
-    avatarBorder: "rgba(201,162,39,0.40)",
-    avatarColor:  "#c9a227",
-    accentGrad:   "rgba(201,162,39,0.40)",
-    rating: 5,
-    quote: "The whole process felt easy and well thought out. They really understood our vision and brought it to life through clean, modern graphics that feel true to our brand.",
+    initials: 'VA',
+    name: 'Victoria Abiodun',
+    role: 'Founder',
+    company: 'VeeLuxe',
+    avatarStyle: 'background:rgba(201,162,39,0.15); border:1.5px solid rgba(201,162,39,0.4); color:#c9a227;',
+    accentColor: 'rgba(201,162,39,0.4)',
+    quote: 'The whole process felt easy and well thought out. They really understood our vision and brought it to life through clean, modern graphics that feel true to our brand.',
   },
   {
-    initials: "JR",
-    name: "James Rodriguez",
-    role: "Founder",
-    company: "BrandSpark",
-    avatarBg:     "rgba(129,140,248,0.15)",
-    avatarBorder: "rgba(129,140,248,0.40)",
-    avatarColor:  "#818cf8",
-    accentGrad:   "rgba(129,140,248,0.40)",
-    rating: 5,
-    quote: "From concept to final delivery, every piece was pixel-perfect. The graphic design work elevated our entire brand identity to a completely new level.",
+    initials: 'JR',
+    name: 'James Rodriguez',
+    role: 'Founder',
+    company: 'BrandSpark',
+    avatarStyle: 'background:rgba(129,140,248,0.15); border:1.5px solid rgba(129,140,248,0.4); color:#818cf8;',
+    accentColor: 'rgba(129,140,248,0.4)',
+    quote: 'From concept to final delivery, every piece was pixel-perfect. The graphic design work elevated our entire brand identity to a completely new level.',
   },
   {
-    initials: "AJ",
-    name: "Amara Johnson",
-    role: "CEO",
-    company: "VibeMedia",
-    avatarBg:     "rgba(45,212,191,0.15)",
-    avatarBorder: "rgba(45,212,191,0.40)",
-    avatarColor:  "#2dd4bf",
-    accentGrad:   "rgba(45,212,191,0.40)",
-    rating: 5,
-    quote: "Professional, creative, and incredibly fast. The AI video content created for our campaign was beyond our expectations. A true creative partner.",
+    initials: 'AJ',
+    name: 'Amara Johnson',
+    role: 'CEO',
+    company: 'VibeMedia',
+    avatarStyle: 'background:rgba(45,212,191,0.15); border:1.5px solid rgba(45,212,191,0.4); color:#2dd4bf;',
+    accentColor: 'rgba(45,212,191,0.4)',
+    quote: 'Professional, creative, and incredibly fast. The AI video content created for our campaign was beyond our expectations. A true creative partner.',
   },
 ];
 ---
 
-<section id="testimonials" class="relative py-[120px] bg-aso-surface overflow-hidden">
+<section id="testimonials" class="reveal-section py-[120px] bg-aso-surface/30">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
 
-  <div class="absolute top-16 right-10 font-heading font-bold leading-none pointer-events-none select-none hidden lg:block" style="font-size:200px; color:rgba(201,162,39,0.04);">
-    &#8220;
-  </div>
+    <SectionLabel number="05" text="Testimonials" />
 
-  <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-10">
+    <h2 class="mt-6 font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-aso-text mb-16">
+      What Clients <span class="gradient-text">Say</span>
+    </h2>
 
-    <!-- Header -->
-    <div class="mb-16">
-      <div class="flex items-center gap-3 mb-5">
-        <span class="font-label text-[11px] tracking-[0.35em] uppercase text-aso-gold">05 / Testimonials</span>
-        <div class="w-16 h-px bg-gradient-to-r from-aso-gold to-transparent"></div>
-      </div>
-      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
-        <h2 class="font-heading font-bold text-aso-text text-display-lg">What Clients Say</h2>
-        <div class="flex items-center gap-2">
-          <span class="text-aso-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span class="font-label text-xs text-aso-text-muted">5.0 &middot; All verified clients</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5" role="list">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-container">
       {testimonials.map((t) => (
-        <article
-          class="card-hover group relative rounded-2xl border border-aso-border bg-aso-elevated p-8 flex flex-col"
-          role="listitem"
-        >
+        <div class="stagger-item relative bg-aso-black border border-aso-border rounded-2xl p-8 hover:border-aso-gold/50 transition-all duration-500 flex flex-col">
+
           <!-- Quote icon -->
-          <div class="mb-6 text-aso-gold/35 group-hover:text-aso-gold/55 transition-colors duration-300">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
-              <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
-            </svg>
+          <div class="mb-6">
+            <i data-lucide="quote" class="w-8 h-8 text-aso-gold/40"></i>
           </div>
 
           <!-- Stars -->
           <div class="flex gap-1 mb-5">
-            {Array(t.rating).fill(0).map(() => (
-              <span class="text-aso-gold text-sm">&#9733;</span>
-            ))}
+            <span class="text-aso-gold text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
           </div>
 
           <!-- Quote -->
-          <blockquote class="font-body text-[15px] leading-[1.75] text-aso-text-secondary flex-1 mb-8 italic">
+          <p class="text-aso-text-secondary leading-relaxed mb-8 text-[15px] flex-1">
             &ldquo;{t.quote}&rdquo;
-          </blockquote>
+          </p>
 
           <!-- Divider -->
-          <div class="w-full h-px bg-aso-border mb-6"></div>
+          <div class="h-px bg-aso-border mb-6"></div>
 
           <!-- Author -->
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-4">
             <div
-              class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-heading font-bold text-sm"
-              style={`background: ${t.avatarBg}; border: 1.5px solid ${t.avatarBorder}; color: ${t.avatarColor};`}
+              class="w-12 h-12 rounded-full flex items-center justify-center font-heading font-semibold text-sm flex-shrink-0"
+              style={t.avatarStyle}
             >
               {t.initials}
             </div>
-            <div class="min-w-0">
-              <p class="font-heading font-semibold text-sm text-aso-text leading-tight truncate">{t.name}</p>
-              <p class="font-label text-[11px] tracking-wide text-aso-text-muted truncate">{t.role} &middot; {t.company}</p>
-            </div>
-            <!-- Verified badge -->
-            <div class="ml-auto w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25);">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
+            <div>
+              <div class="font-heading font-medium text-aso-text">{t.name}</div>
+              <div class="text-sm text-aso-text-muted">{t.role}, {t.company}</div>
             </div>
           </div>
+
+          <!-- Bottom accent -->
+          <div
+            class="absolute bottom-0 left-8 right-8 h-px opacity-40"
+            style={`background: linear-gradient(90deg, ${t.accentColor}, transparent);`}
+          ></div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>          </div>
 
           <!-- Bottom accent -->
           <div

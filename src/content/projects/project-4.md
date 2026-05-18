@@ -1,9 +1,9 @@
 ---
-title: "Customer Support Chatbot Automation"
-description: "Built and deployed an AI-powered customer support chatbot with automated email sequences and CRM integration, cutting response time by 80% for a growing e-commerce brand."
-category: "AI Automation"
-image: "https://placehold.co/800x500/0f0f0f/f472b6?text=AI+Automation"
-client: "AutoFlow Co."
-date: "2024-06-10"
+title: "Full Web Experience Build"
+description: "Architecture-first responsive codebases, lightweight portfolio structures, and polished front-end animations built with modern frameworks and optimised for performance and conversion."
+category: "Web Dev"
+image: "/images/1000613254.jpg"
+client: "Client Work"
+date: "2025-12-05"
 featured: false
 ---

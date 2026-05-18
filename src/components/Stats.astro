@@ -1,80 +1,47 @@
 ---
-const stats = [
-  { value: 50, suffix: "+", label: "Projects Delivered",   desc: "Across AI video, graphics & web" },
-  { value: 30, suffix: "+", label: "Happy Clients",         desc: "Brands, founders & agencies"      },
-  { value: 5,  suffix: "",  label: "Countries Reached",    desc: "100% remote collaboration"         },
-  { value: 3,  suffix: "+", label: "Years of Craft",        desc: "In creative & digital work"       },
-];
+// Stats.astro
 ---
 
-<section
-  id="stats"
-  class="relative border-t border-b border-aso-border bg-aso-surface py-16"
->
-  <!-- Top glow -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-aso-gold to-transparent pointer-events-none"></div>
+<section id="stats" class="reveal-section bg-aso-surface border-y border-aso-border py-16 lg:py-20">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 stagger-container">
 
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-10">
+      <div class="stagger-item text-center">
+        <div
+          class="stat-number font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-aso-gold"
+          data-target="50"
+          data-suffix="+"
+        >0+</div>
+        <div class="mt-2 text-aso-text-secondary text-sm sm:text-base font-medium">Projects Completed</div>
+      </div>
 
-    <!-- Eyebrow -->
-    <div class="flex justify-center mb-10">
-      <span class="font-label text-[11px] tracking-[0.3em] uppercase text-aso-text-muted">By the numbers</span>
+      <div class="stagger-item text-center">
+        <div
+          class="stat-number font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-aso-gold"
+          data-target="30"
+          data-suffix="+"
+        >0+</div>
+        <div class="mt-2 text-aso-text-secondary text-sm sm:text-base font-medium">Happy Clients</div>
+      </div>
+
+      <div class="stagger-item text-center">
+        <div
+          class="stat-number font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-aso-gold"
+          data-target="5"
+          data-suffix=""
+        >0</div>
+        <div class="mt-2 text-aso-text-secondary text-sm sm:text-base font-medium">Countries Served</div>
+      </div>
+
+      <div class="stagger-item text-center">
+        <div
+          class="stat-number font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-aso-gold"
+          data-target="3"
+          data-suffix="+"
+        >0+</div>
+        <div class="mt-2 text-aso-text-secondary text-sm sm:text-base font-medium">Years Experience</div>
+      </div>
+
     </div>
-
-    <!-- Grid -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-aso-border rounded-2xl overflow-hidden">
-      {stats.map((s) => (
-        <div class="flex flex-col items-center text-center px-8 py-10 bg-aso-surface group hover:bg-aso-elevated transition-colors duration-300">
-
-          <!-- Star icon placeholder -->
-          <div class="w-10 h-10 rounded-xl bg-aso-gold/10 border border-aso-gold/20 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
-            <svg class="w-5 h-5 text-aso-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-          </div>
-
-          <!-- Counter -->
-          <span
-            data-count={s.value}
-            data-suffix={s.suffix}
-            class="font-heading font-bold gradient-text tabular-nums leading-none mb-1.5"
-            style="font-size: clamp(2.25rem, 4vw, 3.5rem);"
-          >
-            0{s.suffix}
-          </span>
-
-          <p class="font-heading font-semibold text-[15px] text-aso-text mb-1">{s.label}</p>
-          <p class="font-body text-xs text-aso-text-muted leading-relaxed max-w-[140px]">{s.desc}</p>
-
-          <!-- Gold accent line on hover -->
-          <div class="mt-5 h-px w-0 group-hover:w-12 bg-aso-gold transition-all duration-500 ease-out"></div>
-        </div>
-      ))}
-    </div>
-
   </div>
-
-  <!-- Bottom glow -->
-  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-aso-gold to-transparent pointer-events-none"></div>
 </section>
-
-<script is:inline>
-  var counters = document.querySelectorAll('[data-count]');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (!entry.isIntersecting) return;
-      var el      = entry.target;
-      var target  = parseInt(el.getAttribute('data-count'), 10);
-      var suffix  = el.getAttribute('data-suffix') || '';
-      var current = 0;
-      var step    = target / 80;
-      var timer   = setInterval(function() {
-        current += step;
-        if (current >= target) { current = target; clearInterval(timer); }
-        el.textContent = Math.floor(current) + suffix;
-      }, 20);
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  counters.forEach(function(el) { observer.observe(el); });
-</script>

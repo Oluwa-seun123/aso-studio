@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 var pageTitle = Astro.props.title || 'ASO Creative Studio | AI-Powered Creative Solutions';
 var pageDesc  = Astro.props.description || 'Samuel Aina — AI Video Creation, Graphic Design, Web Development & AI Automation. Building brands that stand out.';
 ---
@@ -36,12 +38,11 @@ var pageDesc  = Astro.props.description || 'Samuel Aina — AI Video Creation, G
       if (window.lucide) window.lucide.createIcons();
 
       if (!window.gsap || !window.ScrollTrigger) return;
-
       var gsap          = window.gsap;
       var ScrollTrigger = window.ScrollTrigger;
       gsap.registerPlugin(ScrollTrigger);
 
-      /* Nav glassmorphism on scroll */
+      /* Nav glassmorphism */
       var nav = document.getElementById('main-nav');
       if (nav) {
         window.addEventListener('scroll', function () {
@@ -61,7 +62,7 @@ var pageDesc  = Astro.props.description || 'Samuel Aina — AI Video Creation, G
         );
       });
 
-      /* Stagger items */
+      /* Stagger containers */
       document.querySelectorAll('.stagger-container').forEach(function (container) {
         var items = container.querySelectorAll('.stagger-item');
         gsap.fromTo(items,

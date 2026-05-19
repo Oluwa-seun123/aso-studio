@@ -68,8 +68,19 @@
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function () {
-    if (!window.gsap) return;
     var items = document.querySelectorAll('.hero-item');
+
+    if (!window.gsap) {
+      /* GSAP CDN failed — show content immediately, no animation */
+      items.forEach(function (el) {
+        el.classList.remove('gsap-hidden');
+        el.style.opacity  = '1';
+        el.style.transform = 'none';
+      });
+      return;
+    }
+
+    /* GSAP loaded — animate in */
     items.forEach(function (item) {
       item.classList.remove('gsap-hidden');
     });

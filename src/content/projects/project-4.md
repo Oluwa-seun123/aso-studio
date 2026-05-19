@@ -1,6 +1,6 @@
 ---
 title: "Full Web Experience Build"
-description: "Architecture-first responsive codebases, lightweight portfolio structures, and polished front-end animations built with modern frameworks and optimised for performance and conversion."
+description: "Architecture-first responsive codebase with lightweight portfolio structures and polished front-end animations built for performance, SEO, and conversion."
 category: "Web Dev"
 image: "/images/1000613254.jpg"
 client: "Client Work"

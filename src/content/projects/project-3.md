@@ -1,6 +1,6 @@
 ---
 title: "Visual Asset Design System"
-description: "Structured asset packages, vector layout alignments, and presentation mockups tailored for scaling companies — including brand identity, social templates, and comprehensive style guides."
+description: "Structured asset packages, vector layout alignments, and presentation mockups tailored for scaling companies — brand identity, social templates, and comprehensive style guides."
 category: "Graphics"
 image: "/images/1000611848.jpg"
 client: "Brand Work"

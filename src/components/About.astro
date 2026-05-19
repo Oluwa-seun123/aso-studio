@@ -7,20 +7,17 @@ import Button from './ui/Button.astro';
   <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-      <!-- Photo column -->
+      <!-- Photo -->
       <div class="relative order-2 lg:order-1">
         <div class="absolute -top-4 -left-4 w-full h-full rounded-2xl border border-aso-gold/25 pointer-events-none z-0"></div>
         <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border border-aso-gold/12 pointer-events-none z-0"></div>
-
         <div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-aso-surface border border-aso-border z-10">
-          <!-- Path matches: public/profile/samuel-aina.jpg → URL: /profile/samuel-aina.jpg -->
           <img
             src="/profile/samuel-aina.jpg"
-            alt="Samuel Aina — Founder of ASO Creative Studio"
+            alt="Samuel Aina — ASO Creative Studio"
             class="w-full h-full object-cover"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
           />
-          <!-- Fallback when no photo -->
           <div
             class="w-full h-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-aso-elevated to-aso-surface"
             style="display:none;"
@@ -32,8 +29,6 @@ import Button from './ui/Button.astro';
               Add photo to<br />public/profile/samuel-aina.jpg
             </p>
           </div>
-
-          <!-- Availability badge -->
           <div class="absolute bottom-4 right-4 z-10 flex items-center gap-2.5 px-4 py-2 rounded-xl border border-aso-border backdrop-blur-sm" style="background:rgba(5,5,5,0.85);">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -44,49 +39,28 @@ import Button from './ui/Button.astro';
         </div>
       </div>
 
-      <!-- Text column -->
+      <!-- Text -->
       <div class="order-1 lg:order-2">
-
         <SectionLabel number="06" text="About Me" />
-
         <h2 class="mt-6 font-heading font-bold text-4xl sm:text-5xl text-aso-text mb-6">
           Hi, I'm <span class="gradient-text">Samuel Aina</span>
         </h2>
-
         <div class="space-y-4 text-aso-text-secondary leading-relaxed mb-8">
-          <p>
-            I'm the founder of <strong class="text-aso-text">ASO Creative Studio</strong>, where I blend artificial intelligence with human creativity to build brands that truly stand out. Based in Nigeria, I work with clients globally.
-          </p>
-          <p>
-            My passion lies at the intersection of <span class="text-aso-gold">AI technology</span> and <span class="text-aso-gold">design excellence</span>. Whether it's generating stunning AI videos, crafting pixel-perfect graphics, building modern websites, or automating complex workflows — I bring a unique mix of technical skill and creative vision.
-          </p>
-          <p>
-            When I'm not creating, I'm learning. The AI landscape evolves daily, and I make it my mission to stay ahead — so my clients always get cutting-edge solutions.
-          </p>
+          <p>I'm the founder of <strong class="text-aso-text">ASO Creative Studio</strong>, where I blend artificial intelligence with human creativity to build brands that truly stand out. Based in Nigeria, I work with clients globally.</p>
+          <p>My passion lies at the intersection of <span class="text-aso-gold">AI technology</span> and <span class="text-aso-gold">design excellence</span> — AI videos, pixel-perfect graphics, modern websites, and intelligent automations that drive real results.</p>
+          <p>When I'm not creating, I'm learning. The AI landscape evolves daily, and I stay ahead so my clients always get cutting-edge solutions.</p>
         </div>
-
-        <!-- Inline stats -->
         <div class="grid grid-cols-3 gap-4 mb-8 py-6 border-y border-aso-border">
-          <div>
-            <div class="font-heading font-bold text-2xl text-aso-gold">50+</div>
-            <div class="text-sm text-aso-text-muted mt-1">Projects</div>
-          </div>
-          <div>
-            <div class="font-heading font-bold text-2xl text-aso-gold">3+</div>
-            <div class="text-sm text-aso-text-muted mt-1">Years</div>
-          </div>
-          <div>
-            <div class="font-heading font-bold text-2xl text-aso-gold">100%</div>
-            <div class="text-sm text-aso-text-muted mt-1">Remote</div>
-          </div>
+          <div><div class="font-heading font-bold text-2xl text-aso-gold">50+</div><div class="text-sm text-aso-text-muted mt-1">Projects</div></div>
+          <div><div class="font-heading font-bold text-2xl text-aso-gold">3+</div><div class="text-sm text-aso-text-muted mt-1">Years</div></div>
+          <div><div class="font-heading font-bold text-2xl text-aso-gold">100%</div><div class="text-sm text-aso-text-muted mt-1">Remote</div></div>
         </div>
-
         <Button href="/resume.pdf" variant="outline" size="lg" target="_blank" rel="noopener noreferrer">
           <i data-lucide="download" class="w-4 h-4"></i>
           Download Resume
         </Button>
-
       </div>
+
     </div>
   </div>
 </section>

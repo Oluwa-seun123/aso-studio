@@ -1,5 +1,5 @@
 ---
-title: "Customer Support Chatbot Automation"
+title: "Customer Support Chatbot"
 description: "Built and deployed an AI-powered customer support chatbot with automated email sequences and CRM integration, cutting response time by 80% and improving customer satisfaction scores."
 category: "AI Automation"
 image: "/images/1000611783.jpg"

@@ -2,14 +2,18 @@
 // Footer.astro
 ---
 
-<footer class="bg-aso-black border-t border-aso-border py-12">
+<<footer class="bg-aso-black border-t border-aso-border py-12">
   <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
 
       <!-- Logo -->
       <a href="#hero" class="flex items-center gap-3 group">
-        <div class="w-9 h-9 rounded-lg bg-aso-gold flex items-center justify-center text-aso-black font-heading font-bold text-sm transition-all duration-300 group-hover:gold-glow">
-          ASO
+        <div class="w-9 h-9 rounded-full bg-aso-elevated border border-aso-border flex items-center justify-center p-1 transition-all duration-300 group-hover:border-aso-gold group-hover:shadow-[0_0_12px_rgba(201,162,39,0.5)]">
+          <img 
+            src="/logo.png" 
+            alt="ASO Creative Studio" 
+            class="h-full w-full object-contain" 
+          />
         </div>
         <span class="font-heading font-medium text-aso-text-secondary text-sm">Creative Studio</span>
       </a>

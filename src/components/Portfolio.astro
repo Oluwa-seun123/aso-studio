@@ -169,10 +169,7 @@ var categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
       });
     });
   })();
-</script>        btn.classList.remove('bg-transparent', 'text-aso-text-secondary', 'border-aso-border');
-        btn.classList.add('bg-aso-gold', 'text-aso-black', 'border-aso-gold');
-
-        cards.forEach(function (card) {
+</script>                cards.forEach(function (card) {
           var cat  = card.getAttribute('data-category');
           var show = filter === 'All' || cat === filter;
           if (show) {

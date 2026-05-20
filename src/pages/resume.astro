@@ -1,0 +1,301 @@
+---
+// Standalone resume page — no layout imports needed
+// Visit /resume → click "Download PDF" → browser prints to PDF
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel Aina — Resume | ASO Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f0f0;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* ── Top bar (hidden when printing) ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: #c9a227;
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .topbar-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 15px; color: #050505;
+    }
+    .topbar-actions { display: flex; gap: 10px; }
+    .btn-print {
+      background: #050505; color: #c9a227;
+      border: none; padding: 8px 20px;
+      border-radius: 999px; cursor: pointer;
+      font-weight: 600; font-size: 13px; font-family: 'Inter', sans-serif;
+    }
+    .btn-back {
+      background: transparent; color: #050505;
+      border: 2px solid #050505; padding: 6px 18px;
+      border-radius: 999px; font-weight: 600;
+      font-size: 13px; text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex; align-items: center;
+    }
+
+    /* ── Resume page ── */
+    .page {
+      max-width: 800px; margin: 32px auto 64px;
+      background: white; padding: 52px 56px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+    }
+
+    /* ── Header ── */
+    .r-header { border-bottom: 3px solid #c9a227; padding-bottom: 24px; margin-bottom: 32px; }
+    .r-name   { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: #050505; }
+    .r-role   { font-size: 15px; color: #c9a227; font-weight: 600; margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .r-contacts {
+      display: flex; flex-wrap: wrap; gap: 6px 20px;
+      margin-top: 12px; font-size: 13px; color: #444;
+    }
+    .r-contacts a { color: #444; text-decoration: none; }
+    .r-contacts a:hover { color: #c9a227; }
+
+    /* ── Section ── */
+    .r-section { margin-bottom: 28px; }
+    .r-section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: #c9a227; border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 6px; margin-bottom: 16px;
+    }
+
+    /* ── Experience item ── */
+    .r-item { margin-bottom: 20px; }
+    .r-item-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .r-item-title { font-weight: 700; font-size: 15px; color: #050505; }
+    .r-item-company { font-weight: 500; color: #555; font-size: 14px; }
+    .r-item-date { font-size: 12px; color: #888; white-space: nowrap; flex-shrink: 0; }
+    .r-item ul { margin-top: 8px; padding-left: 18px; }
+    .r-item li { font-size: 13px; color: #333; margin-bottom: 4px; }
+
+    /* ── Skills grid ── */
+    .r-skills { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .r-skill-group-title { font-weight: 600; font-size: 13px; color: #050505; margin-bottom: 6px; }
+    .r-skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .r-tag {
+      background: #f5f5f5; color: #333; border: 1px solid #e0e0e0;
+      padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500;
+    }
+
+    /* ── Education ── */
+    .r-edu-header { display: flex; justify-content: space-between; }
+    .r-edu-school { font-weight: 700; font-size: 15px; color: #050505; }
+    .r-edu-degree { font-size: 13px; color: #555; margin-top: 2px; }
+    .r-edu-thesis { font-size: 12px; color: #777; margin-top: 6px; font-style: italic; }
+
+    /* ── Projects ── */
+    .r-project { margin-bottom: 14px; }
+    .r-project-name { font-weight: 600; font-size: 14px; color: #050505; }
+    .r-project-tech { font-size: 11px; color: #c9a227; font-weight: 600; margin-left: 8px; }
+    .r-project-desc { font-size: 13px; color: #444; margin-top: 2px; }
+
+    /* ── Print styles ── */
+    @media print {
+      .topbar    { display: none !important; }
+      body       { background: white; }
+      .page      { margin: 0; box-shadow: none; padding: 32px 40px; }
+      @page      { margin: 1cm; size: A4; }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 32px 24px; }
+      .r-skills { grid-template-columns: 1fr; }
+      .r-item-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar (not printed) -->
+  <div class="topbar">
+    <span class="topbar-title">Samuel Aina — Resume</span>
+    <div class="topbar-actions">
+      <button class="btn-print" onclick="window.print()">⬇ Download PDF</button>
+      <a href="/" class="btn-back">← Back to Site</a>
+    </div>
+  </div>
+
+  <!-- Resume page -->
+  <div class="page">
+
+    <!-- Header -->
+    <div class="r-header">
+      <div class="r-name">Samuel Aina</div>
+      <div class="r-role">Founder &amp; Creative Technologist — ASO Creative Studio</div>
+      <div class="r-contacts">
+        <span>📧 <a href="mailto:samuelaina683@gmail.com">samuelaina683@gmail.com</a></span>
+        <span>🌐 <a href="https://60925205.aso-studio.pages.dev" target="_blank">asocreative.studio</a></span>
+        <span>💼 <a href="https://www.linkedin.com/in/samuel-aina-150391390" target="_blank">LinkedIn</a></span>
+        <span>📍 Nigeria (Remote · Worldwide)</span>
+        <span>📞 <a href="https://calendly.com/samuelaina683/30min" target="_blank">Book a Call</a></span>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="r-section">
+      <div class="r-section-title">Professional Summary</div>
+      <p style="font-size:13.5px; color:#333; line-height:1.7;">
+        Creative technologist and founder of ASO Creative Studio — a one-person agency at the intersection of AI, design, and digital automation. Delivered 50+ projects for clients across 5 countries, specialising in AI-enhanced video production, brand identity, modern web development, and intelligent workflow automation. Currently completing a Bachelor's degree while running an active freelance business with international clientele.
+      </p>
+    </div>
+
+    <!-- Experience -->
+    <div class="r-section">
+      <div class="r-section-title">Experience</div>
+
+      <div class="r-item">
+        <div class="r-item-header">
+          <div>
+            <div class="r-item-title">Founder &amp; Creative Director</div>
+            <div class="r-item-company">ASO Creative Studio</div>
+          </div>
+          <div class="r-item-date">2023 – Present</div>
+        </div>
+        <ul>
+          <li>Founded and scaled a full-service creative studio delivering AI video, graphic design, web development, and automation services to brands across Nigeria and internationally</li>
+          <li>Built a food ordering platform (Awele's Fresh Fix) with Firebase Firestore, admin dashboard, and Cloudflare Pages deployment — handling full frontend and backend integration</li>
+          <li>Designed and produced media materials for Apostolic Faith Campus Fellowship (AFCF), FUOYE — including event flyers, social media kits, and promotional graphics</li>
+          <li>Developed a Google Apps Script web app generating SPSS-grade academic analysis documents, reducing research report time from hours to minutes</li>
+          <li>Created AI-powered social media content analysis tools using the Gemini API for studying framing patterns in Nigerian media</li>
+          <li>Delivered 50+ projects for clients including VeeLuxe, BrandSpark, VibeMedia, Digital Dynasty Institute, and SkillForge Digital</li>
+        </ul>
+      </div>
+
+      <div class="r-item">
+        <div class="r-item-header">
+          <div>
+            <div class="r-item-title">Freelance Creative Professional</div>
+            <div class="r-item-company">Self-Employed</div>
+          </div>
+          <div class="r-item-date">2022 – Present</div>
+        </div>
+        <ul>
+          <li>Designed brand visuals and social media graphics for consumer brands: Joyce Bites, Cuticles &amp; Co., God's Glory Ministry</li>
+          <li>Produced promotional video scripts and AI image generation prompt sets for SkillForge Digital (Northern Cyprus/Nigeria)</li>
+          <li>Created movie trailer thumbnails and social graphics for Becky Ithra TV's "Stray" film production</li>
+          <li>Developed the Growmybiz digital growth agency concept — market research, business plan, and proposal writing for Nigerian SME and online coaching clients</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="r-section">
+      <div class="r-section-title">Education</div>
+      <div>
+        <div class="r-edu-header">
+          <div class="r-edu-school">Federal University Oye-Ekiti (FUOYE)</div>
+          <div class="r-item-date">Expected 2026</div>
+        </div>
+        <div class="r-edu-degree">Bachelor of Science — Mass Communication</div>
+        <div class="r-edu-thesis">
+          Final Year Research: "Influence of Social Media Campaigns on Knowledge, Attitude and Practice of Exclusive Breastfeeding Among Nursing Mothers in Gbonyin Local Government Area, Ekiti State"
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="r-section">
+      <div class="r-section-title">Technical Skills</div>
+      <div class="r-skills">
+        <div>
+          <div class="r-skill-group-title">Frontend Development</div>
+          <div class="r-skill-tags">
+            <span class="r-tag">Astro</span><span class="r-tag">React</span>
+            <span class="r-tag">HTML5</span><span class="r-tag">CSS3</span>
+            <span class="r-tag">JavaScript</span><span class="r-tag">Tailwind CSS</span>
+          </div>
+        </div>
+        <div>
+          <div class="r-skill-group-title">Backend &amp; Platforms</div>
+          <div class="r-skill-tags">
+            <span class="r-tag">Firebase</span><span class="r-tag">Google Apps Script</span>
+            <span class="r-tag">Cloudflare Pages</span><span class="r-tag">Formspree</span>
+            <span class="r-tag">GitHub</span>
+          </div>
+        </div>
+        <div>
+          <div class="r-skill-group-title">AI &amp; Automation</div>
+          <div class="r-skill-tags">
+            <span class="r-tag">AI Video Generation</span><span class="r-tag">Gemini API</span>
+            <span class="r-tag">Workflow Automation</span><span class="r-tag">Chatbot Setup</span>
+            <span class="r-tag">Email Sequences</span>
+          </div>
+        </div>
+        <div>
+          <div class="r-skill-group-title">Creative &amp; Design</div>
+          <div class="r-skill-tags">
+            <span class="r-tag">Brand Identity</span><span class="r-tag">AI Video</span>
+            <span class="r-tag">Social Media Graphics</span><span class="r-tag">Print Design</span>
+            <span class="r-tag">Ministry Media</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selected Projects -->
+    <div class="r-section">
+      <div class="r-section-title">Selected Projects</div>
+
+      <div class="r-project">
+        <span class="r-project-name">ASO Creative Studio Portfolio</span>
+        <span class="r-project-tech">Astro 4 · Tailwind CSS v4 · Cloudflare Pages · GSAP</span>
+        <div class="r-project-desc">Full-stack personal portfolio with GSAP scroll animations, dual form submission (Formspree + Google Sheets), and automated deployment via Cloudflare Pages.</div>
+      </div>
+
+      <div class="r-project">
+        <span class="r-project-name">Awele's Fresh Fix</span>
+        <span class="r-project-tech">React · Firebase Firestore · Cloudflare Pages · Paystack</span>
+        <div class="r-project-desc">End-to-end food ordering platform with real-time database, customer-facing ordering page, admin dashboard, and payment integration. Independently designed, built, and deployed.</div>
+      </div>
+
+      <div class="r-project">
+        <span class="r-project-name">FUOYE Research Data Analyzer</span>
+        <span class="r-project-tech">Google Apps Script · HTML · CSS · JavaScript</span>
+        <div class="r-project-desc">Web application that processes survey data and auto-generates SPSS-grade academic analysis documents, dramatically reducing research report time.</div>
+      </div>
+
+      <div class="r-project">
+        <span class="r-project-name">Social Media Framing Analysis Tool</span>
+        <span class="r-project-tech">React · Gemini API · Google Apps Script</span>
+        <div class="r-project-desc">Content analysis system for studying framing patterns in Nigerian political and religious social media narratives, rebuilt as a fully serverless Google Apps Script web app.</div>
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="r-section">
+      <div class="r-section-title">Languages</div>
+      <div style="font-size:13px; color:#333;">
+        <strong>English</strong> — Professional Fluency &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Yoruba</strong> — Native Speaker
+      </div>
+    </div>
+
+  </div>
+
+  <script is:inline>
+    // Improve print quality
+    window.addEventListener('beforeprint', function() {
+      document.title = 'Samuel-Aina-Resume';
+    });
+  </script>
+
+</body>
+</html>

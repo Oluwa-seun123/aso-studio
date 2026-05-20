@@ -1,33 +1,33 @@
 ---
 import SectionLabel from './ui/SectionLabel.astro';
 
-const testimonials = [
+var testimonials = [
   {
-    initials: 'VA',
-    name: 'Victoria Abiodun',
-    role: 'Founder',
-    company: 'VeeLuxe',
-    avatarStyle: 'background:rgba(201,162,39,0.15); border:1.5px solid rgba(201,162,39,0.4); color:#c9a227;',
+    initials:    'VA',
+    name:        'Victoria Abiodun',
+    role:        'Founder',
+    company:     'VeeLuxe',
+    avatarStyle: 'background:rgba(201,162,39,0.15);border:1.5px solid rgba(201,162,39,0.4);color:#c9a227;',
     accentColor: 'rgba(201,162,39,0.4)',
-    quote: 'The whole process felt easy and well thought out. They really understood our vision and brought it to life through clean, modern graphics that feel true to our brand.',
+    quote:       'The whole process felt easy and well thought out. They really understood our vision and brought it to life through clean, modern graphics that feel true to our brand.',
   },
   {
-    initials: 'JR',
-    name: 'James Rodriguez',
-    role: 'Founder',
-    company: 'BrandSpark',
-    avatarStyle: 'background:rgba(129,140,248,0.15); border:1.5px solid rgba(129,140,248,0.4); color:#818cf8;',
-    accentColor: 'rgba(129,140,248,0.4)',
-    quote: 'From concept to final delivery, every piece was pixel-perfect. The graphic design work elevated our entire brand identity to a completely new level.',
+    initials:    'MA',
+    name:        'Morountodun Aládé',
+    role:        'CEO',
+    company:     'Cuticles & Co.',
+    avatarStyle: 'background:rgba(244,114,182,0.15);border:1.5px solid rgba(244,114,182,0.4);color:#f472b6;',
+    accentColor: 'rgba(244,114,182,0.4)',
+    quote:       'Clean and intentional designs. He does not just create designs; he brings brands to life through creativity and attention to detail.',
   },
   {
-    initials: 'AJ',
-    name: 'Amara Johnson',
-    role: 'CEO',
-    company: 'VibeMedia',
-    avatarStyle: 'background:rgba(45,212,191,0.15); border:1.5px solid rgba(45,212,191,0.4); color:#2dd4bf;',
+    initials:    'AW',
+    name:        'Awele',
+    role:        'Founder',
+    company:     "Awele's Fresh Fix",
+    avatarStyle: 'background:rgba(45,212,191,0.15);border:1.5px solid rgba(45,212,191,0.4);color:#2dd4bf;',
     accentColor: 'rgba(45,212,191,0.4)',
-    quote: 'Professional, creative, and incredibly fast. The AI video content created for our campaign was beyond our expectations. A true creative partner.',
+    quote:       'Samuel built Awele\'s Fresh Fix exactly how I envisioned it. The ordering flow is seamless, the design is beautiful, and the admin dashboard makes managing everything effortless. My customers keep complimenting how easy the site is to use.',
   },
 ];
 ---
@@ -42,68 +42,54 @@ const testimonials = [
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-container">
-      {testimonials.map((t) => (
-        <div class="stagger-item relative bg-aso-black border border-aso-border rounded-2xl p-8 hover:border-aso-gold/50 transition-all duration-500 flex flex-col">
+      {testimonials.map(function(t) {
+        return (
+          <div class="stagger-item relative bg-aso-black border border-aso-border rounded-2xl p-8 hover:border-aso-gold/50 transition-all duration-500 flex flex-col group">
 
-          <!-- Quote icon -->
-          <div class="mb-6">
-            <i data-lucide="quote" class="w-8 h-8 text-aso-gold/40"></i>
-          </div>
+            <!-- Quote icon -->
+            <div class="mb-6 text-aso-gold/40 group-hover:text-aso-gold/60 transition-colors duration-300">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+              </svg>
+            </div>
 
-          <!-- Stars -->
-          <div class="flex gap-1 mb-5">
-            <span class="text-aso-gold text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          </div>
+            <!-- Stars -->
+            <div class="flex gap-1 mb-5">
+              <span class="text-aso-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
 
-          <!-- Quote -->
-          <p class="text-aso-text-secondary leading-relaxed mb-8 text-[15px] flex-1">
-            &ldquo;{t.quote}&rdquo;
-          </p>
+            <!-- Quote -->
+            <p class="text-aso-text-secondary leading-relaxed mb-8 flex-1" style="font-size:15px;">
+              &ldquo;{t.quote}&rdquo;
+            </p>
 
-          <!-- Divider -->
-          <div class="h-px bg-aso-border mb-6"></div>
+            <!-- Divider -->
+            <div class="h-px bg-aso-border mb-6"></div>
 
-          <!-- Author -->
-          <div class="flex items-center gap-4">
+            <!-- Author -->
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-full flex items-center justify-center font-heading font-semibold text-sm flex-shrink-0"
+                style={t.avatarStyle}
+              >
+                {t.initials}
+              </div>
+              <div>
+                <div class="font-heading font-medium text-aso-text">{t.name}</div>
+                <div class="text-sm text-aso-text-muted">{t.role}, {t.company}</div>
+              </div>
+            </div>
+
+            <!-- Bottom accent line -->
             <div
-              class="w-12 h-12 rounded-full flex items-center justify-center font-heading font-semibold text-sm flex-shrink-0"
-              style={t.avatarStyle}
-            >
-              {t.initials}
-            </div>
-            <div>
-              <div class="font-heading font-medium text-aso-text">{t.name}</div>
-              <div class="text-sm text-aso-text-muted">{t.role}, {t.company}</div>
-            </div>
+              class="absolute bottom-0 left-8 right-8 h-px opacity-40"
+              style={"background:linear-gradient(90deg," + t.accentColor + ",transparent);"}
+            ></div>
+
           </div>
-
-          <!-- Bottom accent -->
-          <div
-            class="absolute bottom-0 left-8 right-8 h-px opacity-40"
-            style={`background: linear-gradient(90deg, ${t.accentColor}, transparent);`}
-          ></div>
-
-        </div>
-      ))}
-    </div>
-
-    <!-- Social proof strip -->
-    <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6">
-      <div class="flex items-center gap-2 text-aso-text-muted">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        </svg>
-        <span class="font-mono text-xs tracking-wide">All reviews from real clients</span>
-      </div>
-      <span class="hidden sm:block w-1 h-1 rounded-full bg-aso-text-muted"></span>
-      <div class="flex items-center gap-2 text-aso-text-muted">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
-        <span class="font-mono text-xs tracking-wide">Clients across 5 countries</span>
-      </div>
+        );
+      })}
     </div>
 
   </div>

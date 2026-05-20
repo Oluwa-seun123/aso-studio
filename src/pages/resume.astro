@@ -1,6 +1,7 @@
 ---
 // Standalone resume page — no layout imports needed
-// Visit /resume → click "Download PDF" → browser prints to PDF
+// Visit /resume → desktop: click "Download PDF" → browser prints to PDF
+// Mobile: "Request PDF" sends you an email instead
 ---
 
 <!DOCTYPE html>
@@ -39,6 +40,8 @@
       border: none; padding: 8px 20px;
       border-radius: 999px; cursor: pointer;
       font-weight: 600; font-size: 13px; font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      display: inline-flex; align-items: center;
     }
     .btn-back {
       background: transparent; color: #050505;
@@ -48,6 +51,10 @@
       font-family: 'Inter', sans-serif;
       display: inline-flex; align-items: center;
     }
+
+    /* Mobile / Desktop toggle */
+    .mobile-only  { display: none; }
+    .desktop-only { display: inline-flex; }
 
     /* ── Resume page ── */
     .page {
@@ -119,6 +126,8 @@
       .page { padding: 32px 24px; }
       .r-skills { grid-template-columns: 1fr; }
       .r-item-header { flex-direction: column; }
+      .mobile-only  { display: inline-flex; }
+      .desktop-only { display: none; }
     }
   </style>
 </head>
@@ -128,7 +137,22 @@
   <div class="topbar">
     <span class="topbar-title">Samuel Aina — Resume</span>
     <div class="topbar-actions">
-      <button class="btn-print" onclick="window.print()">⬇ Download PDF</button>
+      <!-- Desktop: triggers browser print dialog -->
+      <button class="btn-print desktop-only" onclick="window.print()">⬇ Download PDF</button>
+      
+      <!-- Mobile: sends email request (window.print fails on phones) -->
+      <a 
+        href="mailto:samuelaina683@gmail.com?subject=Resume%20Request&body=Hi%20Samuel,%0A%0APlease%20send%20me%20your%20resume%20PDF.%0A%0AThanks!"
+        class="btn-print mobile-only"
+      >
+        📎 Request PDF
+      </a>
+      
+      <!-- 
+        WHEN you upload resume.pdf to public/, REPLACE both buttons above with:
+        <a href="/resume.pdf" download class="btn-print desktop-only mobile-only">⬇ Download PDF</a>
+      -->
+      
       <a href="/" class="btn-back">← Back to Site</a>
     </div>
   </div>
@@ -291,7 +315,6 @@
   </div>
 
   <script is:inline>
-    // Improve print quality
     window.addEventListener('beforeprint', function() {
       document.title = 'Samuel-Aina-Resume';
     });

@@ -131,7 +131,7 @@ var categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
 <script is:inline>
   (function () {
     var filterBtns = document.querySelectorAll('.filter-btn');
-    var cards      = document.querySelectorAll('.project-card');
+    var cards       = document.querySelectorAll('.project-card');
 
     filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -145,31 +145,6 @@ var categories = ['All', 'AI Video', 'Graphics', 'Web Dev', 'AI Automation'];
         btn.classList.add('bg-aso-gold', 'text-aso-black', 'border-aso-gold');
 
         cards.forEach(function (card) {
-          var cat  = card.getAttribute('data-category');
-          var show = filter === 'All' || cat === filter;
-          if (show) {
-            card.classList.remove('filter-hidden');
-            if (window.gsap) {
-              window.gsap.fromTo(card,
-                { opacity: 0, scale: 0.95 },
-                { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }
-              );
-            }
-          } else {
-            if (window.gsap) {
-              window.gsap.to(card, {
-                opacity: 0, scale: 0.95, duration: 0.3, ease: 'power2.in',
-                onComplete: function () { card.classList.add('filter-hidden'); }
-              });
-            } else {
-              card.classList.add('filter-hidden');
-            }
-          }
-        });
-      });
-    });
-  })();
-</script>                cards.forEach(function (card) {
           var cat  = card.getAttribute('data-category');
           var show = filter === 'All' || cat === filter;
           if (show) {
